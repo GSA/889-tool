@@ -1,0 +1,14 @@
+node_modules
+venv
+__pycache__
+.idea
+.vscode
+.flaskenv
+semantic
+package-lock.json
+log
+instance
+production/nginx.conf
+production/python-app.conf
+production/procfile
+last_updated.txt
