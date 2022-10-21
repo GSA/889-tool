@@ -108,31 +108,32 @@ def _setup_logging():
                 "formatter": "default",
                 "stream": "ext://sys.stdout",
             },
-            "error_file": {
-                "class": "logging.handlers.TimedRotatingFileHandler",
-                "formatter": "default",
-                "filename": "/var/log/gunicorn/error.log",
-                'when': 'D',
-                'backupCount': 15,
-                'delay': 'True',
-            },
-            "access_file": {
-                "class": "logging.handlers.TimedRotatingFileHandler",
-                "formatter": "access",
-                "filename": "/var/log/gunicorn/access.log",
-                'when': 'D',
-                'backupCount': 15,
-                'delay': 'True',
-            }
+            # Should not be writing to local files for cloud.gov
+            # "error_file": {
+            #     "class": "logging.handlers.TimedRotatingFileHandler",
+            #     "formatter": "default",
+            #     "filename": "/var/log/gunicorn/error.log",
+            #     'when': 'D',
+            #     'backupCount': 15,
+            #     'delay': 'True',
+            # },
+            # "access_file": {
+            #     "class": "logging.handlers.TimedRotatingFileHandler",
+            #     "formatter": "access",
+            #     "filename": "/var/log/gunicorn/access.log",
+            #     'when': 'D',
+            #     'backupCount': 15,
+            #     'delay': 'True',
+            # }
         },
         "loggers": {
             "gunicorn.error": {
-                "handlers": ["console"] if debug else ["console", "error_file"],
+                "handlers": ["console"],
                 "level": "ERROR",
                 "propagate": False,
             },
             "gunicorn.access": {
-                "handlers": ["console"] if debug else ["console", "access_file"],
+                "handlers": ["console"],
                 "level": "INFO",
                 "propagate": False,
             }

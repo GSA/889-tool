@@ -81,5 +81,5 @@ class Default:
     EXTERNAL_LINKS = {
         "SAM.GOV": "https://sam.gov",
         "SAM_ENTITIES_API_DOCS": "https://open.gsa.gov/api/entity-api/",
-        "NF1883": "https://forms.neacc.nasa.gov/documents/11002/305376/NF1883.pdf"
+        #"NF1883": "https://forms.neacc.nasa.gov/documents/11002/305376/NF1883.pdf" # this doesn't seem to be accessible outside of NASA
     }

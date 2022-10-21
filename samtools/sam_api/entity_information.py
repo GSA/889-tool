@@ -54,7 +54,7 @@ def _search_sam(search_args, host_url, sam_api_endpoint):
                                                         exclusions.has_exclusions,
                                                         registration_status.is_active),
                 'pdfLinks': {
-                    'entityPDF': f"{host_url}/api/file-download/summary?"
+                    'entityPDF': f"{host_url}api/file-download/summary?"
                                  f"ueiSAM={entity['entityRegistration']['ueiSAM']}"
                                   "&entityEFTIndicator="
                     },
@@ -219,7 +219,7 @@ class DataAdaptors:
         value = '52.204-26.c.1'
         return  _get_dict_from_list_of_dicts(
             far52_204_26['listOfAnswers'], key, value
-            )['answerText']
+            ).get('answerText')
 
     @staticmethod
     def _get_far_52_204_26_c_2_answer(far52_204_26):
@@ -227,7 +227,7 @@ class DataAdaptors:
         value = '52.204-26.c.2'
         return  _get_dict_from_list_of_dicts(
             far52_204_26['listOfAnswers'], key, value
-            )['answerText']
+            ).get('answerText')
 
 
     @staticmethod
@@ -273,4 +273,4 @@ def _is_entity_selectable(is_compliant, has_exclusions, is_active):
 
 
 def _get_dict_from_list_of_dicts(list_of_dicts, key_name, value):
-    return next((dict_i for dict_i in list_of_dicts if dict_i[key_name] == value), None)
+    return next((dict_i for dict_i in list_of_dicts if dict_i[key_name] == value), {})

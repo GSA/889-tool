@@ -80,6 +80,7 @@ class TestEntitiesSearch:
             ("cdw", "PHZDZ8SJ5CM1"),
             ("newegg", "VYGGEBDMC155"),
             ("8020", "VD8SDL4UWTN1"),
+            # MM: It's not clear what's going on here. This test fails, but they seem to know that.
             ("priority worldwide", "P5FDDF13ZZ68"),  # It is not clear why the SAM Entities API does not return any results for this entity unless this name is placed in quotes
             ("msc direct", "NTP7NWDS9Y49")
         ]

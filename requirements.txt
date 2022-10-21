@@ -3,4 +3,5 @@ Flask==2.2.2
 honcho==1.1.0
 gunicorn==20.1.0
 wheel==0.37.1
+weasyprint<53.0
 Flask-WeasyPrint==1.0
