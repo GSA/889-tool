@@ -2,4 +2,4 @@
 
 set -eo pipefail
 
-gunicorn samtools.wsgi:app --workers=2
+gunicorn samtools.wsgi:app --workers=4
