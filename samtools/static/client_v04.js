@@ -25,18 +25,20 @@ const getNonSelectableElement = function (
   ueiSAM,
   cageCode,
 ) {
-  const resultsListItem = document.createElement('div');
-  resultsListItem.className = 'disabled item';
+  const resultRow = document.createElement('div');
+  resultRow.className = 'grid-row padding-y-3 border-bottom-1px border-base-lighter';
+  const link_col = document.createElement('div')
+  link_col.className = 'grid-col-auto'
 
   const downloadIcon = getDownloadIcon();
   downloadIcon.style = 'visibility:hidden';
-  resultsListItem.appendChild(downloadIcon);
+  link_col.appendChild(downloadIcon);
+  resultRow.appendChild(link_col)
 
-  const listItemContent = document.createElement('div');
-  listItemContent.className = 'content';
+  const content_col = document.createElement('div');
+  content_col.className = 'grid-col-auto';
 
   const listItemContentHeader = document.createElement('div');
-  listItemContentHeader.className = 'ui small disabled header';
   listItemContentHeader.innerHTML = legalBusinessName;
 
   // It may be confusing to users if a non-selectable entity has mixed acceptable and non-acceptable labels.
@@ -53,22 +55,23 @@ const getNonSelectableElement = function (
     entityComplianceLabel.innerHTML = exclusions.statusText;
     listItemContentHeader.appendChild(entityComplianceLabel);
   }
-  listItemContent.appendChild(listItemContentHeader);
+  content_col.appendChild(listItemContentHeader);
 
   if (dbaName) {
-    listItemContent.appendChild(getDbaNameElement(dbaName));
+    resultsListItemContent.appendChild(getDbaNameElement(dbaName));
   }
 
   if (entityURL) {
-    listItemContent.appendChild(getWebsiteElement(entityURL));
+    resultsListItemContent.appendChild(getWebsiteElement(entityURL));
   }
 
-  listItemContent.appendChild(
+  const resultsListItemContent = document.createElement('div');
+  resultsListItemContent.appendChild(
     getAddressAndCodesElement(city, stateOrProvinceCode, countryCode, ueiSAM, cageCode),
   );
-  resultsListItem.appendChild(listItemContent);
-  return resultsListItem;
-};
+  content_col.appendChild(resultsListItemContent);
+  resultRow.appendChild(content_col)
+  return resultRow;};
 
 const getSelectableElement = function (
   legalBusinessName,
@@ -83,16 +86,25 @@ const getSelectableElement = function (
   ueiSAM,
   cageCode,
 ) {
-  const resultsListItem = document.createElement('a');
-  resultsListItem.href = pdfLinks.entityPDF;
-  resultsListItem.target = '_blank';
-  resultsListItem.rel = 'noopener noreferrer';
-  resultsListItem.className = 'item';
+  const resultRow = document.createElement('div');
+  resultRow.className = 'grid-row padding-y-3 border-bottom-1px border-base-lighter';
+  const link_col = document.createElement('div')
+  link_col.className = 'grid-col-auto'
 
-  resultsListItem.appendChild(getDownloadIcon());
+  const resultsListItemAnchor = document.createElement('a');
+  resultsListItemAnchor.href = pdfLinks.entityPDF;
+  resultsListItemAnchor.target = '_blank';
+  resultsListItemAnchor.rel = 'noopener noreferrer';
+  resultsListItemAnchor.className = 'item';
+
+  resultsListItemAnchor.appendChild(getDownloadIcon());
+  link_col.appendChild(resultsListItemAnchor)
+  resultRow.appendChild(link_col)
+
+  const content_col = document.createElement('div')
+  content_col.className = 'grid-col-auto'
 
   const resultsListItemContent = document.createElement('div');
-  resultsListItemContent.className = 'content';
 
   resultsListItemContent.appendChild(
     getSelectableItemHeader(legalBusinessName, eightEightNine, registrationExpirationDate),
@@ -109,8 +121,9 @@ const getSelectableElement = function (
   resultsListItemContent.appendChild(
     getAddressAndCodesElement(city, stateOrProvinceCode, countryCode, ueiSAM, cageCode),
   );
-  resultsListItem.appendChild(resultsListItemContent);
-  return resultsListItem;
+  content_col.appendChild(resultsListItemContent);
+  resultRow.appendChild(content_col)
+  return resultRow;
 };
 
 const getSelectableItemHeader = function (
@@ -119,7 +132,7 @@ const getSelectableItemHeader = function (
   registrationExpirationDate,
 ) {
   const itemHeader = document.createElement('div');
-  itemHeader.className = 'ui small header';
+  itemHeader.className = 'text-primary-dark text-bold';
   itemHeader.innerHTML = legalBusinessName;
 
   itemHeader.appendChild(getSelectableComplianceLabel(eightEightNine));
