@@ -2,42 +2,100 @@
 <html lang="en">
     <head>
         <title>889 Compliance Search | SAM Tools</title>
+        <script src="static/assets/js/uswds-init.min.js"></script>
+        <link rel="stylesheet" href="static/assets/css/styles.css" />
+
         <link rel="icon" type="image/png" href="/static/favicon.ico"/>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="static/semantic/semantic.min.css"/>
-        <script src="static/semantic/semantic.min.js"></script>
-        <style>
+        <!-- <link rel="stylesheet" type="text/css" href="static/semantic/semantic.min.css"/> -->
+        <!-- <script src="static/semantic/semantic.min.js"></script> -->
+        <!-- <style>
             html,body {
                 background-color: #FCFDFD;
             }
-        </style>
+        </style> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">       
     </head>
 
-    <body>
-        <header style="background-color:white; box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, .15); padding: 8px 0px;">
-            <div class="ui text container">
-                <div class="ui basic horizontal segments">
-                    <div class="ui fitted compact basic segment">
-                        <img class="ui tiny image" src="static/images/nasa-logo.png" alt="NASA logo" style="margin: 0em 0.5em;">
+    <bod class="grid-col">
+        <script src="static/assets/js/uswds.min.js"></script>
+        {% include 'banner.html' %}
+        {% include 'prototype-alert.html' %}
+        {% include 'header.html' %}
+
+        <div id="main-container" class="wide-layout">
+            <main id="main-content">
+                <div class="grid-container">
+                    <div class="padding-y-5 border-bottom-1px border-base-lighter">
+                        <h2 class="font-sans-lg margin-bottom-1"> 
+                            Check to see if a vendor is section 889 compliant
+                        </h2>
+                        
+                    
+                        <form class="usa-search usa-search-big" id="form">
+                            <div class="field">
+                                <label>Search by business name, website, CAGE code, or SAM Unique Entity ID</label>
+                                <div class="ui big fluid left icon input margin-top-2">
+                                    <input id="input" class="prompt" type="text" placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" required pattern=".*\S+.*" title="Enter a search term" autofocus>
+                                    <button class="margin-left-neg-05 usa-button usa-sr-hidden usa-button-primary" type="submit">
+                                        <span class="usa-search-submit-text">Search</span>
+                                    </button>
+                                    <!-- <i class="search icon"></i> -->
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <div id="error-message" class="ui negative message" style="display:none"></div>
+        
+        
+                            <div id="results-box" class="ui attached fitted segment" style="display:none">
+                                <div id="results-list" class="ui divided selection list"></div>
+                                <div id="loading-box" class="ui loading placeholder basic segment"></div>
+                            </div>
+                            
+                            
+                            <button id="show-more" class="fluid ui bottom attached button"
+                                style="margin: none; display: none">
+                                <i id="show-more-icon" class="angle double down icon"></i>
+                                <p id="show-more-text" style="display: inline"></p>
+                            </button>
+                
+                            <div id="no-results" class="ui segment" style="display:none">
+                                No results. Vendors marked “For Official Use Only” will not appear in this search.
+                            </div>
+                        </div>
                     </div>
-                    <div class="ui fitted compact basic segment">
-                        <img class="ui tiny image" src="static/images/gsa-logo.png" alt="GSA logo" style="padding: 7px;"> 
-                    </div>
-                    <div class="ui compact basic segment">
-                        <h1 class="ui huge header">
-                            889 Compliance Search
-                            <div class="ui huge sub header" style="text-transform: capitalize;">Determine vendor 889 compliance</div>
-                        </h1>
+                    <div class="padding-y-3">
+                        <h3>How do I use this tool?</h3>
+                        <p>
+                            The 889 Compliance Search checks for a vendor's section section 889 compliance in their SAM record.
+                            You'll be able to download the vendor's compliance records.
+                            For full vendor records, vist <a href="https://sam.gov">sam.gov</a>
+                        </p>
+                        <p>
+                            <strong>Note: </strong>Although vendors only doing business within the Micro-Purchase Threshold (MPT)
+                            are not required to register in SAM, vendors who do business both above and below the MPT are required
+                            to register in SAM. Vendors marked as "For Official Use Only" in SAM will not appear in the search.
+                            Entities without Representation & Certifications are also omitted from the search results.
+                            If a vendor is not registered in SAM, you may request the vendor sign a 
+                            <a href="/static/downloads/NF1883.pdf">Vendor Representation Form</a>
+                        </p>
                     </div>
                 </div>
-            </div>
-        </header>
+                <!-- <div class="grid-container">
+                    <div class="usa-hero__callout">
+                      <h2 class="usa-hero__heading">A search engine by and for the federal government
+                      </h2>
+                      <p>Powering search results on more than 2,000 websites. Free, effective, and simple—Search.gov has all you need to get search right on your website!</p>
+                      <a class="usa-button" href="/get-started/">Get started today</a>
+                    </div>
+                  </div> -->
 
-        <div class="ui hidden divider"></div>
+            </main>
+        </div>
 
         <div class="ui text container">
-            <div class="ui compact basic segment">
+            <!-- <div class="ui compact basic segment">
                 <h2 class="ui large header">
                     How to use this tool
                 </h2>
@@ -78,11 +136,11 @@
                 Full vendor records are available at <a style="text-decoration: underline;" href="{{ external_links['SAM.GOV'] }}">sam.gov</a>.<br /> 
                 This tool is built on the <a style="text-decoration: underline;" href="{{ external_links['SAM_ENTITIES_API_DOCS'] }}">openGSA sam.gov Entity Management API</a>.
                 
-            </div>
+            </div> -->
 
-            <div class="ui divider"></div>
+            <!-- <div class="ui divider"></div> -->
 
-            <div class="ui compact basic segment">
+            <!-- <div class="ui compact basic segment">
                 
                     <div class="ui small header" style="text-transform: uppercase">
                         Search Tips
@@ -97,27 +155,19 @@
                         <div class="item">
                             <i class="file download icon"></i>
                             <div class="content">
-                                If the vendor is not registered in SAM, you may request the vendor sign a <br />
+                                If the vendor is not registered in SAM, you may request the vendor sign a <br /> -->
                                 <!-- <a style="text-decoration: underline;" href="{{ external_links['NF1883'] }}" download>NASA Purchase Card Vendor Representation (NF1883)</a>. -->
-                                <a style="text-decoration: underline;" href="static/downloads/NF1883.pdf" download>Vendor Representation Form</a>.                          
+                                <!-- <a style="text-decoration: underline;" href="static/downloads/NF1883.pdf" download>Vendor Representation Form</a>.                          
                             </div>
                         </div>
                     </ul>            
-            </div>
+            </div> -->
 
-            <div class="ui divider"></div>
-            <div class="ui hidden divider"></div>
+            <!-- <div class="ui divider"></div>
+            <div class="ui hidden divider"></div> -->
 
-            <form class="ui form" id="form">
-                <div class="field">
-                    <label>Search SAM.gov Entities Representations & Certifications</label>
-                    <div class="ui big fluid left icon input">
-                        <input id="input" class="prompt" type="text" placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" required pattern=".*\S+.*" title="Enter a search term" autofocus>
-                        <i class="search icon"></i>
-                    </div>
-                </div>
-            </form>
-            <div id="error-message" class="ui negative message" style="display:none"></div>
+            
+            <!-- <div id="error-message" class="ui negative message" style="display:none"></div>
 
 
             <div id="results-box" class="ui attached fitted segment" style="display:none">
@@ -134,19 +184,20 @@
 
             <div id="no-results" class="ui segment" style="display:none">
                 No results. Vendors marked “For Official Use Only” will not appear in this search.
-            </div>
+            </div> -->
 
-            <div class="ui fitted basic segment">
+            <!-- <div class="ui fitted basic segment">
                 Note: Entities without Representations & Certifications are omitted from the search results.
             </div>
 
             <div class="ui right aligned basic segment">
-                {{ version }}</br>
+                
                 We encourage input! Please provide feedback and suggestions to <a style="text-decoration: underline;" href = "mailto: {{ contact_email }}">{{ contact_email }}</a></br>
                 The 889 Compliance SAM Tool web application was developed by NASA.
-            </div>
+            </div> -->
         </div>
-
+        {% include 'footer.html' %}
+        {% include 'usa-identifier.html' %}
     </body>
   <script type="text/javascript" src="static/client_v04.js"></script>
   <script type="text/javascript">
