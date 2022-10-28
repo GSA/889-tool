@@ -31,18 +31,19 @@
                             Check to see if a vendor is section 889 compliant
                         </h2>
                         
-                    
-                        <form class="usa-search usa-search-big" id="form">
-                            <div class="field">
-                                <label>Search by business name, website, CAGE code, or SAM Unique Entity ID</label>
-                                <div class="ui big fluid left icon input margin-top-2">
-                                    <input id="input" class="prompt" type="text" placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" required pattern=".*\S+.*" title="Enter a search term" autofocus>
-                                    <button class="margin-left-neg-05 usa-button usa-sr-hidden usa-button-primary" type="submit">
-                                        <span class="usa-search-submit-text">Search</span>
-                                    </button>
-                                    <!-- <i class="search icon"></i> -->
-                                </div>
-                            </div>
+                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>
+                        <form role="search" class="usa-search usa-search--big" id="form">
+                            <label class="usa-sr-only" for="search-field-en-big">Search by business name, website, CAGE code, or SAM Unique Entity ID</label>
+                                <input id="input" class="usa-input border-base-lighter" type="search" placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" required pattern=".*\S+.*" title="Enter a search term" autofocus>
+                                <button class="usa-button" type="submit">
+                                    <span class="usa-search__submit-text">Search </span
+                                    ><img
+                                      src="/assets/img/usa-icons-bg/search--white.svg"
+                                      class="usa-search__submit-icon"
+                                      alt="Search"
+                                    />
+                                  </button>
+                                <!-- <i class="search icon"></i> -->
                         </form>
                         <div>
                             <div id="error-message" class="ui negative message" style="display:none"></div>
@@ -70,7 +71,7 @@
                         <p>
                             The 889 Compliance Search checks for a vendor's section section 889 compliance in their SAM record.
                             You'll be able to download the vendor's compliance records.
-                            For full vendor records, vist <a href="https://sam.gov">sam.gov</a>
+                            For full vendor records, visit <a href="https://sam.gov">sam.gov</a>
                         </p>
                         <p>
                             <strong>Note: </strong>Although vendors only doing business within the Micro-Purchase Threshold (MPT)

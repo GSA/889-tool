@@ -8,7 +8,8 @@ in the form $setting: value,
 */
 
 //
- @use "uswds-core" with (
-    $theme-input-line-height: 16px
- );
-
+//  @use "uswds-core" with (
+//    $setting: value,
+//    $setting: value
+//  );
+//
