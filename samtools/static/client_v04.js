@@ -39,19 +39,20 @@ const getNonSelectableElement = function (
   content_col.className = 'grid-col-auto';
 
   const listItemContentHeader = document.createElement('div');
+  listItemContentHeader.className = 'text-base-dark text-bold'
   listItemContentHeader.innerHTML = legalBusinessName;
 
   // It may be confusing to users if a non-selectable entity has mixed acceptable and non-acceptable labels.
   // Therefore, only show the reason the entity is non-selectable and hide check that passed.
   if (!eightEightNine.isCompliant) {
-    const entityComplianceLabel = document.createElement('div');
-    entityComplianceLabel.className = 'ui horizontal black label';
+    const entityComplianceLabel = document.createElement('span');
+    entityComplianceLabel.className = 'usa-tag margin-left-2 bg-base-dark';
     entityComplianceLabel.innerHTML = eightEightNine.statusText;
     listItemContentHeader.appendChild(entityComplianceLabel);
   }
   if (exclusions.has_exclusions) {
-    const entityComplianceLabel = document.createElement('div');
-    entityComplianceLabel.className = 'ui horizontal black label';
+    const entityComplianceLabel = document.createElement('span');
+    entityComplianceLabel.className = 'usa-tag margin-left-2 bg-base-dark';
     entityComplianceLabel.innerHTML = exclusions.statusText;
     listItemContentHeader.appendChild(entityComplianceLabel);
   }
@@ -88,14 +89,14 @@ const getSelectableElement = function (
 ) {
   const resultRow = document.createElement('div');
   resultRow.className = 'grid-row padding-y-3 border-bottom-1px border-base-lighter';
-  const link_col = document.createElement('div')
-  link_col.className = 'grid-col-auto'
+  const link_col = document.createElement('div');
+  link_col.className = 'grid-col-auto flex-align-center padding-1 bg-primary margin-right-1 font-sans-xl';
 
   const resultsListItemAnchor = document.createElement('a');
   resultsListItemAnchor.href = pdfLinks.entityPDF;
   resultsListItemAnchor.target = '_blank';
   resultsListItemAnchor.rel = 'noopener noreferrer';
-  resultsListItemAnchor.className = 'item';
+  resultsListItemAnchor.className = 'item text-white';
 
   resultsListItemAnchor.appendChild(getDownloadIcon());
   link_col.appendChild(resultsListItemAnchor)
@@ -146,7 +147,7 @@ const getSelectableItemHeader = function (
 
 const getSelectableComplianceLabel = function (eightEightNine) {
   const complianceLabel = document.createElement('span');
-  complianceLabel.className = 'usa-tag';
+  complianceLabel.className = 'usa-tag margin-left-2 bg-primary';
   complianceLabel.innerHTML = eightEightNine.statusText;
   return complianceLabel;
 };
@@ -167,8 +168,13 @@ const getRegistrationExpirationLabel = function (registrationExpirationDate) {
 };
 
 const getDownloadIcon = function () {
-  const downloadIcon = document.createElement('i');
-  downloadIcon.className = 'large file download middle aligned icon';
+  const downloadIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  downloadIcon.setAttribute('aria-hidden', "true");
+  downloadIcon.setAttribute('focusable', "false")
+  downloadIcon.setAttribute('role', "img")
+  downloadIcon.setAttribute('class', 'usa-icon');
+  downloadIcon.innerHTML = "<use xlink:href='/static/assets/img/sprite.svg#file_download'></use>"
+  
   return downloadIcon;
 };
 
