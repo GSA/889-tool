@@ -145,8 +145,8 @@ const getSelectableItemHeader = function (
 };
 
 const getSelectableComplianceLabel = function (eightEightNine) {
-  const complianceLabel = document.createElement('div');
-  complianceLabel.className = 'ui horizontal blue label';
+  const complianceLabel = document.createElement('span');
+  complianceLabel.className = 'usa-tag';
   complianceLabel.innerHTML = eightEightNine.statusText;
   return complianceLabel;
 };
