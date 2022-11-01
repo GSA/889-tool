@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">       
     </head>
 
-    <bod class="grid-col">
+    <body class="grid-col">
         <script src="static/assets/js/uswds.min.js"></script>
         {% include 'banner.html' %}
         {% include 'prototype-alert.html' %}
@@ -34,8 +34,9 @@
                         <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>
                         <form role="search" class="usa-search usa-search--big" id="form">
                             <label class="usa-sr-only" for="search-field-en-big">Search by business name, website, CAGE code, or SAM Unique Entity ID</label>
-                                <input id="input" class="usa-input border-base-lighter" type="search" placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" required pattern=".*\S+.*" title="Enter a search term" autofocus>
-                                <button class="usa-button" type="submit">
+                            <div class="grid-row width-full">
+                                <input id="input" class="usa-input border-base-lighter grid-col flex-12" type="search" placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" required pattern=".*\S+.*" title="Enter a search term" autofocus>
+                                <button class="usa-button grid-col flex-auto" type="submit">
                                     <span class="usa-search__submit-text">Search </span
                                     ><img
                                       src="/assets/img/usa-icons-bg/search--white.svg"
@@ -43,6 +44,7 @@
                                       alt="Search"
                                     />
                                   </button>
+                            </div>
                                 <!-- <i class="search icon"></i> -->
                         </form>
                         <div>
