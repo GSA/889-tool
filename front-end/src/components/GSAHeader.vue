@@ -1,0 +1,10 @@
+<template>
+    <header class="usa-header usa-header--extended border-bottom-1px border-base-lighter" role="banner">
+        <div class="usa-navbar">
+            <div class="usa-logo grid-row flex-align-baseline" id="header-logo">
+                <img width="56" class="float-left margin-right-2" src="@/assets/images/gsa-logo.svg" alt="GSA Logo" title="U.S. General Services Administration">
+                <em class="usa-logo__text">889 Compliance Search</em>
+            </div>
+        </div>
+    </header>
+ </template>
