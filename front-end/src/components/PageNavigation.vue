@@ -96,7 +96,7 @@
             >
             <span>…</span>
         </li>
-        <li class="usa-pagination__item usa-pagination__page-no">
+        <li v-if='numberOfPages > 1' class="usa-pagination__item usa-pagination__page-no">
             <a
                 @click="$emit('gotoPage', numberOfPages - 1)"
                 :class="{'usa-current': currentPage == numberOfPages - 1}"

@@ -4,9 +4,12 @@
     import PageNavigation from './PageNavigation.vue'
 
     import { ref } from 'vue'
-    const LOTS_OF_RESULTS = 40;
+    
+    // see https://vitejs.dev/guide/env-and-mode.html 
+    // for setting production env
+    const API_DOMAIN = import.meta.env.VITE_API_DOMAIN
+
     const DEFAULT_PAGE_SIZE = 10;
-    const API_DOMAIN = "http:\/\/localhost:8000"
 
     const search_text = ref('')
     const data = ref([])
