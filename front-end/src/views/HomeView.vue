@@ -23,10 +23,6 @@ import Search from "../components/Search.vue";
 
                         <div id="loading-box" class="ui loading placeholder basic segment"></div>
                     </div>
-                    <!-- <div id="results-box" class="ui attached fitted segment" style="display:none">
-                        <div id="results-list" class="ui divided selection list"></div>
-                        
-                    </div> -->
                     
                     
                     <button id="show-more" class="fluid ui bottom attached button"

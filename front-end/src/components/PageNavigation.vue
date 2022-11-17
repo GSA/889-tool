@@ -52,8 +52,9 @@
 <template>
     <nav v-if="numberOfPages" aria-label="Pagination" class="usa-pagination">
     <ul class="usa-pagination__list">
-        <li v-if="showPrevious" class="usa-pagination__item usa-pagination__arrow">
+        <li  class="usa-pagination__item usa-pagination__arrow">
         <a
+            :style="{visibility: showPrevious ? 'visible' : 'hidden'}" 
             href="javascript:void(0);"
             @click="$emit('gotoPage', currentPage - 1)"
             class="usa-pagination__link usa-pagination__previous-page"
@@ -106,8 +107,8 @@
             >
         </li>
         
-        <li v-if="beforeLastPage" class="usa-pagination__item usa-pagination__arrow">
-        <a
+        <li  class="usa-pagination__item usa-pagination__arrow">
+        <a   :style="{visibility: beforeLastPage ? 'visible' : 'hidden'}" 
             @click="$emit('gotoPage', currentPage + 1)"
             class="usa-pagination__link usa-pagination__next-page"
             aria-label="Next page"
