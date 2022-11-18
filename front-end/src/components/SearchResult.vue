@@ -46,32 +46,42 @@
  
 </script>
 <template>
-    <div class="grid-row padding-y-3 border-bottom-1px border-base-lighter">
-        <div v-if="isSelectable" class="grid-col-auto flex-align-center padding-1 bg-primary margin-right-1 font-sans-xl">
-            <a 
-                :href="entity.samToolsData.pdfLinks.entityPDF"
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="item text-white">
-                <svg aria-hidden="true" focusable="false" role="img" class="usa-icon">
+    <div class="grid-row border-y-2px border-base-lighter gidr-row flex-no-wrap">
+        <a v-if="isSelectable" :href="entity.samToolsData.pdfLinks.entityPDF" class="grid-row" target="_blank"  rel="noopener noreferrer"  >
+            <button         
+                class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
+                <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" aria-labelledby="download-pdf">
+                    <title id="download-pdf">Download PDF</title>
                     <use xlink:href="@/assets/images/sprite.svg#file_download">
                     </use>
                 </svg>
-            </a> 
-        </div>
-        <div class="grid-col-auto">
-           
-            <div class="text-primary-dark text-bold margin-bottom-1">
-                {{entity.entityRegistration.legalBusinessName}}
-                <span class="usa-tag margin-left-2" :class="isSelectable ? 'bg-primary' : 'bg-base-dark'">
+            </button> 
+        </a>
+        <span v-else class="grid-row ">
+            <button disabled="true"
+                class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
+                <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" aria-labelledby="no-download">
+                    <title id="no-download">No download</title>
+                    <use xlink:href="@/assets/images/sprite.svg#remove_circle">
+                    </use>
+                </svg>
+            </button> 
+        </span>
+
+        <div class="grid-col-auto padding-y-2">    
+            <div class="text-primary-dark text-bold margin-bottom-1 grid-row">
+                <span class="margin-right-2" >
+                    {{entity.entityRegistration.legalBusinessName}}
+                </span>
+                <span class="usa-tag margin-right-2" :class="isSelectable ? 'bg-primary' : 'bg-base-dark'">
                     {{entity.samToolsData.eightEightNine.statusText}}
                 </span>
-                <div class="margin-top-1">
+            </div>
+            <div class="margin-y-1">
                     <span v-if="isExpiring" class="text-secondary">
                         {{expirationDateText}}
                     </span>
                 </div>
-            </div>
             <div v-if="dba">
                 ({{entity.entityRegistration.dbaName}})
             </div>

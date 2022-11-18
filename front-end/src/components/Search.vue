@@ -63,7 +63,7 @@
         <input 
             v-model="search_text"
             id="input" 
-            class="usa-input border-base-lighter" 
+            class="usa-input border-base-lighter grid-col flex-12" 
             type="search" 
             placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" 
             required pattern=".*\S+.*" 
@@ -73,7 +73,7 @@
         <button class="usa-button" type="submit">
             <span class="usa-search__submit-text">Search </span
             ><img
-                    src="@/assets/images/search--white.svg"
+                    src="@/assets/images/usa-icons-bg/search--white.svg"
                     class="usa-search__submit-icon"
                     alt="Search"
             />
