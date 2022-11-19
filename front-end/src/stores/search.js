@@ -15,6 +15,7 @@ export const useSearchStore = defineStore("search", () => {
     const totalRecords = ref(0)
 
     const numberOfPages = computed(() => Math.ceil(totalRecords.value / DEFAULT_PAGE_SIZE ))
+    const showResults = computed(() => data.value.length > 0)
 
     function gotToPage(page) {
         currentPageIndex.value = page
@@ -49,6 +50,7 @@ export const useSearchStore = defineStore("search", () => {
         numberOfPages,
         currentPageIndex,
         totalRecords,
+        showResults,
         gotToPage,
         fetchResults
     };

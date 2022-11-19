@@ -30,7 +30,7 @@
             />
         </button>
     </form>
-    <div v-if="store.data" class="margin-top-3">
+    <div id="results" v-if="store.showResults" class="margin-top-3">
         <div v-for="item in store.data" >
             <SearchResult :entity="item" />
         </div>

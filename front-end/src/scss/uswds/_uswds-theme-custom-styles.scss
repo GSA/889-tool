@@ -22,3 +22,12 @@ i.e.
 
 @use "uswds-core" as *;
 @import '_components/header';
+
+.background {
+    color: #fff;
+    background-image: linear-gradient(#0f4374,#0254a1);
+}
+
+.background a {
+    color: #fff;
+}
