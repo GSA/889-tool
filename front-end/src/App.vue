@@ -1,7 +1,6 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 import Banner from "./components/Banner.vue";
-import GSAHeader from "./components/GSAHeader.vue";
 import PrototypeAlert from "./components/PrototypeAlert.vue";
 
 </script>
@@ -9,7 +8,6 @@ import PrototypeAlert from "./components/PrototypeAlert.vue";
 <template>
     <Banner />
     <PrototypeAlert />
-    <GSAHeader />
     <div id="main-container" class="wide-layout">
         <RouterView />
     </div>

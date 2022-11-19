@@ -6,8 +6,8 @@
  * 
  */
     import { computed } from 'vue'
-    defineEmits(['gotoPage'])
 
+    defineEmits(['gotoPage'])
 
     const props = defineProps({
         /**
@@ -47,7 +47,6 @@
         if (props.numberOfPages <= 8 || props.currentPage >= props.numberOfPages - 4) return props.numberOfPages - 1
         return Math.max(props.currentPage + 2, 5)
     })
-
 </script>
 <template>
     <nav v-if="numberOfPages" aria-label="Pagination" class="usa-pagination">

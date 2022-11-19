@@ -1,8 +1,10 @@
 <script setup>
 import Search from "../components/Search.vue";
+import GSAHeader from "../components/GSAHeader.vue"
 </script>
 
 <template>
+    <GSAHeader />
     <main id="main-content">
         <div class="grid-container">
             <div class="padding-y-5 border-bottom-1px border-base-lighter">
