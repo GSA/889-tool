@@ -67,6 +67,7 @@
         <li class="usa-pagination__item usa-pagination__page-no">
             <a
                 @click="$emit('gotoPage', 0)"
+                href="javascript:void(0);"
                 :class="{'usa-current': currentPage == 0}"
                 class="usa-pagination__button"
                 aria-label="Page 1"
@@ -83,6 +84,7 @@
         <li v-for="page in range(interiorIndexStart, interiorIndexEnd)" class="usa-pagination__item usa-pagination__page-no">
             <a
                 @click="$emit('gotoPage', page - 1)"
+                href="javascript:void(0);"
                 :class="{'usa-current': page == currentPage + 1 }"
                 class="usa-pagination__button"
                 aria-label="Page {{page}}"
@@ -99,6 +101,7 @@
         <li v-if='numberOfPages > 1' class="usa-pagination__item usa-pagination__page-no">
             <a
                 @click="$emit('gotoPage', numberOfPages - 1)"
+                href="javascript:void(0);"
                 :class="{'usa-current': currentPage == numberOfPages - 1}"
                 class="usa-pagination__button"
                 aria-label="Last Page, page {{numberOfPages}}"
@@ -109,6 +112,7 @@
         <li  class="usa-pagination__item usa-pagination__arrow">
         <a   :style="{visibility: beforeLastPage ? 'visible' : 'hidden'}" 
             @click="$emit('gotoPage', currentPage + 1)"
+            href="javascript:void(0);"
             class="usa-pagination__link usa-pagination__next-page"
             aria-label="Next page"
             ><span class="usa-pagination__link-text">Next </span
