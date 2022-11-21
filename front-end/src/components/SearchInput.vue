@@ -1,13 +1,17 @@
 <script setup>
-    import SearchResult from './SearchResult.vue'
-    import PageNavigation from './PageNavigation.vue'
     import { useSearchStore } from '@/stores/search'
+    import { useRouter } from 'vue-router'
 
     const store = useSearchStore()
+    const router = useRouter()
+
+    function setSearchParam() {
+        router.push({ name: 'search', params: { term: store.search_text } })
+    }
 
 </script>
 <template>
-    <form role="search" class="usa-search usa-search--big" id="form" @submit.prevent="store.fetchResults">
+    <form role="search" class="usa-search usa-search--big" id="form" @submit.prevent="setSearchParam">
         <label class="usa-sr-only" for="search-field-en-big">
             Search by business name, website, CAGE code, or SAM Unique Entity ID
         </label>
@@ -30,16 +34,6 @@
             />
         </button>
     </form>
-    <div id="results" v-if="store.showResults" class="margin-top-3">
-        <div v-for="item in store.data" >
-            <SearchResult :entity="item" />
-        </div>
-    </div>
-    
-    <PageNavigation 
-        v-if='store.numberOfPages > 1' 
-        :numberOfPages="store.numberOfPages" 
-        :currentPage="store.currentPageIndex" 
-        @goto-page="store.gotToPage" />
+   
     
 </template>

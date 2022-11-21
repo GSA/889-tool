@@ -1,20 +1,27 @@
 <script setup>
+import {onMounted } from 'vue'
+import { useSearchStore } from '@/stores/search'
+
 import SearchInput from "../components/SearchInput.vue";
+import SearchResults from "../components/SearchResults.vue";
 import GSAHeader from "../components/GSAHeader.vue"
+
+const store = useSearchStore()
+
+onMounted(() => {
+    store.initState()
+})
+
 </script>
 
 <template>
-    <div class="background">
+    <div class="background padding-bottom-2">
     <GSAHeader />
         <div id="main-container" class="wide-layout">
             <main id="main-content">
                 <div class="grid-container">
-                    <div class="padding-top-10">
-                        <h2 class="font-sans-lg margin-bottom-1"> 
-                            Check to see if a vendor is section 889 compliant
-                        </h2>
-                    
-                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>
+                    <div class="padding-top-2">
+                        
                     
                         <SearchInput />
                     
@@ -41,11 +48,12 @@ import GSAHeader from "../components/GSAHeader.vue"
                             </div>
                         </div>
                     </div>
-                    <div class="padding-bottom-10">
-                        <p>This search checks for section 889 compliance in a vendor's SAM record. Although vendors only doing business within the Micro-Purchase Threshold (MPT) are not required to register in SAM, vendors who do business both above and below the MPT are required to register in SAM. Vendors marked as "For Official Use Only" in SAM will not appear in this search. Entities without Representations & Certifications are omitted from the search results. If a vendor is not registered in SAM, you may request the vendor sign a <a href="/static/downloads/NF1883.pdf">Vendor Representation Form</a>.</p>
-                    </div>
+                   
                 </div>
             </main>
         </div>
+    </div>
+    <div class="grid-container">
+        <SearchResults />
     </div>
 </template>

@@ -1,4 +1,4 @@
-import { ref, computed} from "vue";
+import { ref, computed, watch} from "vue";
 import { defineStore } from "pinia";
 import { useRoute } from 'vue-router'
 
@@ -16,6 +16,28 @@ export const useSearchStore = defineStore("search", () => {
 
     const numberOfPages = computed(() => Math.ceil(totalRecords.value / DEFAULT_PAGE_SIZE ))
     const showResults = computed(() => data.value.length > 0)
+
+    const route = useRoute()
+
+    watch(
+        () => route.params.term, (new_value, old_value) => {
+            search_text.value = new_value
+            fetchResults()
+        }
+    )
+
+    watch(
+        () => route.params.page, (new_value, old_value) => {
+            currentPageIndex.value = parseInt(new_value)
+            fetchResults()
+        }
+    )
+
+    function initState() {
+        search_text.value = route.params.term
+        currentPageIndex.value = parseInt(route.params.page) || 0
+        fetchResults()
+    }
 
     function gotToPage(page) {
         currentPageIndex.value = page
@@ -52,6 +74,7 @@ export const useSearchStore = defineStore("search", () => {
         totalRecords,
         showResults,
         gotToPage,
-        fetchResults
+        fetchResults,
+        initState
     };
 });
