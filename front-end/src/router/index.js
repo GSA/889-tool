@@ -12,10 +12,9 @@ const router = createRouter({
       alias: '/search'
     },
     {
-      path: "/search/:term/:page?",
+      path: "/search/:term/:page(\\d+)?",
       name: "search",
       component: ResultsView,
-      props: true
     },
   ],
 });

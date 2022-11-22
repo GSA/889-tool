@@ -53,7 +53,10 @@ onMounted(() => {
             </main>
         </div>
     </div>
-    <div class="grid-container">
-        <SearchResults />
+    <div class="grid-container" v-show="store.loading">
+        <h3>Fancy loading animation goes here</h3>
+    </div>
+    <div class="grid-container" v-show="!store.loading">
+        <SearchResults  />
     </div>
 </template>

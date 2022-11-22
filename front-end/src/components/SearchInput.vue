@@ -6,7 +6,7 @@
     const router = useRouter()
 
     function setSearchParam() {
-        router.push({ name: 'search', params: { term: store.search_text } })
+        router.push({ name: 'search', params: { term: store.search_text} })
     }
 
 </script>

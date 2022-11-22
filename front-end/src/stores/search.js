@@ -9,6 +9,7 @@ const DEFAULT_PAGE_SIZE = 10;
 
 export const useSearchStore = defineStore("search", () => {
     const data = ref([])
+    const loading = ref(false)
     const error = ref(null)
     const search_text = ref('')
     const currentPageIndex = ref(0)
@@ -19,16 +20,12 @@ export const useSearchStore = defineStore("search", () => {
 
     const route = useRoute()
 
-    watch(
-        () => route.params.term, (new_value, old_value) => {
-            search_text.value = new_value
-            fetchResults()
-        }
-    )
-
-    watch(
-        () => route.params.page, (new_value, old_value) => {
-            currentPageIndex.value = parseInt(new_value)
+    watch (
+        () => route.params, (params, old_params) => {
+            search_text.value = params.term
+            currentPageIndex.value = params.page 
+            ? parseInt(params.page) 
+            : 0
             fetchResults()
         }
     )
@@ -39,12 +36,8 @@ export const useSearchStore = defineStore("search", () => {
         fetchResults()
     }
 
-    function gotToPage(page) {
-        currentPageIndex.value = page
-        fetchResults()
-    }
-
     function fetchResults() {
+        loading.value = true
         error.value = null
         const url_params = {
             samToolsSearch:  search_text.value,
@@ -52,7 +45,7 @@ export const useSearchStore = defineStore("search", () => {
             registrationStatus: 'A',
             purposeOfRegistrationCode: 'Z2~Z5',
             entityEFTIndicator: '',
-            page: currentPageIndex.value
+            page: currentPageIndex.value || 0
         }
         const url = new URL(`${API_DOMAIN}/api/entity-information/v3/entities`);
         url.search = new URLSearchParams(url_params);
@@ -62,8 +55,12 @@ export const useSearchStore = defineStore("search", () => {
             .then((json) => {
                 data.value =  json.entityData
                 totalRecords.value = json.totalRecords
+                loading.value = false
             })
-            .catch((err) => (error.value = err))
+            .catch((err) => {
+                loading = false
+                error.value = err
+            })
     }
 
     return {
@@ -73,8 +70,7 @@ export const useSearchStore = defineStore("search", () => {
         currentPageIndex,
         totalRecords,
         showResults,
-        gotToPage,
-        fetchResults,
+        loading,
         initState
     };
 });

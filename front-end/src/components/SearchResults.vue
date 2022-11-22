@@ -13,7 +13,7 @@
 
 </script>
 <template>
-    <div id="results" v-if="store.showResults" class="margin-top-3">
+    <div id="results"  class="margin-top-3">
         <div v-for="item in store.data" >
             <SearchResult :entity="item" />
         </div>
