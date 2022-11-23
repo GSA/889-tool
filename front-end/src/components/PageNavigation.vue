@@ -39,21 +39,22 @@
     }
 
     const interiorIndexStart = computed(() => {
-        if (props.numberOfPages <= 8 || props.currentPage < 4) return 2
+        if (props.numberOfPages <= 7 || props.currentPage < 4) return 2
         return Math.min(props.currentPage , props.numberOfPages - 4)
     })
 
     const interiorIndexEnd = computed(() => {
-        if (props.numberOfPages <= 8 || props.currentPage >= props.numberOfPages - 4) return props.numberOfPages - 1
+        if (props.numberOfPages <= 7 || props.currentPage >= props.numberOfPages - 4) return props.numberOfPages - 1
         return Math.max(props.currentPage + 2, 5)
     })
 </script>
 <template>
     <nav v-if="numberOfPages" aria-label="Pagination" class="usa-pagination">
-    <ul class="usa-pagination__list">
+    <ul class="usa-pagination__list" data-test="page-navigation-list">
         <li  class="usa-pagination__item usa-pagination__arrow">
         <a
             :style="{visibility: showPrevious ? 'visible' : 'hidden'}" 
+            data-test="previous-page-link"
             href="javascript:void(0);"
             @click="$emit('gotoPage', currentPage - 1)"
             class="usa-pagination__link usa-pagination__previous-page"
@@ -68,6 +69,7 @@
             <a
                 href="javascript:void(0);"
                 @click="$emit('gotoPage', 0)"
+                data-test="page-link"
                 :class="{'usa-current': currentPage == 0}"
                 class="usa-pagination__button"
                 aria-label="Page 1"
@@ -78,6 +80,7 @@
             v-if='interiorIndexStart != 2'
             class="usa-pagination__item usa-pagination__overflow"
             role="presentation"
+            data-test="first-ellipsis"
             >
             <span>…</span>
         </li>
@@ -85,6 +88,7 @@
             <a
                 href="javascript:void(0);"
                 @click="$emit('gotoPage', page - 1)"
+                data-test="page-link"
                 :class="{'usa-current': page == currentPage + 1 }"
                 class="usa-pagination__button"
                 aria-label="Page {{page}}"
@@ -95,6 +99,7 @@
             v-if='interiorIndexEnd != numberOfPages - 1 '
             class="usa-pagination__item usa-pagination__overflow"
             role="presentation"
+            data-test="last-ellipsis"
             >
             <span>…</span>
         </li>
@@ -102,6 +107,7 @@
             <a
                 href="javascript:void(0);"
                 @click="$emit('gotoPage', numberOfPages - 1)"
+                data-test="page-link"
                 :class="{'usa-current': currentPage == numberOfPages - 1}"
                 class="usa-pagination__button"
                 aria-label="Last Page, page {{numberOfPages}}"
@@ -110,9 +116,11 @@
         </li>
         
         <li  class="usa-pagination__item usa-pagination__arrow">
-        <a   :style="{visibility: beforeLastPage ? 'visible' : 'hidden'}" 
-            href="javascript:void(0);"
+        <a   
+            :style="{visibility: beforeLastPage ? 'visible' : 'hidden'}" 
+            data-test="next-page-link"
             @click="$emit('gotoPage', currentPage + 1)"
+            href="javascript:void(0);"
             class="usa-pagination__link usa-pagination__next-page"
             aria-label="Next page"
             ><span class="usa-pagination__link-text">Next </span
