@@ -7,7 +7,7 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
 
   build: {
-    outDir: '../_site'
+    outDir: './_site'
   },
   plugins: [vue()],
   resolve: {
