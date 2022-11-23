@@ -5,7 +5,7 @@
     const props = defineProps({
         'entity': Object
     })
-    
+
     const dba = computed(() => props.entity.entityRegistration.dbaName)
     const hasCageCode = computed(() => props.entity.entityRegistration.cageCode)
     const hasWebsite = computed(() => props.entity.coreData.entityInformation.entityURL)
@@ -70,15 +70,15 @@
 
         <div class="grid-col-auto padding-y-2">    
             <div class="text-primary-dark text-bold margin-bottom-1 grid-row">
-                <span class="margin-right-2" >
+                <span class="margin-right-2" data-test="business-name">
                     {{entity.entityRegistration.legalBusinessName}}
                 </span>
-                <span class="usa-tag margin-right-2" :class="isSelectable ? 'bg-primary' : 'bg-base-dark'">
+                <span class="usa-tag margin-right-2" data-test="889-status" :class="isSelectable ? 'bg-primary' : 'bg-base-dark'">
                     {{entity.samToolsData.eightEightNine.statusText}}
                 </span>
             </div>
             <div class="margin-y-1">
-                    <span v-if="isExpiring" class="text-secondary">
+                    <span v-if="isExpiring" class="text-secondary" data-test="expiration-date">
                         {{expirationDateText}}
                     </span>
                 </div>
@@ -89,7 +89,7 @@
                 {{websiteURL}}
             </div>
             <div>
-                <span class="margin-right-2">{{condensedAddress}}</span>
+                <span class="margin-right-2" data-test="address">{{condensedAddress}}</span>
                 <span class="margin-right-2">SAM: {{entity.entityRegistration.ueiSAM}}</span>
                 <span v-if="hasCageCode">CAGE: {{entity.entityRegistration.cageCode}}</span>
             </div>

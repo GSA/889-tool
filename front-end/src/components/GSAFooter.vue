@@ -1,5 +1,5 @@
 <template>
-    <footer class="usa-footer usa-footer--slim">
+    <div class="usa-footer usa-footer--slim">
     <div class="usa-footer__primary-section">
       <div class="usa-footer__primary-container grid-row">
         <div class="mobile-lg:grid-col-8">
@@ -14,5 +14,5 @@
       </div>
     </div>
 
-  </footer>
+</div>
 </template>

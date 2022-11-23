@@ -4,7 +4,9 @@ import { useSearchStore } from '@/stores/search'
 
 import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
-import GSAHeader from "../components/GSAHeader.vue"
+import GSAHeader from "../components/GSAHeader.vue";
+import NoResults from "../components/NoResults.vue";
+import APIError from "../components/APIError.vue"
 
 const store = useSearchStore()
 
@@ -15,48 +17,29 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="background padding-bottom-2">
-    <GSAHeader />
-        <div id="main-container" class="wide-layout">
-            <main id="main-content">
-                <div class="grid-container">
-                    <div class="padding-top-2">
-                        
-                    
-                        <SearchInput />
-                    
-                        <div>
-                            <div id="error-message" class="ui negative message" style="display:none"></div>
-                            
-                            <div id="results-box" class="margin-top-3" > 
-                                <!-- style="display:none" -->
-                                <!--Contents from AJAX call go here -->
-                                <div id="results-list" class="grid-container"></div>
+    <div class="wide-layout flex-fill">
 
-                                <div id="loading-box" class="ui loading placeholder basic segment"></div>
-                            </div>
-                            
-                            
-                            <button id="show-more" class="fluid ui bottom attached button"
-                                style="margin: none; display: none">
-                                <i id="show-more-icon" class="angle double down icon"></i>
-                                <p id="show-more-text" style="display: inline"></p>
-                            </button>
-                
-                            <div id="no-results" class="ui segment" style="display:none">
-                                No results. Vendors marked “For Official Use Only” will not appear in this search.
-                            </div>
+        <div class="background padding-bottom-2">
+            <GSAHeader />
+            <div id="main-container" >
+                <main id="main-content">
+                    <div class="grid-container">
+                        <div class="padding-top-2">
+                            <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>                  
+                            <SearchInput />
                         </div>
                     </div>
-                   
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
-    </div>
-    <div class="grid-container" v-show="store.loading">
-        <h3>Fancy loading animation goes here</h3>
-    </div>
-    <div class="grid-container" v-show="!store.loading">
-        <SearchResults  />
+        <div class="grid-container" v-show="store.loading">
+            <h3>Fancy loading animation goes here</h3>
+        </div>
+        <div class="grid-container" v-show="!store.loading">
+            <SearchResults />
+            
+            <NoResults v-if="store.emptyResults"></NoResults>
+            <APIError v-if="store.error"></APIError>
+        </div>
     </div>
 </template>

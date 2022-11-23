@@ -3,8 +3,9 @@ import SearchInput from "../components/SearchInput.vue";
 import GSAHeader from "../components/GSAHeader.vue"
 </script>
 
-<template>
-    <div class="background">
+<template >
+    <div  class="background flex-fill">
+    
     <GSAHeader />
         <div id="main-container" class="wide-layout">
             <main id="main-content">
@@ -36,9 +37,7 @@ import GSAHeader from "../components/GSAHeader.vue"
                                 <p id="show-more-text" style="display: inline"></p>
                             </button>
                 
-                            <div id="no-results" class="ui segment" style="display:none">
-                                No results. Vendors marked “For Official Use Only” will not appear in this search.
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="padding-bottom-10">

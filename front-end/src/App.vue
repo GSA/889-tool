@@ -10,11 +10,11 @@ import USAIdentifier from "./components/USAIdentifier.vue";
 <template>
     <Banner />
     <PrototypeAlert />
-    <div id="main-container" class="wide-layout">
-        <RouterView />
-    </div>
-    <GSAFooter />
-    <USAIdentifier />
+    <RouterView />
+    <footer class="flex-shrink-0">
+        <GSAFooter />
+        <USAIdentifier />
+    </footer>
 </template>
 
 <style scoped lang="scss">

@@ -19,8 +19,7 @@
             v-model="store.search_text"
             id="input" 
             class="usa-input border-base-lighter grid-col flex-12" 
-            type="search" 
-            placeholder="Search by business name, website, CAGE code, or SAM Unique Entity ID" 
+            type="search"  
             required pattern=".*\S+.*" 
             title="Enter a search term" 
             autofocus
