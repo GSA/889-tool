@@ -5,8 +5,7 @@ import { useSearchStore } from '@/stores/search'
 import SearchInput from "../components/SearchInput.vue";
 import SearchResults from "../components/SearchResults.vue";
 import GSAHeader from "../components/GSAHeader.vue";
-import NoResults from "../components/NoResults.vue";
-import APIError from "../components/APIError.vue"
+import Alert from "../components/Alert.vue";
 
 const store = useSearchStore()
 
@@ -37,9 +36,9 @@ onMounted(() => {
         </div>
         <div class="grid-container" v-show="!store.loading">
             <SearchResults />
-            
-            <NoResults v-if="store.emptyResults"></NoResults>
-            <APIError v-if="store.error"></APIError>
+
+            <Alert v-if="store.APIMessage" heading="No Results">{{store.APIMessage}}</Alert>
+            <Alert v-if="store.error"  heading="Error" status="error">{{store.error}}</Alert>
         </div>
     </div>
 </template>

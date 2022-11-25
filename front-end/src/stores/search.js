@@ -6,12 +6,14 @@ import { useRoute } from 'vue-router'
 // for setting production env
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN
 const DEFAULT_PAGE_SIZE = 10;
+const NO_RESULT_MESSAGE = "Vendors marked “For Official Use Only” will not appear in this search."
+const API_ERROR_MESSAGE = "Sorry, we weren't able to connect to SAM.gov. Please try again later."
 
 export const useSearchStore = defineStore("search", () => {
     const data = ref([])
     const loading = ref(false)
-    const error = ref(null)
-    const emptyResults = ref(false)
+    const error = ref('')
+    const APIMessage = ref('')
     const search_text = ref('')
     const currentPageIndex = ref(0)
     const totalRecords = ref(0)
@@ -39,8 +41,8 @@ export const useSearchStore = defineStore("search", () => {
 
     function fetchResults() {
         loading.value = true
-        error.value = null
-        emptyResults.value = false
+        error.value = ''
+        APIMessage.value = ''
         const url_params = {
             samToolsSearch:  search_text.value,
             includeSections: 'samToolsData,entityRegistration,coreData',
@@ -62,13 +64,14 @@ export const useSearchStore = defineStore("search", () => {
             .then(json => {
                 data.value =  json.entityData
                 totalRecords.value = json.totalRecords
-                emptyResults.value = totalRecords.value == 0
+                if (totalRecords.value == 0){
+                    APIMessage.value = NO_RESULT_MESSAGE
+                }
                 loading.value = false
             })
             .catch((err) => {
-                console.log("error:", err)
                 loading.value = false
-                error.value = err
+                error.value = API_ERROR_MESSAGE
             })
     }
 
@@ -76,7 +79,7 @@ export const useSearchStore = defineStore("search", () => {
         data,
         search_text,
         numberOfPages,
-        emptyResults,
+        APIMessage,
         currentPageIndex,
         totalRecords,
         showResults,
