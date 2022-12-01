@@ -92,7 +92,7 @@
 </script>
 <template>
     <div class="grid-row border-y-2px border-base-lighter gidr-row flex-no-wrap">
-        <a v-if="isSelectable" href="javascript:void(0);" @click="downloadPDF" class="grid-row" target="_blank"  rel="noopener noreferrer"  >
+        <a v-if="isSelectable" href="javascript:void(0);" @click="downloadPDF" class="grid-row" rel="noopener noreferrer"  >
             <!-- <router-link v-if="isSelectable" :to="{name: 'pdf', params: {'entity_index': 0}}"> -->
             <button         
                 class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
