@@ -1,5 +1,5 @@
 <template>
-    <div class="grid-row border-1px border-base-lighter gidr-row flex-no-wrap height-10 bg-base-lightest pulse">
+    <div class="grid-row border-1px border-base-lighter gidr-row flex-no-wrap height-10 margin-bottom-1 bg-base-lightest pulse">
         <span  class="grid-row width-10 bg-base-light"></span>
         <div class="grid-col-auto padding-y-2 margin-bottom-1"></div>
     </div>
