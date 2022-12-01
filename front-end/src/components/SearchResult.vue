@@ -1,10 +1,55 @@
 <script setup>
-    import { computed } from 'vue'
+    import { computed, createApp, h } from 'vue'
+    import { jsPDF } from "jspdf"; 
+    import PDFView from '@/views/PDFView.vue'
+
     const WARN_IF_FEWER_THAN_DAYS = 30
 
     const props = defineProps({
         'entity': Object
     })
+
+    function downloadPDF() {
+        const doc = new jsPDF({
+            orientation: 'p',
+            unit: 'px',
+            format: 'letter',
+            putOnlyUsedFonts:true,
+            floatPrecision: 16,
+            hotfixes: ["px_scaling"]
+        });
+       
+        const tempApp = createApp({
+            render() {
+                return h(PDFView, {
+                    entityData: props.entity
+                })
+            }
+        })
+
+        // in Vue 3 we need real element to mount not just a v-node
+        const el = document.createElement('body');
+        const mountedApp = tempApp.mount(el)
+
+        const rendered =  mountedApp.$el.outerHTML
+        const doc_title = `Record of Section 889 Compliance - ${props.entity.entityRegistration.legalBusinessName}.pdf`
+
+        doc.html(rendered, {
+            callback: function (doc) {
+                doc.save(doc_title);
+            },
+            autoPaging: 'text',
+            html2canvas: {
+                dpi: 300,
+                scale: 1,
+                letterRendering: true,
+            },
+            x: 50,
+            y: 50,
+            windowWidth: 712,
+            width: 712,
+        });
+    }
 
     const dba = computed(() => props.entity.entityRegistration.dbaName)
     const hasCageCode = computed(() => props.entity.entityRegistration.cageCode)
@@ -47,7 +92,8 @@
 </script>
 <template>
     <div class="grid-row border-y-2px border-base-lighter gidr-row flex-no-wrap">
-        <a v-if="isSelectable" :href="entity.samToolsData.pdfLinks.entityPDF" class="grid-row" target="_blank"  rel="noopener noreferrer"  >
+        <a v-if="isSelectable" href="javascript:void(0);" @click="downloadPDF" class="grid-row" target="_blank"  rel="noopener noreferrer"  >
+            <!-- <router-link v-if="isSelectable" :to="{name: 'pdf', params: {'entity_index': 0}}"> -->
             <button         
                 class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
                 <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" aria-labelledby="download-pdf">
@@ -56,6 +102,7 @@
                     </use>
                 </svg>
             </button> 
+        <!-- </router-link>     -->
         </a>
         <span v-else class="grid-row ">
             <button disabled="true"

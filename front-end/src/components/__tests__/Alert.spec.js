@@ -14,7 +14,7 @@ describe("Alert", () => {
     expect(wrapper.classes()).toContain('usa-alert--info')
   });
 
-  it("renders header properly", () => {
+  it("renders header prop as the alert header", () => {
     const wrapper = mount(Alert, { 
         props: {heading: "Warning!!"},
         slots: { default: "The library, and step on it"}
@@ -25,7 +25,7 @@ describe("Alert", () => {
 
   });
 
-  it("renders status properly", () => {
+  it("renders status prop by indicating corresponding USWDS calss", () => {
     const wrapper = mount(Alert, { 
         props: {heading: "Error!!", status: "error"},
         slots: { default: "The truth will set you free. But not until it is finished with you."}
