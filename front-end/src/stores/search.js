@@ -25,7 +25,6 @@ export const useSearchStore = defineStore("search", () => {
 
     watch (
         () => route.params, (params, old_params) => {
-            console.log("watch fired", params)
             if ('term' in params || 'page' in params) {
                 search_text.value = params.term
                 currentPageIndex.value = params.page 

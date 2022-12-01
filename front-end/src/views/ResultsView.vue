@@ -1,18 +1,26 @@
 <script setup>
-import {onMounted } from 'vue'
+import {onMounted, watch} from 'vue'
 import { useSearchStore } from '@/stores/search'
+import { useRoute } from 'vue-router'
 
 import SearchInput from "../components/SearchInput.vue";
+import LoadingPage from "../components/LoadingPage.vue"
 import SearchResults from "../components/SearchResults.vue";
 import GSAHeader from "../components/GSAHeader.vue";
 import Alert from "../components/Alert.vue";
 
+const route = useRoute()
 const store = useSearchStore()
 
 onMounted(() => {
     store.initState()
+  
 })
-
+watch (
+    () => route.params, () => {
+        window.scrollTo(0,0);
+    }
+)
 </script>
 
 <template>
@@ -31,12 +39,11 @@ onMounted(() => {
                 </main>
             </div>
         </div>
-        <div class="grid-container" v-show="store.loading">
-            <h3>Fancy loading animation goes here</h3>
+        <div class="grid-container" v-if="store.loading">
+            <LoadingPage />
         </div>
-        <div class="grid-container" v-show="!store.loading">
+        <div class="grid-container" v-else>
             <SearchResults />
-
             <Alert v-if="store.APIMessage" heading="No Results">{{store.APIMessage}}</Alert>
             <Alert v-if="store.error"  heading="Error" status="error">{{store.error}}</Alert>
         </div>
