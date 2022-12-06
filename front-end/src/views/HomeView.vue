@@ -1,6 +1,13 @@
 <script setup>
-import SearchInput from "../components/SearchInput.vue";
-import GSAHeader from "../components/GSAHeader.vue"
+    import { onMounted } from 'vue'
+    import { useSearchStore } from '@/stores/search'
+
+    import SearchInput from "../components/SearchInput.vue";
+    import GSAHeader from "../components/GSAHeader.vue"
+
+    // reset input when coming back to homepage
+    const store = useSearchStore()
+    onMounted(() => {store.resetState()})
 </script>
 
 <template >

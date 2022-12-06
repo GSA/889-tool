@@ -35,6 +35,11 @@ export const useSearchStore = defineStore("search", () => {
         }
     )
 
+    function resetState() {
+        search_text.value = ''
+        currentPageIndex.value = 0
+    }
+
     function initState() {
         search_text.value = route.params.term
         currentPageIndex.value = parseInt(route.params.page) || 0
@@ -87,6 +92,7 @@ export const useSearchStore = defineStore("search", () => {
         showResults,
         loading,
         error,
-        initState
+        initState,
+        resetState
     };
 });
