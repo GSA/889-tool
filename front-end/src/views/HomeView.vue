@@ -6,7 +6,7 @@ import GSAHeader from "../components/GSAHeader.vue"
 <template >
     <div  class="background flex-fill">
     
-    <GSAHeader />
+    <GSAHeader :linkHome="false" />
         <div id="main-container" class="wide-layout">
             <main id="main-content">
                 <div class="grid-container">
