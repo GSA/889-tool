@@ -1,86 +1,54 @@
-"""This is the main flask application with endpoints, configuration, etc.
+"""This is the main FastAPI application with endpoints, configuration, etc.
 
 Returns:
-    flask app: Application factory pattern. Returns a flask application.
+    FastAPI: Application factory pattern. Returns a FastAPI application.
 """
-import datetime
 from logging.config import dictConfig
-
+from datetime import datetime
+import logging
 import os
-
-from flask_weasyprint import HTML, render_pdf
-from flask import Flask, render_template, request
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from samtools.sam_api.entity_information import search_sam_v3
 
+logger = logging.getLogger(__name__)
+
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+]
+
 
 def create_app(name=__name__):
-    """Create a flask application of the SAM Tool
-
-    Args:
-        name (str, optional): name of the application. Defaults to __name__.
-
-    Raises:
-        Exception:
-
-    Returns:
-        flask app: returns the flask app.
-    """
     _setup_logging()
-    app = Flask(name, instance_relative_config=True)
+    app = FastAPI()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
-    app.config.from_object('samtools.config.Default')
-    app.config.from_pyfile('samtools.cfg')
-    if app.config['SAM_API_KEY'] is None:
-        raise Exception("SAM_API_KEY has not been set")
-
-
-    @app.route('/')
-    def welcome():
-        app.logger.info(request)
-        return render_template(
-            'base.html',
-            version=app.config['VERSION_STRING'],
-            contact_email=app.config['CONTACT_EMAIL'],
-            external_links=app.config['EXTERNAL_LINKS'],
-            toast_messages=_get_nonexpired_messages(app.config["RECENT_WEBSITE_UPDATE_MESSAGES"])
-        )
-
-    @app.route('/api/entity-information/v3/entities', methods=['GET'])
-    def search_v3():
-        app.logger.info(request)
+    @app.get('/api/entity-information/v3/entities')
+    async def search_v3(
+        req: Request,
+        samToolsSearch: str,
+        includeSections: str,
+        registrationStatus: str,
+        purposeOfRegistrationCode: str,
+        entityEFTIndicator: str,
+        page: int = 0,
+    ):
         try:
-            return search_sam_v3(request.args, host_url=request.host_url)
+            response = await search_sam_v3(req.query_params, host_url='')
+            return response
         except Exception as exception:
-            app.logger.error(exception)
+            logging.error(exception)
             return {'success': False,
                     'errors': ["400 Bad Request"]}
-
-    @app.route('/api/file-download/summary', methods=['GET'])
-    def get_compliance_summary_pdf():
-        app.logger.info(request)
-        try:
-            response = search_sam_v3(request.args, host_url=request.host_url)
-        except Exception as exception:
-            app.logger.error(exception)
-            return {'success': False,
-                    'errors': ["400 Bad Request"]}
-
-        if not response['success']:
-            app.logger.error(response)
-            return {'success': False,
-                    'errors': ["400 Bad Request"]}
-
-        if len(response['entityData']) != 1:
-            app.logger.error(response)
-            return {'success': False,
-                    'errors': ["400 Bad Request"]}
-
-        return _get_summary_pdf_response(
-            response["entityData"][0],
-            host_url=request.host_url,
-            external_links=app.config['EXTERNAL_LINKS']
-            )
 
     return app
 
@@ -108,23 +76,6 @@ def _setup_logging():
                 "formatter": "default",
                 "stream": "ext://sys.stdout",
             },
-            # Should not be writing to local files for cloud.gov
-            # "error_file": {
-            #     "class": "logging.handlers.TimedRotatingFileHandler",
-            #     "formatter": "default",
-            #     "filename": "/var/log/gunicorn/error.log",
-            #     'when': 'D',
-            #     'backupCount': 15,
-            #     'delay': 'True',
-            # },
-            # "access_file": {
-            #     "class": "logging.handlers.TimedRotatingFileHandler",
-            #     "formatter": "access",
-            #     "filename": "/var/log/gunicorn/access.log",
-            #     'when': 'D',
-            #     'backupCount': 15,
-            #     'delay': 'True',
-            # }
         },
         "loggers": {
             "gunicorn.error": {
@@ -143,27 +94,3 @@ def _setup_logging():
             "handlers": ["console"],
         }
     })
-
-
-def _get_summary_pdf_response(entity, host_url, external_links):
-    html = render_template('sam_summary_pdf_template.html',
-                           date_generated=datetime.datetime.now().strftime('%B %-d, %Y'),
-                           entityData=entity,
-                           host_url=host_url,
-                           external_links=external_links
-                           )
-    filename = _get_pdf_filename(entity["entityRegistration"]["legalBusinessName"])
-    return render_pdf(HTML(string=html), download_filename=filename)
-
-
-def _get_pdf_filename(legal_business_name):
-    cleaned_name = legal_business_name.replace(".", "").replace(",", "")
-    return f'Record of Section 889 Compliance - {cleaned_name}.pdf'
-
-
-def _get_nonexpired_messages(messages):
-    non_expired_messages = []
-    for message in messages:
-        if message['expiration_date'].date() >= datetime.datetime.now().date():
-            non_expired_messages.append(message['message'])
-    return non_expired_messages
