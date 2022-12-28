@@ -2,14 +2,13 @@
  compliance information
 """
 import aiohttp
-from datetime import datetime
 from samtools.config import settings
 
 from samtools.compliance import compliance_rules
 from samtools.sam_api.search_preprocessor import get_search_parameter
 
 
-async def search_sam_v3(search_args, host_url):
+async def search_sam_v3(search_args):
     """This is the main Sam Tool function which converts the parameters provided to the Sam Tool
     endpoint and to SAM Entities API parameters. The response from the SAM entities API is appended
     with the samToolsData section, which includes the 889 compliance, exclusions, and registration
@@ -17,16 +16,15 @@ async def search_sam_v3(search_args, host_url):
 
     Args:
         search_args (dict): Sam Tools url search parameters
-        host_url (str): The url of the this tool which will be included in the PDF download link
 
     Returns:
         dict: Contains the response data, otherwise returns the error messages
     """
     sam_api_endpoint = "https://api.sam.gov/entity-information/v3/entities"
-    return await _search_sam(search_args, host_url, sam_api_endpoint)
+    return await _search_sam(search_args, sam_api_endpoint)
 
 
-async def _search_sam(search_args, host_url, sam_api_endpoint):
+async def _search_sam(search_args, sam_api_endpoint):
     data_adaptors = DataAdaptors()
     search_parameters = data_adaptors.adapt_samtools_to_sam_parameters(search_args)
     sam_response_data = await _call_post_sam_entities_api(sam_api_endpoint, search_parameters)
@@ -43,11 +41,6 @@ async def _search_sam(search_args, host_url, sam_api_endpoint):
                     exclusions.has_exclusions,
                     registration_status.is_active
                 ),
-                'pdfLinks': {
-                    'entityPDF': f"{host_url}api/file-download/summary?"
-                                 f"ueiSAM={entity['entityRegistration']['ueiSAM']}"
-                                 "&entityEFTIndicator="
-                },
                 'eightEightNine': {
                     'isCompliant': eight_eight_nine.is_compliant,
                     'statusText': eight_eight_nine.status_text,
@@ -104,6 +97,7 @@ async def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
         'Accept': 'application/json',
     }
     search_parameters.pop("api_key", None)
+
     async with aiohttp.ClientSession(raise_for_status=True) as session:
         async with session.post(sam_api_endpoint, headers=header, params=search_parameters) as resp:
             result = await resp.json()
