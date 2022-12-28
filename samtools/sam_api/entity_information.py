@@ -1,7 +1,7 @@
 """This is the main module that performs the calls to the SAM Entities API and returns the
  compliance information
 """
-import aiohttp
+import httpx
 from samtools.config import settings
 
 from samtools.compliance import compliance_rules
@@ -98,10 +98,11 @@ async def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
     }
     search_parameters.pop("api_key", None)
 
-    async with aiohttp.ClientSession(raise_for_status=True) as session:
-        async with session.post(sam_api_endpoint, headers=header, params=search_parameters) as resp:
-            result = await resp.json()
-            return result
+    async with httpx.AsyncClient() as client:
+        resp = await client.post(sam_api_endpoint, headers=header, params=search_parameters)
+        resp.raise_for_status()
+        result = resp.json()
+        return result
 
 
 def _get_api_key_if_none_provided(search_args):
