@@ -15,7 +15,7 @@ class TestDataAdaptors:
             parameters = ImmutableMultiDict([])
             data_adaptors = DataAdaptors()
             assert data_adaptors.adapt_samtools_to_sam_parameters(parameters) == {
-                "includeSections": set(['entityRegistration', 'coreData', 'repsAndCerts'])
+                "includeSections": set(['coreData', 'entityRegistration', 'repsAndCerts'])
             }
 
 

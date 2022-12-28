@@ -98,7 +98,7 @@ class TestEntitiesSearch:
         [
             ("fisher scientific company l.l.c.", "F5TEGZ32EJ38"),
             ("omega engineering inc.", "U2LWMEYC3MP1"),
-            ("w. w. grainger, inc.", "DBQGN324ULK3"),
+            ("w.w. grainger, inc.", "DBQGN324ULK3"),
             ("office timeline, llc", "CD65M3FP1MX7"),
         ]
         )
