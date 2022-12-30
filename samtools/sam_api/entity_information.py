@@ -61,9 +61,13 @@ async def _search_sam(search_args, sam_api_endpoint):
                 }
             }
         }}
-
+        returned_sections = set(search_parameters['includeSections']).union({'samToolsData'})
+        # repsAndCerts are needed by the backend to determine compliance,
+        # but we do not need to send them to the front-end.
+        # Discarding them reduces the API size from ~600kb to ~30kb
+        returned_sections.discard('repsAndCerts')
         entities.append({
-            section: entity[section] for section in set(search_parameters['includeSections']).union({'samToolsData'})
+            section: entity[section] for section in returned_sections
         })
 
     search_sam_response = {

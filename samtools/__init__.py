@@ -46,7 +46,7 @@ def create_app(name=__name__):
             response = await search_sam_v3(req.query_params)
             return response
         except Exception as exception:
-            logging.error(exception)
+            logging.exception(exception)
             return {'success': False,
                     'errors': ["400 Bad Request"]}
 
