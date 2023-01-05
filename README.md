@@ -6,7 +6,7 @@ This search uses the openGSA sam.gov Entity Management API. Vendors that have se
 
 - https://open.gsa.gov/api/entity-api/
 
-Search results omit entities without representations and certifications, which are those with a "purpose of registration code" of "Federal Assistance Awards" only (Code Z1) and child entities (non-zero/non-null EFT Indicator). This behavior is implemented in `client_v[0-9][0-9].js` calls to the python backend.
+Search results omit entities without representations and certifications, which are those with a "purpose of registration code" of "Federal Assistance Awards" only (Code Z1) and child entities (non-zero/non-null EFT Indicator).
 
 ## Objective
 
@@ -14,15 +14,15 @@ The purpose of this tool is to enable the broadest possible user-base, including
 
 ## Libraries
 
-The 889 Compliance SAM Tool is written in the Flask Python micro web framework and uses CSS/JS from the fomantic-ui development framework. PDFs are generated using the WeasyPrint Python library.
+The 889 Compliance SAM Tool is written in the FastAPI Python framework and uses a Vue.js front-end. PDFs are generated in the browser using jspdf.
 
-- Flask https://flask.palletsprojects.com (BSD3)
-- Fomantic https://fomantic-ui.com (MIT)
+- FastAPI https://fastapi.tiangolo.com (MIT)
+- Vue.js https://vuejs.org (MIT)
 
 Other python libraries include:
 
-- requests https://github.com/psf/requests (Apache 2) -- Requests is a simple, yet elegant, HTTP library. -- Used to make calls the SAM Entities API in python
-- Flask-WeasyPrint https://github.com/Kozea/Flask-WeasyPrint (MIT) -- Make PDF with WeasyPrint in your Flask app. -- Used to generate PDF records of vendor 889 compliance on the fly
+- httpx https://www.python-httpx.org/ (BSD) -- An Async HTTP library. -- Used to make calls the SAM Entities API in python without blocking.
+- jsPDF https://parall.ax/products/jspdf (MIT) -- Make PDFs with Javascript. -- Used to generate PDF records of vendor 889 compliance on the fly without additional calls to the backend
 
 The following libraries from requirements.dev.txt are not required for running a production instance, but may be useful in development:
 
@@ -31,10 +31,8 @@ The following libraries from requirements.dev.txt are not required for running a
 
 The python Flask application can be deployed in a production environment using a variety of tools. While they are not required, these tools may be useful:
 
-- honcho https://honcho.readthedocs.io/en/latest/ (MIT) -- A command-line application which helps you manage and run Procfile-based applications -- Used to manage the Flask app in a production environment.
-- gunicorn https://docs.gunicorn.org/en/stable/ (MIT) -- WSGI HTTP Server for UNIX -- Used to run multiple workers for the Flask app
-- nginx (BSD2) or apache (Apache2) web server -- Full webservers for production deployment
-
+- gunicorn https://docs.gunicorn.org/en/stable/ (MIT) -- WSGI HTTP Server for UNIX -- Used to run FastAPI app
+- uvicorn https://www.uvicorn.org (BSD) -- Provides asynchronous workers to allow gunicorn to handle asyncIO 
 Additional libraries used by the tool can be found in the requirements.txt (python libraries) and package.json (javascript libraries) files.
 
 ## Features
@@ -45,30 +43,11 @@ The tool performs three main tasks.
 2. Determine entity compliance status. - Call the SAM Entities API and append the response data with a "samToolsData" section for each vendor containing compliance information. See compliance/compliance_rules.py for compliance rules and associated tests in tests/test_compliance_rules.py.
 3. Render PDF record of vendor compliance.
 
-Note: The code can display a "Recent updates" toast message to inform users of changes to the tool. Populate messages and message expiration dates in the `recent_website_update_messages.json` file. This file is read during application startup, so restarting the application is required. Example json file:
-
-```
-[
-    {
-        "message": "Updated NF1883 to version 1.1",
-        "expiration_date": "2022/09/03"
-    },
-    {
-        "message": "Search results cleanup. Fewer entities without Reps&Certs will appear in the search results. Entities registered for federal awards only and child entities are omitted.",
-        "expiration_date": "2022/09/03"
-    }
-]
-```
-
 ## NASA SAM Tool API Endpoints
 
-The 889 compliance SAM Tool provides two API endpoints. These endpoints allow for other tools that require 889 compliance data from SAM to obtain this from the SAM Tool. They can be found in `__init__.py`.
+The 889 compliance SAM Tool provides a single API endpoint. This endpoints allow for other tools (like the Vue.js front-end) that require 889 compliance data from SAM to obtain this from the SAM Tool. They can be found in `__init__.py`.
 
 `<HOST_URL>/api/entity-information/v3/entities`
-
-`<HOST_URL>/api/file-download/summary`
-
-Both endpoints accept the same arguments and call the same function internally. The difference between the endpoints is in their responses.
 
 The entity-information endpoint returns the complete information for all vendors in the search results.
 
