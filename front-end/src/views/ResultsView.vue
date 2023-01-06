@@ -45,7 +45,7 @@ watch (
         <div class="grid-container" v-else>
             <div class="margin-top-1em">Displaying {{store.totalRecords}} results</div>
             <SearchResults />
-            <Alert v-if="store.APIMessage" heading="No Results">{{store.APIMessage}}</Alert>
+            <Alert v-if="store.APIMessage" heading="No Results"><span  v-html="store.APIMessage"></span></Alert>
             <Alert v-if="store.error"  heading="Error" status="error">{{store.error}}</Alert>
         </div>
     </div>

@@ -48,7 +48,9 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10">
-                        <p>This search checks for section 889 compliance in a vendor's SAM record. Although vendors only doing business within the Micro-Purchase Threshold (MPT) are not required to register in SAM, vendors who do business both above and below the MPT are required to register in SAM. Vendors marked as "For Official Use Only" in SAM will not appear in this search. Entities without Representations & Certifications are omitted from the search results. If a vendor is not registered in SAM, you may request the vendor sign a <a href="/static/downloads/NF1883.pdf">Vendor Representation Form</a>.</p>
+                        <p>This tool only checks for Section 889 compliance in a vendor's SAM.gov record. Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. </p>
+
+                        <p><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for Section 889 compliance documentation.</p>
                     </div>
                 </div>
             </main>
