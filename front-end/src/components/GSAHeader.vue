@@ -14,15 +14,15 @@
         <div class="usa-navbar border-bottom-1px">
             <div v-if="linkHome" class="usa-logo" id="header-logo">
                 <router-link to="/">
-                    <img class="usa-logo-img" src="@/assets/images/gsa-logo-reverse.svg" alt="GSA Logo" title="U.S. General Services Administration">
+                    <img class="usa-logo-img" src="@/assets/images/gsa-smartpay-logo-reverse.png" alt="GSA SmartPay Logo" title="U.S. General Services Administration">
                 </router-link>
                 <router-link to="/">
-                    <em class="usa-logo__text">889 Compliance Search</em>
+                    <em class="usa-logo__text padding-x-1">889 Compliance Search</em>
                 </router-link>
             </div>
             <div v-else class="usa-logo" id="header-logo">
-                <img class="usa-logo-img" src="@/assets/images/gsa-logo-reverse.svg" alt="GSA Logo" title="U.S. General Services Administration">
-                <em class="usa-logo__text">889 Compliance Search</em>
+                <img class="usa-logo-img" src="@/assets/images/gsa-smartpay-logo-reverse.png" alt="GSA SmartPay Logo" title="U.S. General Services Administration">
+                <em class="usa-logo__text padding-x-1">889 Compliance Search</em>
             </div>
         </div>
     </header>
