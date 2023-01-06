@@ -17,7 +17,8 @@ logger = logging.getLogger(__name__)
 origins = [
     "http://localhost",
     "http://localhost:5173",
-    "http://127.0.0.1:5173"
+    "http://127.0.0.1:5173",
+    "https://federalist-6f53a7f5-d187-47ca-b17f-7ccb6a5e1db0.sites.pages.cloud.gov"
 ]
 
 
