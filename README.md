@@ -14,7 +14,7 @@ The purpose of this tool is to enable the broadest possible user-base, including
 
 ## Libraries
 
-The 889 Compliance SAM Tool is written in the FastAPI Python framework and uses a Vue.js front-end. PDFs are generated in the browser using jspdf.
+The 889 Compliance SAM Tool is written with the FastAPI Python framework and uses a Vue.js front-end. PDFs are generated in the browser using jsPDF.
 
 - FastAPI https://fastapi.tiangolo.com (MIT)
 - Vue.js https://vuejs.org (MIT)
@@ -29,23 +29,22 @@ The following libraries from requirements.dev.txt are not required for running a
 - pytest https://github.com/pytest-dev/pytest/ (MIT) -- Makes it easy to write small, readable tests, and can scale to support complex functional testing for applications and libraries. -- Used to help write and execute tests.
 - pylint https://pylint.pycqa.org/en/latest/ (GPL2) -- Pylint is a static code analyzer -- Used to help in writing clean consistent code
 
-The python Flask application can be deployed in a production environment using a variety of tools. While they are not required, these tools may be useful:
+The python FastAPI application can be deployed in a production environment using a variety of tools. While they are not required, these tools may be useful:
 
 - gunicorn https://docs.gunicorn.org/en/stable/ (MIT) -- WSGI HTTP Server for UNIX -- Used to run FastAPI app
 - uvicorn https://www.uvicorn.org (BSD) -- Provides asynchronous workers to allow gunicorn to handle asyncIO 
-Additional libraries used by the tool can be found in the requirements.txt (python libraries) and package.json (javascript libraries) files.
+Additional libraries used by the tool can be found in requirements.txt.
 
 ## Features
 
-The tool performs three main tasks.
+The tool performs two main tasks.
 
 1. Search term pre-processing. - Improves the quality of search results returned by the SAM Entities API by modifying the search expression provided by the user. Regular expressions are used to identify SAM UEIs, and US and NATO cage codes. See the search_preprocessor.py file and associated tests in tests/test_search_preprocessor.py
 2. Determine entity compliance status. - Call the SAM Entities API and append the response data with a "samToolsData" section for each vendor containing compliance information. See compliance/compliance_rules.py for compliance rules and associated tests in tests/test_compliance_rules.py.
-3. Render PDF record of vendor compliance.
 
-## NASA SAM Tool API Endpoints
+## NASA/SAM Tool API Endpoints
 
-The 889 compliance SAM Tool provides a single API endpoint. This endpoints allow for other tools (like the Vue.js front-end) that require 889 compliance data from SAM to obtain this from the SAM Tool. They can be found in `__init__.py`.
+The 889 compliance SAM Tool provides a single API endpoint. This endpoint allow for other tools (like the Vue.js front-end) that require 889 compliance data from SAM to obtain this from the SAM Tool. The endpoint is defined in `__init__.py`.
 
 `<HOST_URL>/api/entity-information/v3/entities`
 
@@ -58,20 +57,15 @@ Both endpoints use the same arguments as the OpenGSA Entities API, but with two 
 - A additional argument, 'samToolsSearch' can be used and will use the previously described search pre-processor to set the search arguments before it is passed to the SAM Entities API.
 - 'samToolsData' can be included in the 'includeSections' argument of the SAM Entities Management API
 
-Examples:
+Example:
 
 `<HOST_URL>/api/entity-information/v3/entities?samToolsSearch=mcmaster&includeSections=[samToolsData,entityRegistration,coreData]&registrationStatus=A`
 
-`<HOST_URL>/api/file-download/summary?ueiSAM=LMLHENSX2W97&entityEFTIndicator=`
-
-`<HOST_URL>/api/file-download/summary?cageCode=9B9F4`
-
 ## Code structure
 
-- `__init__.py` --> Main Flask application
+- `__init__.py` --> Main FastAPI application
 - samtools/compliance --> Objects for determining compliance from SAM data
 - samtools/sam_api --> Run search preprocessor, call SAM Entities Management API, append compliance data to response
-- production --> Scripts for setting up nginx, gunicorn, etc.
 - tests --> Tests
 
 Tests can be run using pytest:
@@ -93,8 +87,9 @@ cd samtools
 
 ### Install python >= 3.8, pip, and virtualenv using apt-get, brew, etc.
 
-These commands must be run as root or with superuser privileges (sudo). Example:
-`sudo apt-get update`
+This is an example on systems that use apt-get (such as Debian-based Linux) commands must be run as root or with superuser privileges (sudo). If developing locally on a Mac or Windows machine, take appropriate steps to ensure you have Python version 3.8 installed.
+
+Example: `sudo apt-get update`
 
 ```
 apt-get update
@@ -102,14 +97,9 @@ apt-get install -yq git python3 python3-pip
 pip3 install --upgrade pip virtualenv
 ```
 
-### Install weasyprint
+### Create a python virtual environment
 
-See instructions on installing weasyprint in different operating systems here:
-https://weasyprint.readthedocs.io/en/stable/install.html
-
-### Build the npm modules, add static css/js files to the static folder, create a python virtual environment, and update the 'last_updated.txt' file
-
-The SAM Tool comes with a bash script that automates several of the build steps.
+The SAM Tool comes with a bash script that automates several of the build steps. Alternatively, you can look at the contenst of the script and run the commands as desired. It is just building a python virtual-env and installing dependencies:
 
 ```
 cd samtools
@@ -123,27 +113,25 @@ pip install -r requirements.dev.txt  # install development-only python requireme
 
 ### Setup instance-specific data (SAM Entity Management API key and contact email)
 
-Create an instance folder and add the Flask configuration file with the API key and contact email.
+To communicate with the SAM API you need an API Key. You will need to set an environmental variable with this key. On Mac/Linux systems you can eport it:  
 
 ```
-mkdir instance
-echo "SAM_API_KEY = '<ADD_SAM_API_KEY>'" > instance/samtools.cfg
-echo "CONTACT_EMAIL = '<ADD_CONTACT_EMAIL>'" >> instance/samtools.cfg
+export SAM_API_KEY=YOUR_API_KEY
 ```
 
-### Run the Flask application:
+### Run the FastAPI application using uvicorn. The `--reload` will watch for changes and reload the app.
 
 ```
-flask --debug --app samtools run
+uvicorn samtools.wsgi:app --reload
 ```
 
 ### Optional: use gunicorn as a web server gateway interface (WSGI)
 
-This is not required to run a development instance of the Flask application, but is required for a production instance.
-If you would like to run gunicorn in front of Flask you can run the Flask application with:
+This is not required to run a development instance of FastAPI application, but is the recommended way to run in production.
+If you would like to run gunicorn with uvicorn workers (for nice async IO):
 
 ```
-gunicorn samtools.wsgi:app
+gunicorn samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWorker
 ```
 
 NOTE: gunicorn runs on port 8000 by default.
@@ -156,19 +144,7 @@ Hopefully that all went smoothly and now you can continue to develop and improve
 
 ## Production deployment
 
-The production deployment uses a reverse proxy and web server gateway interface (WSGI). We use nginx as a reverse proxy and gunicorn as a WSGI, but we do not use any specialized features of these programs and it's expected that anything with similar capabilities will suffice.
-
-## Updating the site
-
-Production uses a soft link from a specific version (e.g., `/opt/samtool_v0.3.12`) to a production folder (`/opt/samtool_production`). To update the site just point the production soft link to the desired version folder and reboot supervisor and nginx:
-
-```
-sudo ln -sfn /opt/samtool_v0.3.12 /opt/samtool_production
-sudo service supervisor restart
-sudo systemctl restart nginx
-```
-
-This makes it simpler to roll-back to a previous version if needed.
+[Note: this section will likely change once we have decided on a cloud provide] The production deployment uses a reverse proxy and web server gateway interface (WSGI). We use nginx as a reverse proxy and gunicorn as a WSGI, but we do not use any specialized features of these programs and it's expected that anything with similar capabilities will suffice.
 
 You can see if any packages have newer versions with `pip list --outdated` and `npm outdated`
 
