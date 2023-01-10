@@ -47,3 +47,25 @@ html, body {
 .background a {
     color: #fff;
 }
+
+.usa-navbar {
+    height: 4em;
+    @include at-media('desktop') {
+        height: auto;
+      }
+}
+
+// .usa-logo {
+//     font-size: 1.125rem;
+//     line-height: 1.7;
+//     @include at-media('desktop') {
+//         font-size: unset;
+//         line-height: unset;
+//       }
+// }
+
+// Style Attribute {
+//     float: left;
+//     height: 50px;
+//     margin-top: 20px;
+//     }

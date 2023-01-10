@@ -22,7 +22,7 @@
             </div>
             <div v-else class="usa-logo" id="header-logo">
                 <img class="usa-logo-img" src="@/assets/images/gsa-smartpay-logo-reverse.svg" alt="GSA SmartPay Logo" title="U.S. General Services Administration">
-                <em class="usa-logo__text">889 Compliance Search</em>
+                <em class="usa-logo__text" >889 Compliance Search</em>
             </div>
         </div>
     </header>
