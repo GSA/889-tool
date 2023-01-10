@@ -17,7 +17,7 @@
         <div id="main-container" class="wide-layout">
             <main id="main-content">
                 <div class="grid-container">
-                    <div class="padding-top-10">
+                    <div class="padding-top-8">
                         <h2 class="font-sans-lg margin-bottom-1"> 
                             Check to see if a vendor is section 889 compliant
                         </h2>
