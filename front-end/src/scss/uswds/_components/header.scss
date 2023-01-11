@@ -8,7 +8,10 @@
 
       @include at-media($theme-header-min-width)  {
         font-size: 2.13rem;
-        line-height: 1.125;
+        line-height: 1;
+        em {
+            margin-top: .25em;
+        }
       }
       .usa-logo-img {
         float: left;
