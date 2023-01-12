@@ -19,10 +19,10 @@
                 <div class="grid-container">
                     <div class="padding-top-8">
                         <h2 class="font-sans-lg margin-bottom-1"> 
-                            Check to see if a vendor is section 889 compliant
+                            Check to see if a vendor has a section 889 representation in SAM.gov
                         </h2>
                     
-                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>
+                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM.gov Unique Entity ID</p>
                     
                         <SearchInput />
                     
