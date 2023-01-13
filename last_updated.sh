@@ -1,1 +1,0 @@
-git log -1 | grep Date > last_updated.txt

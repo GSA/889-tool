@@ -8,78 +8,14 @@ import datetime
 import pathlib
 import json
 
-
-def _get_version_string():
-    version_file_name = 'last_updated.txt'
-    try:
-        with open(version_file_name, 'r', encoding='utf-8') as version_file:
-            date_from_file = version_file.read().replace('Date:', '').strip()
-        file_date_format = '%a %b %d %H:%M:%S %Y %z'
-        return_date_format = '%B %d, %Y'
-        formatted_datetime = (
-            datetime.datetime.strptime(date_from_file, file_date_format)
-            .astimezone(tz=datetime.timezone(datetime.timedelta(hours=-5)))
-            .strftime(return_date_format)
-        )
-        return f"Website last updated {formatted_datetime}"
-    except Exception as exception:
-        raise Exception(f'Cannot read date string from file: {version_file_name}.') from exception
+from pydantic import BaseSettings
 
 
-def _get_recent_website_update_messages():
-    messages_file_name = 'recent_website_update_messages.json'
-    if not pathlib.Path(messages_file_name).is_file:
-        return None
-
-    try:
-        with open(messages_file_name, 'r', encoding='utf-8') as messages_file:
-            messages = json.load(messages_file)
-    except Exception as exception:
-        raise ValueError(f"Error in file {messages_file_name}") from exception
-
-    try:
-        messages[0]
-    except Exception as exception:
-        raise ValueError(f"{messages} is not a list") from exception
-
-    for message in messages:
-        if "message" not in message:
-            raise ValueError(f"{message} does not contain key: 'message")
-
-        if "expiration_date" not in message:
-            raise ValueError(f"{message} does not contain key: 'expiration_date")
-
-        try:
-            message["expiration_date"] = (
-                datetime
-                .datetime
-                .strptime(message["expiration_date"], "%Y/%m/%d")
-            )
-        except Exception as exception:
-            raise ValueError(
-                f"expiration_date: '{message['expiration_date']}' "
-                f"is not formatted as YYYY/MM/DD in {messages_file_name}"
-                ) from exception
-
-        if message.keys() != {"message", "expiration_date"}:
-            raise ValueError(
-                    f"Unexpected key in {messages_file_name}: "
-                    f"{set(message.keys()).difference(set(['message', 'expiration_date']))}")
-
-    return messages
-
-
-class Default:
-    """Default constants for the application
-    """
-    SAM_API_KEY = environ.get('SAM_API_KEY')
-    CONTACT_EMAIL = environ.get('CONTACT_EMAIL', '')
-    STATIC_FOLDER = 'static'
-    TEMPLATES_FOLDER = 'templates'
-    VERSION_STRING = _get_version_string()
-    RECENT_WEBSITE_UPDATE_MESSAGES = _get_recent_website_update_messages()
+class Settings(BaseSettings):
+    SAM_API_KEY: str 
     EXTERNAL_LINKS = {
         "SAM.GOV": "https://sam.gov",
         "SAM_ENTITIES_API_DOCS": "https://open.gsa.gov/api/entity-api/",
-        #"NF1883": "https://forms.neacc.nasa.gov/documents/11002/305376/NF1883.pdf" # this doesn't seem to be accessible outside of NASA
     }
+
+settings = Settings() # type: ignore See: https://github.com/pydantic/pydantic/issues/3753

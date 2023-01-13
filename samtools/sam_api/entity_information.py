@@ -1,15 +1,14 @@
 """This is the main module that performs the calls to the SAM Entities API and returns the
  compliance information
 """
-
-import requests
-from flask import current_app
+import httpx
+from samtools.config import settings
 
 from samtools.compliance import compliance_rules
 from samtools.sam_api.search_preprocessor import get_search_parameter
 
 
-def search_sam_v3(search_args, host_url):
+async def search_sam_v3(search_args):
     """This is the main Sam Tool function which converts the parameters provided to the Sam Tool
     endpoint and to SAM Entities API parameters. The response from the SAM entities API is appended
     with the samToolsData section, which includes the 889 compliance, exclusions, and registration
@@ -17,47 +16,31 @@ def search_sam_v3(search_args, host_url):
 
     Args:
         search_args (dict): Sam Tools url search parameters
-        host_url (str): The url of the this tool which will be included in the PDF download link
 
     Returns:
         dict: Contains the response data, otherwise returns the error messages
     """
     sam_api_endpoint = "https://api.sam.gov/entity-information/v3/entities"
-    return _search_sam(search_args, host_url, sam_api_endpoint)
+    return await _search_sam(search_args, sam_api_endpoint)
 
 
-def _search_sam(search_args, host_url, sam_api_endpoint):
+async def _search_sam(search_args, sam_api_endpoint):
     data_adaptors = DataAdaptors()
     search_parameters = data_adaptors.adapt_samtools_to_sam_parameters(search_args)
-    sam_response = _call_post_sam_entities_api(sam_api_endpoint, search_parameters)
-    sam_response_data = sam_response.json()
-    current_app.logger.info(sam_response.url)
-    current_app.logger.info(sam_response.request.body)
-
-    if not sam_response.ok:
-        sam_error_message = (
-            "SAM Entities API services cannot be accessed right now. Please try again later. "
-            "This occurs when the SAM Entities API returns an error, is down for maintenance, "
-            "or cannot be reached."
-        )
-        current_app.logger.error(sam_response.json())
-        return {'success': False, 'errors': [f'{sam_error_message}']}
+    sam_response_data = await _call_post_sam_entities_api(sam_api_endpoint, search_parameters)
 
     entities = []
-    for entity in sam_response_data.get('entityData'):
+    for entity in sam_response_data.get('entityData', []):
         eight_eight_nine = data_adaptors.adapt_sam_response_to_889_compliance(entity)
         exclusions = data_adaptors.adapt_sam_response_to_exclusions(entity)
         registration_status = data_adaptors.adapt_sam_response_to_registration_status(entity)
         entity = {**entity, **{
             'samToolsData': {
-                'isSelectable': _is_entity_selectable(eight_eight_nine.is_compliant,
-                                                        exclusions.has_exclusions,
-                                                        registration_status.is_active),
-                'pdfLinks': {
-                    'entityPDF': f"{host_url}api/file-download/summary?"
-                                 f"ueiSAM={entity['entityRegistration']['ueiSAM']}"
-                                  "&entityEFTIndicator="
-                    },
+                'isSelectable': _is_entity_selectable(
+                    eight_eight_nine.is_compliant,
+                    exclusions.has_exclusions,
+                    registration_status.is_active
+                ),
                 'eightEightNine': {
                     'isCompliant': eight_eight_nine.is_compliant,
                     'statusText': eight_eight_nine.status_text,
@@ -78,10 +61,14 @@ def _search_sam(search_args, host_url, sam_api_endpoint):
                 }
             }
         }}
-
+        returned_sections = set(search_parameters['includeSections']).union({'samToolsData'})
+        # repsAndCerts are needed by the backend to determine compliance,
+        # but we do not need to send them to the front-end.
+        # Discarding them reduces the API size from ~600kb to ~30kb
+        returned_sections.discard('repsAndCerts')
         entities.append({
-            section: entity[section] for section in search_parameters['includeSections'].union({'samToolsData'})
-            })
+            section: entity[section] for section in returned_sections
+        })
 
     search_sam_response = {
         'entityData': entities,
@@ -91,7 +78,7 @@ def _search_sam(search_args, host_url, sam_api_endpoint):
     return search_sam_response
 
 
-def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
+async def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
     """
     Users must have a Federal System Account with the “Read FOUO” permission and the respective API
     Key in SAM.gov.
@@ -114,16 +101,19 @@ def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
         'Accept': 'application/json',
     }
     search_parameters.pop("api_key", None)
-    return requests.post(sam_api_endpoint, headers=header, params=search_parameters, timeout=20)
-
-
-def _call_get_sam_entities_api(sam_api_endpoint, search_parameters):
-    search_parameters['api_key'] = _get_api_key_if_none_provided(search_parameters)
-    return requests.get(sam_api_endpoint, search_parameters, timeout=20)
+    
+    # httpx won't convert a set into a proper list for parameters
+    search_parameters['includeSections'] = list(search_parameters['includeSections'])
+    
+    async with httpx.AsyncClient() as client:
+        resp = await client.post(sam_api_endpoint, headers=header, params=search_parameters)
+        resp.raise_for_status()
+        result = resp.json()
+        return result
 
 
 def _get_api_key_if_none_provided(search_args):
-    sam_api_key = current_app.config['SAM_API_KEY']
+    sam_api_key = settings.SAM_API_KEY
     return search_args.get('api_key', sam_api_key)
 
 
@@ -150,7 +140,6 @@ class DataAdaptors:
 
         return sam_parameters
 
-
     def _adapt_samtools_to_sam_sections(self, samtools_sections):
         required_sections = set(['entityRegistration', 'coreData', 'repsAndCerts'])
         samtools_sections = self._parse_include_sections(samtools_sections)
@@ -158,14 +147,12 @@ class DataAdaptors:
         sam_sections.discard('samToolsData')
         return sam_sections
 
-
     @staticmethod
     def _parse_include_sections(include_sections):
         try:
             return set(include_sections.strip('[').strip(']').split(','))
         except Exception:
             return include_sections
-
 
     def adapt_sam_response_to_889_compliance(self, entity):
         """converts SAM Entities API response to a SAM Tools EightEightNine compliance object.
@@ -196,7 +183,6 @@ class DataAdaptors:
 
         return compliance
 
-
     @staticmethod
     def _get_far_responses(entity):
         if 'repsAndCerts' not in entity:
@@ -205,30 +191,27 @@ class DataAdaptors:
             return None
         return entity['repsAndCerts']['certifications'].get('fARResponses', None)
 
-
     @staticmethod
     def _get_far_52_204_26(far_responses):
         key = 'provisionId'
         value = 'FAR 52.204-26'
-        return  _get_dict_from_list_of_dicts(far_responses, key, value)
-
+        return _get_dict_from_list_of_dicts(far_responses, key, value)
 
     @staticmethod
     def _get_far_52_204_26_c_1_answer(far52_204_26):
         key = 'section'
         value = '52.204-26.c.1'
-        return  _get_dict_from_list_of_dicts(
+        return _get_dict_from_list_of_dicts(
             far52_204_26['listOfAnswers'], key, value
-            ).get('answerText')
+        ).get('answerText')
 
     @staticmethod
     def _get_far_52_204_26_c_2_answer(far52_204_26):
         key = 'section'
         value = '52.204-26.c.2'
-        return  _get_dict_from_list_of_dicts(
+        return _get_dict_from_list_of_dicts(
             far52_204_26['listOfAnswers'], key, value
-            ).get('answerText')
-
+        ).get('answerText')
 
     @staticmethod
     def adapt_sam_response_to_exclusions(entity):
@@ -246,7 +229,6 @@ class DataAdaptors:
             return compliance_rules.Exclusions()
         flag = entity['entityRegistration']['exclusionStatusFlag']
         return compliance_rules.Exclusions(flag)
-
 
     @staticmethod
     def adapt_sam_response_to_registration_status(entity):
