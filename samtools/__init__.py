@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from samtools.sam_api.entity_information import search_sam_v3
 
+LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logger = logging.getLogger(__name__)
 
 origins = [
@@ -21,9 +22,10 @@ origins = [
     "https://federalist-6f53a7f5-d187-47ca-b17f-7ccb6a5e1db0.sites.pages.cloud.gov"
 ]
 
-
 def create_app(name=__name__):
+
     _setup_logging()
+
     app = FastAPI()
     app.add_middleware(
         CORSMiddleware,
@@ -55,9 +57,7 @@ def create_app(name=__name__):
 
 
 def _setup_logging():
-    debug = os.environ.get("FLASK_DEBUG", False)
-    if debug == '1':
-        debug = True
+    LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 
     dictConfig({
         "version": 1,
@@ -65,14 +65,11 @@ def _setup_logging():
         "formatters": {
             "default": {
                 "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
-            },
-            "access": {
-                "format": "%(message)s",
             }
         },
         "handlers": {
             "console": {
-                "level": "INFO",
+                "level": LOGLEVEL,
                 "class": "logging.StreamHandler",
                 "formatter": "default",
                 "stream": "ext://sys.stdout",
@@ -88,10 +85,15 @@ def _setup_logging():
                 "handlers": ["console"],
                 "level": "INFO",
                 "propagate": False,
+            },
+            "samtools": {
+                "handlers": ["console"],
+                "level": LOGLEVEL,
+                "propagate": False,
             }
         },
         "root": {
-            "level": "DEBUG" if debug else "INFO",
+            "level": LOGLEVEL,
             "handlers": ["console"],
         }
     })
