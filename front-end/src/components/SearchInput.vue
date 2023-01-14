@@ -1,0 +1,38 @@
+<script setup>
+    import { useSearchStore } from '@/stores/search'
+    import { useRouter } from 'vue-router'
+
+    const store = useSearchStore()
+    const router = useRouter()
+
+    function setSearchParam() {
+        router.push({ name: 'search', params: { term: store.search_text} })
+    }
+
+</script>
+<template>
+    <form role="search" class="usa-search usa-search--big" id="form" @submit.prevent="setSearchParam">
+        <label class="usa-sr-only" for="search-field-en-big">
+            Search by business name, website, CAGE code, or SAM Unique Entity ID
+        </label>
+        <input 
+            v-model="store.search_text"
+            id="input" 
+            class="usa-input border-base-lighter grid-col flex-12" 
+            type="search"  
+            required pattern=".*\S+.*" 
+            title="Enter a search term" 
+            autofocus
+        >
+        <button class="usa-button" type="submit">
+            <span class="usa-search__submit-text">Search </span
+            ><img
+                    src="@/assets/images/usa-icons-bg/search--white.svg"
+                    class="usa-search__submit-icon"
+                    alt="Search"
+            />
+        </button>
+    </form>
+   
+    
+</template>

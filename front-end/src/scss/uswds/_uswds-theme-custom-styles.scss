@@ -1,0 +1,71 @@
+/*
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+========================================
+========================================
+========================================
+----------------------------------------
+USWDS THEME CUSTOM STYLES
+----------------------------------------
+!! Copy this file to your project's
+   sass root. Don't edit the version
+   in node_modules.
+----------------------------------------
+Custom project SASS goes here.
+
+i.e.
+@include u-padding-right('05');
+----------------------------------------
+*/
+
+@use "uswds-core" as *;
+@import '_components/header';
+
+html, body {
+    height: 100%;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: nowrap;
+}
+.flex-fill {
+    flex: 1 0 auto;
+}
+.background {
+    color: #fff;
+    background-image: linear-gradient(#0f4374,#0254a1);
+}
+
+.background a {
+    color: #fff;
+}
+
+.usa-navbar {
+    height: 4em;
+    @include at-media('desktop') {
+        height: auto;
+      }
+}
+
+// .usa-logo {
+//     font-size: 1.125rem;
+//     line-height: 1.7;
+//     @include at-media('desktop') {
+//         font-size: unset;
+//         line-height: unset;
+//       }
+// }
+
+// Style Attribute {
+//     float: left;
+//     height: 50px;
+//     margin-top: 20px;
+//     }
