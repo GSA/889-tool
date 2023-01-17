@@ -5,3 +5,5 @@ requirements_dev.txt
 node_modules
 instance
 www
+front-end/
+env_variables.yaml

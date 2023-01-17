@@ -6,7 +6,9 @@ import { useRoute } from 'vue-router'
 // for setting production env
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN
 const DEFAULT_PAGE_SIZE = 10;
-const NO_RESULT_MESSAGE = "Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov.<br/><br /><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for Section 889 compliance documentation."
+const NO_RESULT_MESSAGE = `
+    Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. Contracts that are classified/FOUO or contractors that do not wish for their information to be publicly available will not show up in search results.
+    <br/><br /><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for Section 889 compliance documentation.`
 const API_ERROR_MESSAGE = "Sorry, we weren't able to connect to SAM.gov. Please try again later."
 
 export const useSearchStore = defineStore("search", () => {

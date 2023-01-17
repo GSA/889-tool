@@ -26,29 +26,12 @@
                     
                         <SearchInput />
                     
-                        <div>
-                            <div id="error-message" class="ui negative message" style="display:none"></div>
-                            
-                            <div id="results-box" class="margin-top-3" > 
-                                <!-- style="display:none" -->
-                                <!--Contents from AJAX call go here -->
-                                <div id="results-list" class="grid-container"></div>
-
-                                <div id="loading-box" class="ui loading placeholder basic segment"></div>
-                            </div>
-                            
-                            
-                            <button id="show-more" class="fluid ui bottom attached button"
-                                style="margin: none; display: none">
-                                <i id="show-more-icon" class="angle double down icon"></i>
-                                <p id="show-more-text" style="display: inline"></p>
-                            </button>
-                
-                            
-                        </div>
                     </div>
                     <div class="padding-bottom-10">
-                        <p>This tool only checks for Section 889 compliance in a vendor's SAM.gov record. Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. </p>
+                        <p>
+                            This tool only checks for Section 889 compliance in a vendor's SAM.gov record. Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. 
+                            Contracts that are classified/FOUO or contractors that do not wish for their information to be publicly available will not show up in search results.
+                        </p>
 
                         <p><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for Section 889 compliance documentation.</p>
                     </div>

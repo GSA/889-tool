@@ -1,0 +1,25 @@
+runtime: python38
+instance_class: F1
+
+includes:
+  - env_variables.yaml
+
+entrypoint: gunicorn -b :$PORT samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWorker
+
+handlers:
+  # This handler routes all requests not caught above to your main app. It is
+  # required when static routes are defined, but can be omitted (along with
+  # the entire handlers section) when there are no static files defined.
+- url: /api/.*
+  script: auto
+
+  # This configures Google App Engine to serve the files in the app's static
+  # directory.
+- url: /
+  static_files: www/index.html
+  upload: www/index.html
+
+- url: /(.*)
+  static_files: www/\1
+  upload: www/(.*)
+

@@ -15,3 +15,5 @@ last_updated.txt
 production/gcp_install*
 production/deploy*
 ~*.pptx
+env_variables.yaml
+www

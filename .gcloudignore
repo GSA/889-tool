@@ -1,0 +1,10 @@
+.gcloudignore
+.git
+.gitignore
+.pytest_cache/
+.venv/
+instance/
+production/
+__pycache__/
+manifest.yml
+Overview.pptx
