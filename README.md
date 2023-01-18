@@ -1,4 +1,4 @@
-# MArt Pay 889 Compliance SAM Tool
+# GSA SmartPay 889 Compliance SAM Tool
 
 ## Overview
 
