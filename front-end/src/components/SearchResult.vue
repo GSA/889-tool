@@ -88,24 +88,27 @@
             const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(validTo);
              return `Expiring registration: ${month}. ${day}, ${year}`
     })
+
+    const downloadLabel = computed(() => "Download PDF for " + props.entity.entityRegistration.legalBusinessName);
  
 </script>
 <template>
     <div class="grid-row border-1px border-base-lighter gidr-row flex-no-wrap margin-bottom-1">
-        <a v-if="isSelectable" href="javascript:void(0);" @click="downloadPDF" class="grid-row" rel="noopener noreferrer"  >
-            <!-- <router-link v-if="isSelectable" :to="{name: 'pdf', params: {'entity_index': 0}}"> -->
-            <button         
+        <span v-if="isSelectable" class="grid-row ">
+            <button    
+                @click="downloadPDF"
+                aria-label="download pdf"
                 class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
-                <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" aria-labelledby="download-pdf">
-                    <title id="download-pdf">Download PDF</title>
+                <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" :aria-labelledby=downloadLabel>
+                    <title :id=downloadLabel>{{downloadLabel}}</title>
                     <use xlink:href="@/assets/images/sprite.svg#file_download">
                     </use>
                 </svg>
-            </button> 
-        <!-- </router-link>     -->
-        </a>
+           </button> 
+        </span>            
         <span v-else class="grid-row ">
             <button disabled="true"
+                aria-label="No pdf download available"
                 class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
                 <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" aria-labelledby="no-download">
                     <title id="no-download">No download</title>
