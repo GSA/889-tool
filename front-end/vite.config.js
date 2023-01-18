@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     outDir: '../www'
   },
-  base: "/site/gsa/889-vue/",
+  base: "/",
   plugins: [vue()],
   resolve: {
     alias: {

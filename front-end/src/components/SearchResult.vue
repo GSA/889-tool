@@ -138,11 +138,11 @@
             <div v-if="hasWebsite">
                 {{websiteURL}}
             </div>
-            <div>
-                <span class="margin-right-2" data-test="address">{{condensedAddress}}</span>
-                <span class="margin-right-2">SAM: {{entity.entityRegistration.ueiSAM}}</span>
-                <span v-if="hasCageCode">CAGE: {{entity.entityRegistration.cageCode}}</span>
-            </div>
+            <ul class="padding-0 margin-0 entity-info">
+                <li class="margin-right-2" data-test="address">{{condensedAddress}}</li>
+                <li class="margin-right-2"> SAM: {{entity.entityRegistration.ueiSAM}}</li>
+                <li  v-if="hasCageCode"> CAGE: {{entity.entityRegistration.cageCode}}</li>
+            </ul>
             
         </div>
     </div>

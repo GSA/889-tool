@@ -3,8 +3,11 @@
 .gitignore
 .pytest_cache/
 .venv/
+venv/
 instance/
 production/
 __pycache__/
 manifest.yml
 Overview.pptx
+front-end
+tests

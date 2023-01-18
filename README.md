@@ -1,4 +1,4 @@
-# NASA 889 Compliance SAM Tool
+# MArt Pay 889 Compliance SAM Tool
 
 ## Overview
 
@@ -42,7 +42,7 @@ The tool performs two main tasks.
 1. Search term pre-processing. - Improves the quality of search results returned by the SAM Entities API by modifying the search expression provided by the user. Regular expressions are used to identify SAM UEIs, and US and NATO cage codes. See the search_preprocessor.py file and associated tests in tests/test_search_preprocessor.py
 2. Determine entity compliance status. - Call the SAM Entities API and append the response data with a "samToolsData" section for each vendor containing compliance information. See compliance/compliance_rules.py for compliance rules and associated tests in tests/test_compliance_rules.py.
 
-## NASA/SAM Tool API Endpoints
+## API Endpoints
 
 The 889 compliance SAM Tool provides a single API endpoint. This endpoint allow for other tools (like the Vue.js front-end) that require 889 compliance data from SAM to obtain this from the SAM Tool. The endpoint is defined in `__init__.py`.
 
@@ -145,6 +145,48 @@ Hopefully that all went smoothly and now you can continue to develop and improve
 ## Production deployment
 
 [Note: this section will likely change once we have decided on a cloud provide] The production deployment uses a reverse proxy and web server gateway interface (WSGI). We use nginx as a reverse proxy and gunicorn as a WSGI, but we do not use any specialized features of these programs and it's expected that anything with similar capabilities will suffice.
+
+### Deploying for Google Cloud Platform
+Although this application can be hosted in many environments, the configuration is currently designed for hosting on Google App Engine. 
+
+In order to deploy to App Engine you will need to install Google's [CLI tool](https://cloud.google.com/sdk), which will give you access to the `gcloud` command line command. See the [deployment guide](https://cloud.google.com/build/docs/deploying-builds/deploy-appengine) for more information.
+
+When deploying we send both the Python app and a production build of the Vue front end appliction. This means if you make changes to the Vue app, you need to run rebuild it. See also `/front-end/README` folder for details on running the Vue App.
+
+```
+cd front-end
+npm run build
+```
+
+There are a few configuration files that influence how this is built:
+
+- `/front-end/env.procuction` [or `env.devleopment`] - This should have the environmental variable `VITE_API_DOMAIN` pointing to the root url.
+- `/front-end/vite.config.js` - make sure the base url is set correctly. It should just be `'/'` for app engine but might be different on a gloud.gov sandbox that is served from a different url. The output directory should be `../www` which will create the build folder which is sent to Google.
+
+Once the front-end is built, we can upload everything to App Engine. App Engine settings are defined in:
+
+`/app.yaml`   
+set up urls, instance type, etc. This also imports a file `env_variables.yaml` which is not in the git repo. You can create this file and add environmental variables to it that you don't want checked into git. For example, you might make:
+
+`/env_variables.yaml`:
+```
+env_variables:
+  SAM_API_KEY: MY_API_KEY
+```
+
+`/.gcloudignore` you shouldn't upload everything to app engine (especially big folders like virtual envs and node_modules). You can ask it not to send these things in a way similar to .gitignore.
+
+You will need to authenticate with [following these instructions](`https://cloud.google.com/sdk/gcloud/reference/auth/login`). Probably just:
+
+```
+gcloud auth login
+```
+
+Then from the same directory as `app.yaml` run:
+
+```
+gcloud app deploy
+```
 
 You can see if any packages have newer versions with `pip list --outdated` and `npm outdated`
 

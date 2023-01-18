@@ -24,19 +24,16 @@ watch (
 </script>
 
 <template>
-    <div class="wide-layout flex-fill">
-
+    <main id="main-content" class="wide-layout flex-fill">
         <div class="background padding-bottom-2">
             <GSAHeader />
             <div id="main-container" >
-                <main id="main-content">
-                    <div class="grid-container">
-                        <div class="padding-top-2">
-                            <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>                  
-                            <SearchInput />
-                        </div>
+                <div class="grid-container">
+                    <div class="padding-top-2">
+                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>                  
+                        <SearchInput />
                     </div>
-                </main>
+                </div>
             </div>
         </div>
         <div class="grid-container" v-if="store.loading">
@@ -48,5 +45,5 @@ watch (
             <Alert v-if="store.APIMessage" heading="No Results"><span  v-html="store.APIMessage"></span></Alert>
             <Alert v-if="store.error"  heading="Error" status="error">{{store.error}}</Alert>
         </div>
-    </div>
+    </main>
 </template>

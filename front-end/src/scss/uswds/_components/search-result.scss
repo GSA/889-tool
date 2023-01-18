@@ -1,0 +1,12 @@
+ul.entity-info {
+    li {
+        display: block;
+    }
+}
+@include at-media("mobile-lg")  {
+    ul.entity-info {
+        li {
+            display: inline;
+        }
+    }
+}
