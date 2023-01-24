@@ -5,7 +5,7 @@
     
     console.log("props:", props.entityData)
     const date_generated = computed(() => new Date().toLocaleDateString('en-us', { year:"numeric", month:"long", day:"numeric"}) )
-    const host_url = "the GSA 889 tool" // todo get correct value
+    const host_url = "the SmartPay 889 tool"
 
     const address = computed(() => {
         const address = props.entityData.coreData.physicalAddress
