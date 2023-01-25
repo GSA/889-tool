@@ -16,7 +16,3 @@ import USAIdentifier from "./components/USAIdentifier.vue";
         <USAIdentifier />
     </footer>
 </template>
-
-<style scoped lang="scss">
-
-</style>
