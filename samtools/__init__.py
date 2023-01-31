@@ -7,7 +7,7 @@ from logging.config import dictConfig
 from datetime import datetime
 import logging
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from samtools.sam_api.entity_information import search_sam_v3
@@ -38,6 +38,7 @@ def create_app(name=__name__):
     @app.get('/api/entity-information/v3/entities')
     async def search_v3(
         req: Request,
+        res: Response,
         samToolsSearch: str,
         includeSections: str,
         registrationStatus: str,
@@ -47,6 +48,7 @@ def create_app(name=__name__):
     ):
         try:
             response = await search_sam_v3(req.query_params)
+            res.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
             return response
         except Exception as exception:
             logging.exception(exception)
