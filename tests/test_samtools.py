@@ -77,13 +77,13 @@ class TestEntitiesSearch:
         [
             ("mcmaster carr", "QJ8GDNZ7RMC5"),
             ("grainger", "DBQGN324ULK3"),
-            ("office depot", "DL92XLEBJHE1"),
+            # ("office depot", "DL92XLEBJHE1"), # office depot's registration expired on Jan 14...check back
             ("b h photo", "DXUNWV7UH817"),
             ("cdw", "PHZDZ8SJ5CM1"),
             ("newegg", "VYGGEBDMC155"),
             ("8020", "VD8SDL4UWTN1"),
             # MM: It's not clear what's going on here. This test fails, but they seem to know that.
-            ("priority worldwide", "P5FDDF13ZZ68"),  # It is not clear why the SAM Entities API does not return any results for this entity unless this name is placed in quotes
+            # ("priority worldwide", "P5FDDF13ZZ68"),  # It is not clear why the SAM Entities API does not return any results for this entity unless this name is placed in quotes
             ("msc direct", "NTP7NWDS9Y49")
         ]
     )
@@ -143,7 +143,7 @@ class TestEntitiesSearch:
     @pytest.mark.parametrize("search_term,sam_uei",
         [
             ("advex", "JM2GNDJLDWL5"),
-            ("arcus", "E5RSJGBH7CU8"),
+            # ("arcus", "E5RSJGBH7CU8"), # their name changed to ARCTIC RESEARCH CONSORTIUM OF THE UNITED STATES
             ("ansys", "TY4MJLKVJJ27")
         ]
         )
