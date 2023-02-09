@@ -6,6 +6,6 @@ import GSA_Footer from "../GSAFooter.vue";
 describe("GSA Footer", () => {
   it("renders properly", () => {
     const wrapper = mount(GSA_Footer);
-    expect(wrapper.text()).toContain("The 889 Compliance SAM Tool web application was originally developed by NASA");
+    expect(wrapper.text()).toContain("The 889 Representations SAM Tool web application was originally developed by NASA");
   });
 });

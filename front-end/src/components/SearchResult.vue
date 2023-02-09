@@ -32,7 +32,7 @@
         const mountedApp = tempApp.mount(el)
 
         const rendered =  mountedApp.$el.outerHTML
-        const doc_title = `Record of Section 889 Compliance - ${props.entity.entityRegistration.legalBusinessName}.pdf`
+        const doc_title = `Record of Section 889 Representations - ${props.entity.entityRegistration.legalBusinessName}.pdf`
 
         doc.html(rendered, {
             callback: function (doc) {

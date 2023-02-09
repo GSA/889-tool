@@ -66,9 +66,9 @@
 
     <hr>
 
-    <h2 style='text-align: center;'>889 Compliance Section</h2>
+    <h2 style='text-align: center;'>889 Representations Section</h2>
     <p>
-        <span id='highlight'>889 Compliance Summary:<b>
+        <span id='highlight'>889 Representations Summary:<b>
             {{ entityData['samToolsData']['eightEightNine']['elaboratedStatusText'] }}
         </b></span>
     </p> 
@@ -88,7 +88,7 @@
         {{ entityData['samToolsData']['eightEightNine']['farText']['52.204-26.c.2'] }}
     </p>
     
-    <h3 style='text-align: center;'>(End of 889 Compliance Section)</h3>
+    <h3 style='text-align: center;'>(End of 889 Representations Section)</h3>
 
     <hr>
     

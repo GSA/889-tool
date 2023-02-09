@@ -29,11 +29,11 @@
                     </div>
                     <div class="padding-bottom-10">
                         <p>
-                            This tool only checks for Section 889 compliance in a vendor's SAM.gov record. Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. 
+                            This tool only checks for Section 889 representations in a vendor's SAM.gov record. Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. 
                             Contracts that are classified/FOUO or contractors that do not wish for their information to be publicly available will not show up in search results.
                         </p>
 
-                        <p><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for Section 889 compliance documentation.</p>
+                        <p><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for documenting compliance with Section 889 in accordance with any applicable agency requirements.</p>
                     </div>
                 </div>
             </main>
