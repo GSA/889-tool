@@ -17,7 +17,7 @@
           class="usa-identifier__identity"
           aria-label="Agency description,"
         >
-          <p class="usa-identifier__identity-domain">889 Compliance Search</p>
+          <p class="usa-identifier__identity-domain">889 Representations Search</p>
           <p class="usa-identifier__identity-disclaimer">
             An official website of the <a href="https://gsa.gov">General Services Administration</a>
           </p>

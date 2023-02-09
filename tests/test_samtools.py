@@ -212,7 +212,7 @@ class TestEntitiesSearch:
     @staticmethod
     @pytest.mark.parametrize("sam_uei",
         [
-            ("UFVMHT6U79Y8"),
+            ("ERKAKNDCV6Q1"),
             ("L5DKR5BE6LS7")
         ]
     )
