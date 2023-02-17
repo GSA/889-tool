@@ -4,10 +4,10 @@ Returns:
     FastAPI: Application factory pattern. Returns a FastAPI application.
 """
 from logging.config import dictConfig
-from datetime import datetime
+
 import logging
 import os
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Response, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from samtools.sam_api.entity_information import search_sam_v3
@@ -19,8 +19,9 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://federalist-6f53a7f5-d187-47ca-b17f-7ccb6a5e1db0.sites.pages.cloud.gov"
+    "https://federalist-6f53a7f5-d187-47ca-b17f-7ccb6a5e1db0.sites.pages.cloud.gov"  # noqa E501
 ]
+
 
 def create_app(name=__name__):
 
@@ -37,18 +38,21 @@ def create_app(name=__name__):
 
     @app.get('/api/entity-information/v3/entities')
     async def search_v3(
-        req: Request,
         res: Response,
-        samToolsSearch: str,
-        includeSections: str,
-        registrationStatus: str,
-        purposeOfRegistrationCode: str,
-        entityEFTIndicator: str,
+        samToolsSearch: str = Query(default=None, max_length=100),
         page: int = 0,
     ):
         try:
-            response = await search_sam_v3(req.query_params)
-            res.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+            params = {}
+            params['registrationStatus'] = 'A'
+            params['includeSections'] = 'samToolsData,entityRegistration,coreData'  # noqa e501
+            params['purposeOfRegistrationCode'] = 'Z2~Z5'
+            params['entityEFTIndicator'] = ''
+            params['samToolsSearch'] = samToolsSearch
+            params['page'] = page
+
+            response = await search_sam_v3(params)
+            res.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"  # noqa E501
             return response
         except Exception as exception:
             logging.exception(exception)
@@ -66,7 +70,7 @@ def _setup_logging():
         "disable_existing_loggers": True,
         "formatters": {
             "default": {
-                "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
+                "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",  # noqa E501
             }
         },
         "handlers": {

@@ -22,8 +22,9 @@
             type="search"  
             required pattern=".*\S+.*" 
             title="Enter a search term" 
+            maxlength="100"
             autofocus
-        >
+        />
         <button class="usa-button" type="submit">
             <span class="usa-search__submit-text">Search </span
             ><img
