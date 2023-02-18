@@ -7,7 +7,7 @@ from logging.config import dictConfig
 
 import logging
 import os
-from fastapi import FastAPI, Response, Query
+from fastapi import FastAPI, Response, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from samtools.sam_api.entity_information import search_sam_v3
@@ -56,8 +56,7 @@ def create_app(name=__name__):
             return response
         except Exception as exception:
             logging.exception(exception)
-            return {'success': False,
-                    'errors': ["400 Bad Request"]}
+            raise HTTPException(status_code=400, detail="Problem connecting to SAM.gov")
 
     return app
 
