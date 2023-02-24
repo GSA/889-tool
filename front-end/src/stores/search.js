@@ -54,10 +54,6 @@ export const useSearchStore = defineStore("search", () => {
         APIMessage.value = ''
         const url_params = {
             samToolsSearch:  search_text.value,
-            includeSections: 'samToolsData,entityRegistration,coreData',
-            registrationStatus: 'A',
-            purposeOfRegistrationCode: 'Z2~Z5',
-            entityEFTIndicator: '',
             page: currentPageIndex.value || 0
         }
         const url = new URL(`${API_DOMAIN}/api/entity-information/v3/entities`);
@@ -79,6 +75,8 @@ export const useSearchStore = defineStore("search", () => {
                 loading.value = false
             })
             .catch((err) => {
+                data.value = []
+                totalRecords.value = 0
                 loading.value = false
                 error.value = API_ERROR_MESSAGE
             })
