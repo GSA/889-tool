@@ -94,7 +94,7 @@
     
     <br />
     <p>
-        The full vendor record can be viewed at: <br /> 
+        The full entity record can be viewed at: <br /> 
         <a  href="https://sam.gov/entity/{{entityData['entityRegistration']['ueiSAM']}}/repsAndCerts?status=active">
             https://sam.gov/entity/{{entityData['entityRegistration']['ueiSAM']}}/repsAndCerts?status=active
         </a> 

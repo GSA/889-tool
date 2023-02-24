@@ -7,8 +7,8 @@ import { useRoute } from 'vue-router'
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN
 const DEFAULT_PAGE_SIZE = 10;
 const NO_RESULT_MESSAGE = `
-    Only vendors doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. Contracts that are classified/FOUO or contractors that do not wish for their information to be publicly available will not show up in search results.
-    <br/><br /><b>Please Note:</b> If a vendor representation is not available, cardholders may still be permitted to purchase from a listed vendor. However, the cardholder would be responsible for documenting compliance with Section 889 in accordance with any applicable agency requirements.`
+    Only entities doing business above the Micro-Purchase Threshold (MPT) are required to register in SAM.gov. Contracts that are classified/FOUO or contractors that do not wish for their information to be publicly available will not show up in search results.
+    <br/><br /><b>Please Note:</b> If an entity representation is not available, cardholders may still be permitted to purchase from a listed entity. However, the cardholder would be responsible for documenting compliance with Section 889 in accordance with any applicable agency requirements.`
 const API_ERROR_MESSAGE = "Sorry, we weren't able to connect to SAM.gov. Please try again later."
 
 export const useSearchStore = defineStore("search", () => {
@@ -54,6 +54,10 @@ export const useSearchStore = defineStore("search", () => {
         APIMessage.value = ''
         const url_params = {
             samToolsSearch:  search_text.value,
+            includeSections: 'samToolsData,entityRegistration,coreData',
+            registrationStatus: 'A',
+            purposeOfRegistrationCode: 'Z2~Z5',
+            entityEFTIndicator: '',
             page: currentPageIndex.value || 0
         }
         const url = new URL(`${API_DOMAIN}/api/entity-information/v3/entities`);
@@ -75,8 +79,6 @@ export const useSearchStore = defineStore("search", () => {
                 loading.value = false
             })
             .catch((err) => {
-                data.value = []
-                totalRecords.value = 0
                 loading.value = false
                 error.value = API_ERROR_MESSAGE
             })
