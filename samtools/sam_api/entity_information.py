@@ -101,10 +101,10 @@ async def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
         'Accept': 'application/json',
     }
     search_parameters.pop("api_key", None)
-    
+
     # httpx won't convert a set into a proper list for parameters
     search_parameters['includeSections'] = list(search_parameters['includeSections'])
-    
+
     async with httpx.AsyncClient() as client:
         resp = await client.post(sam_api_endpoint, headers=header, params=search_parameters)
         resp.raise_for_status()

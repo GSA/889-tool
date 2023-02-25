@@ -9,17 +9,17 @@ class EightEightNine:
     def __init__(self):
         self._far_provision = {
             '52.204-26.c.1': "(1) The Offeror represents that it {answer} "
-                "provide covered telecommunications equipment or services as "
-                "a part of its offered products or services to the Government "
-                "in the performance of any contract, subcontract, or other "
-                "contractual instrument.",
+            "provide covered telecommunications equipment or services as "
+            "a part of its offered products or services to the Government "
+            "in the performance of any contract, subcontract, or other "
+            "contractual instrument.",
 
             '52.204-26.c.2': "(2) After conducting a reasonable inquiry for "
-                "purposes of this representation, the offeror represents that "
-                "it {answer} use covered telecommunications equipment or "
-                "services, or any equipment, system, or service that uses "
-                "covered telecommunications equipment or services."
-                    }
+            "purposes of this representation, the offeror represents that "
+            "it {answer} use covered telecommunications equipment or "
+            "services, or any equipment, system, or service that uses "
+            "covered telecommunications equipment or services."
+        }
         self._answer_to_provision_text_mapping = {'No'.title(): 'DOES NOT', 'Yes'.title(): 'DOES'}
         self._far = defaultdict(lambda: {'text': None, 'answer': None})
 
@@ -76,8 +76,7 @@ class EightEightNine:
             return "NO REPS & CERTS"
         if not self._has_far_part_c2:
             return "OUTDATED FAR (No part (C)(2))"
-        if (self.far['52.204-26.c.1']['answer'] == 'DOES' and
-                    self.far['52.204-26.c.2']['answer'] == 'DOES'):
+        if (self.far['52.204-26.c.1']['answer'] == 'DOES' and self.far['52.204-26.c.2']['answer'] == 'DOES'):
             return "PROVIDES AND USES COVERED TELECOMMUNICATIONS"
         if self.far['52.204-26.c.1']['answer'] == 'DOES':
             return "PROVIDES COVERED TELECOMMUNICATIONS"
@@ -134,7 +133,6 @@ class Exclusions:
     """An object that contains the entity exclusion status information"""
     def __init__(self, sam_exclusion_status_flag=''):
         self._sam_exclusion_status_flag = sam_exclusion_status_flag
-
 
     @property
     def has_exclusions(self):

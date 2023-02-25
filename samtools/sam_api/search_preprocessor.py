@@ -228,8 +228,8 @@ def _split_and_preserve_quotes(search_input):
 def _replace_forbidden_characters_with_whitespace(search_input):
     forbidden_characters = r'-&|{}^\\'
     return search_input.translate(
-        str.maketrans(forbidden_characters, ' '*len(forbidden_characters))
-        )
+        str.maketrans(forbidden_characters, ' ' * len(forbidden_characters))
+    )
 
 
 def _remove_commas(search_input):
