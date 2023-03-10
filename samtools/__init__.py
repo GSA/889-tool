@@ -52,7 +52,7 @@ def create_app(name=__name__):
             params['page'] = page
 
             response = await search_sam_v3(params)
-            res.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"  # noqa E501
+            res.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload"  # noqa E501
             return response
         except Exception as exception:
             logging.exception(exception)
