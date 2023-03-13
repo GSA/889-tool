@@ -28,8 +28,8 @@ describe("Search Result", () => {
 
         const el = wrapper.get('[data-test="889-status"]')
         
-        expect(el.text()).toBe("COMPLIANT");
-        expect(el.classes()).toContain('bg-primary')
+        expect(el.text()).toBe("Transaction can proceed.");
+        expect(el.classes()).toContain('text-success')
     });
 
     it("renders non-compliant 889 Status properly", () => {
@@ -37,8 +37,8 @@ describe("Search Result", () => {
 
         const el = wrapper.get('[data-test="889-status"]')
         
-        expect(el.text()).toBe("PROVIDES AND USES COVERED TELECOMMUNICATIONS");
-        expect(el.classes()).toContain('bg-base-dark')
+        expect(el.text()).toBe("Entity uses covered technology. Contact them for additional information.");
+        expect(el.classes()).toContain('text-secondary')
     });
 
     it("renders expiring registration when expiration date is within 30 days", () => {

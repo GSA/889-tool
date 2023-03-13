@@ -110,21 +110,44 @@
             <button disabled="true"
                 aria-label="No pdf download available"
                 class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
-                <svg aria-hidden="true" focusable="false" role="img" class="usa-icon" aria-labelledby="no-download">
-                    <title id="no-download">No download</title>
+                <svg focusable="true" role="img" class="usa-icon" aria-labelledby="no-download">
+                    <title id="no-download">Entity uses covered technology. Contact them for additional information.</title>
                     <use xlink:href="@/assets/images/sprite.svg#remove_circle">
                     </use>
                 </svg>
             </button> 
         </span>
 
-        <div class="grid-col-auto padding-y-2">    
+        <div class="grid-col-auto padding-y-1">    
             <div class="text-primary-dark text-bold margin-bottom-1 grid-row">
-                <span class="margin-right-2" data-test="business-name">
+                <span class="margin-right-1" data-test="business-name">
                     {{entity.entityRegistration.legalBusinessName}}
                 </span>
-                <span class="usa-tag margin-right-2" data-test="889-status" :class="isSelectable ? 'bg-primary' : 'bg-base-dark'">
-                    {{entity.samToolsData.eightEightNine.statusText}}
+                <a  
+                    type="button"
+                    href="https://www.photo-mark.com"
+                    v-if="isSelectable" 
+                    class="margin-right-2 text-success font-body-md usa-tooltip" 
+                    data-test="889-status"
+                    data-position="top" 
+                    title="Transaction can proceed." 
+                    >
+                    <svg class="usa-icon" focusable="true" aria-labelledby="green-check" role="img">
+                        <title id="green-check">Transaction can proceed.</title>
+                        <use xlink:href="@/assets/images/sprite.svg#check_circle"></use>
+                    </svg>
+                </a>
+                <span 
+                    v-else 
+                    class="margin-right-2 text-secondary font-body-md usa-tooltip" 
+                    data-test="889-status"
+                    data-position="top" 
+                    title="Entity uses covered technology. Contact them for additional information." 
+                    >
+                    <svg class="usa-icon" aria-hidden="true" aria-labelledby="warning-icon" focusable="false" role="img">
+                        <title id="warning-icon">Entity uses covered technology. Contact them for additional information.</title>
+                        <use xlink:href="@/assets/images/sprite.svg#warning"></use>
+                    </svg>
                 </span>
             </div>
             <div class="margin-y-1">
