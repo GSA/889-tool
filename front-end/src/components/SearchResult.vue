@@ -123,9 +123,7 @@
                 <span class="margin-right-1" data-test="business-name">
                     {{entity.entityRegistration.legalBusinessName}}
                 </span>
-                <a  
-                    type="button"
-                    href="https://www.photo-mark.com"
+                <span  
                     v-if="isSelectable" 
                     class="margin-right-2 text-success font-body-md usa-tooltip" 
                     data-test="889-status"
@@ -136,7 +134,7 @@
                         <title id="green-check">Transaction can proceed.</title>
                         <use xlink:href="@/assets/images/sprite.svg#check_circle"></use>
                     </svg>
-                </a>
+                </span>
                 <span 
                     v-else 
                     class="margin-right-2 text-secondary font-body-md usa-tooltip" 
