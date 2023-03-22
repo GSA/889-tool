@@ -120,13 +120,13 @@
         </span>
 
         <div class="grid-col-auto padding-y-1">    
-            <div class="text-primary-dark text-bold margin-bottom-1 grid-row">
+            <div class="text-primary-dark text-bold margin-bottom-1">
                 <span class="margin-right-1" data-test="business-name">
                     {{entity.entityRegistration.legalBusinessName}}
                 </span>
                 <span  
                     v-if="isSelectable" 
-                    class="margin-right-2 text-success font-body-md usa-tooltip" 
+                    class="text-success font-body-md text-middle" 
                     data-test="889-status"
                     data-position="top" 
                     :title="OK_TEXT" 
@@ -138,7 +138,7 @@
                 </span>
                 <span 
                     v-else 
-                    class="margin-right-2 text-secondary font-body-md usa-tooltip" 
+                    class="text-secondary font-body-md text-middle" 
                     data-test="889-status"
                     data-position="top" 
                     :title="WARN_TEXT" 
