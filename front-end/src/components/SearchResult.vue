@@ -4,7 +4,8 @@
     import PDFView from '@/views/PDFView.vue'
 
     const WARN_IF_FEWER_THAN_DAYS = 30
-
+    const OK_TEXT = "Transaction can proceed." 
+    const WARN_TEXT = "The Contractor has represented in SAM that it does provide and/or does use covered (i.e., prohibited) telecommunication equipment. Please follow applicable agency procedures."
     const props = defineProps({
         'entity': Object
     })
@@ -111,7 +112,7 @@
                 aria-label="No pdf download available"
                 class="item text-white usa-button flex-align-center grid-row font-sans-xl margin-right-3 radius-0">
                 <svg focusable="true" role="img" class="usa-icon" aria-labelledby="no-download">
-                    <title id="no-download">Entity uses covered technology. Contact them for additional information.</title>
+                    <title id="no-download">{{WARN_TEXT}}</title>
                     <use xlink:href="@/assets/images/sprite.svg#remove_circle">
                     </use>
                 </svg>
@@ -128,10 +129,10 @@
                     class="margin-right-2 text-success font-body-md usa-tooltip" 
                     data-test="889-status"
                     data-position="top" 
-                    title="Transaction can proceed." 
+                    :title="OK_TEXT" 
                     >
                     <svg class="usa-icon" focusable="true" aria-labelledby="green-check" role="img">
-                        <title id="green-check">Transaction can proceed.</title>
+                        <title id="green-check">{{OK_TEXT}}</title>
                         <use xlink:href="@/assets/images/sprite.svg#check_circle"></use>
                     </svg>
                 </span>
@@ -140,10 +141,10 @@
                     class="margin-right-2 text-secondary font-body-md usa-tooltip" 
                     data-test="889-status"
                     data-position="top" 
-                    title="Entity uses covered technology. Contact them for additional information." 
+                    :title="WARN_TEXT" 
                     >
                     <svg class="usa-icon" aria-hidden="true" aria-labelledby="warning-icon" focusable="false" role="img">
-                        <title id="warning-icon">Entity uses covered technology. Contact them for additional information.</title>
+                        <title id="warning-icon">{{WARN_TEXT}}</title>
                         <use xlink:href="@/assets/images/sprite.svg#warning"></use>
                     </svg>
                 </span>
