@@ -94,9 +94,9 @@
     
     <br />
     <p>
-        The full entity record can be viewed at: <br /> 
-        <a  href="https://sam.gov/entity/{{entityData['entityRegistration']['ueiSAM']}}/repsAndCerts?status=active">
-            https://sam.gov/entity/{{entityData['entityRegistration']['ueiSAM']}}/repsAndCerts?status=active
+        The full entity record can accessed at: 
+        <a  href="https://sam.gov/">
+            https://sam.gov/
         </a> 
     </p> 
 </div>
