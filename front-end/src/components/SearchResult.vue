@@ -1,11 +1,10 @@
 <script setup>
     import { computed, createApp, h } from 'vue'
+    import {OK_TEXT, WARN_TEXT} from "@/strings.js"
     import { jsPDF } from "jspdf"; 
     import PDFView from '@/views/PDFView.vue'
 
     const WARN_IF_FEWER_THAN_DAYS = 30
-    const OK_TEXT = "Transaction can proceed." 
-    const WARN_TEXT = "The Contractor has represented in SAM that it does provide and/or does use covered (i.e., prohibited) telecommunication equipment. Please follow applicable agency procedures."
     const props = defineProps({
         'entity': Object
     })
