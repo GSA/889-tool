@@ -37,7 +37,7 @@ describe("Search Result", () => {
 
         const el = wrapper.get('[data-test="889-status"]')
         
-        expect(el.text()).toBe("Entity uses covered technology. Contact them for additional information.");
+        expect(el.text()).toBe("The contractor has represented in SAM that it does provide and/or does use covered (i.e., prohibited) telecommunication equipment. Please follow applicable agency procedures.");
         expect(el.classes()).toContain('text-secondary')
     });
 
