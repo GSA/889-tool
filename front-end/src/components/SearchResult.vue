@@ -84,9 +84,9 @@
     const expirationDateText = computed(() => {
             const validTo = new Date(props.entity.entityRegistration.registrationExpirationDate);
             const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(validTo);
-            const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(validTo);
+            const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(validTo);
             const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(validTo);
-             return `Expiring registration: ${month}. ${day}, ${year}`
+             return `Expiring registration: ${month} ${day}, ${year}`
     })
 
     const downloadLabel = computed(() => "Download PDF for " + props.entity.entityRegistration.legalBusinessName);

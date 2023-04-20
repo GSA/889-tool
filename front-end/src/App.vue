@@ -9,7 +9,6 @@ import USAIdentifier from "./components/USAIdentifier.vue";
 
 <template>
     <Banner />
-    <PrototypeAlert />
     <RouterView />
     <footer class="flex-shrink-0">
         <GSAFooter />
