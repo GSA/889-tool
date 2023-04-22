@@ -16,6 +16,7 @@ export const useSearchStore = defineStore("search", () => {
     const search_text = ref('')
     const currentPageIndex = ref(0)
     const totalRecords = ref(0)
+    const isFirstLoad = ref(true)
 
     const numberOfPages = computed(() => Math.ceil(totalRecords.value / DEFAULT_PAGE_SIZE ))
     const showResults = computed(() => data.value.length > 0)
@@ -24,7 +25,7 @@ export const useSearchStore = defineStore("search", () => {
 
     watch (
         () => route.params, (params, old_params) => {
-            if ('term' in params || 'page' in params) {
+            if (!isFirstLoad.value && ('term' in params || 'page' in params)) {
                 search_text.value = params.term
                 currentPageIndex.value = params.page 
                 ? parseInt(params.page) 
@@ -42,6 +43,7 @@ export const useSearchStore = defineStore("search", () => {
     function initState() {
         search_text.value = route.params.term
         currentPageIndex.value = parseInt(route.params.page) || 0
+        isFirstLoad.value = false
         fetchResults()
     }
 

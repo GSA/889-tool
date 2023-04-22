@@ -56,7 +56,7 @@
             :style="{visibility: showPrevious ? 'visible' : 'hidden'}" 
             data-test="previous-page-link"
             href="javascript:void(0);"
-            @click="$emit('gotoPage', currentPage - 1)"
+            @click.prevent="$emit('gotoPage', currentPage - 1)"
             class="usa-pagination__link usa-pagination__previous-page"
             aria-label="Previous page"
             ><svg class="usa-icon" aria-hidden="true" role="img">
@@ -68,7 +68,7 @@
         <li class="usa-pagination__item usa-pagination__page-no">
             <a
                 href="javascript:void(0);"
-                @click="$emit('gotoPage', 0)"
+                @click.prevent="$emit('gotoPage', 0)"
                 data-test="page-link"
                 :class="{'usa-current': currentPage == 0}"
                 class="usa-pagination__button"
@@ -87,7 +87,7 @@
         <li v-for="page in range(interiorIndexStart, interiorIndexEnd)" class="usa-pagination__item usa-pagination__page-no">
             <a
                 href="javascript:void(0);"
-                @click="$emit('gotoPage', page - 1)"
+                @click.prevent="$emit('gotoPage', page - 1)"
                 data-test="page-link"
                 :class="{'usa-current': page == currentPage + 1 }"
                 class="usa-pagination__button"
@@ -106,7 +106,7 @@
         <li v-if='numberOfPages > 1' class="usa-pagination__item usa-pagination__page-no">
             <a
                 href="javascript:void(0);"
-                @click="$emit('gotoPage', numberOfPages - 1)"
+                @click.prevent="$emit('gotoPage', numberOfPages - 1)"
                 data-test="page-link"
                 :class="{'usa-current': currentPage == numberOfPages - 1}"
                 class="usa-pagination__button"
@@ -119,7 +119,7 @@
         <a   
             :style="{visibility: beforeLastPage ? 'visible' : 'hidden'}" 
             data-test="next-page-link"
-            @click="$emit('gotoPage', currentPage + 1)"
+            @click.prevent="$emit('gotoPage', currentPage + 1)"
             href="javascript:void(0);"
             class="usa-pagination__link usa-pagination__next-page"
             aria-label="Next page"
