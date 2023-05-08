@@ -5,7 +5,10 @@ import { NO_RESULT_MESSAGE, API_ERROR_MESSAGE } from "@/strings.js"
 
 // see https://vitejs.dev/guide/env-and-mode.html 
 // for setting production env
-const API_DOMAIN = import.meta.env.VITE_API_DOMAIN
+// To make working with App Engine Previews easier, use domain from window
+// since front and backend are served from the same domain
+// on cloud.gov / pages, VITE_API_DOMAIN will need to point to the cloud.gov instance
+const API_DOMAIN = import.meta.env.VITE_API_DOMAIN || window.location.origin
 const DEFAULT_PAGE_SIZE = 10;
 
 export const useSearchStore = defineStore("search", () => {
