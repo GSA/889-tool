@@ -10,7 +10,7 @@ if [ -z "$1" ] ; then
 fi
 
 org="gsa-smartpay"
-app_name="smartpay-training"
+app_name="smartpay-889"
 space=$1
 
 cf target -o ${org} -s ${space}
