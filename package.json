@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "build:frontend": "cd front-end && npm install && npm run build && cd ..",
+        "federalist": "npm run build:frontend"
+    }
+}

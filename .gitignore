@@ -17,3 +17,4 @@ production/deploy*
 ~*.pptx
 env_variables.yaml
 www
+_site
