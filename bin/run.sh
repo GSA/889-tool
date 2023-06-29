@@ -2,4 +2,4 @@
 
 set -eo pipefail
 
-gunicorn samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWorker
+gunicorn -b :$PORT samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWorker
