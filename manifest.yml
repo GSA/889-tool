@@ -1,7 +1,10 @@
 ---
 applications:
 - name: smartpay-889
-  random-route: true
   buildpacks:
     - python_buildpack
-  memory: 256M
+  instances: ((instances))
+  memory: ((memory))
+  routes:
+    - route: smartpay-889-((env)).app.cloud.gov
+
