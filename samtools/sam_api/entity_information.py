@@ -2,6 +2,7 @@
  compliance information
 """
 import httpx
+import ssl
 from samtools.config import settings
 
 from samtools.compliance import compliance_rules
@@ -105,7 +106,11 @@ async def _call_post_sam_entities_api(sam_api_endpoint, search_parameters):
     # httpx won't convert a set into a proper list for parameters
     search_parameters['includeSections'] = list(search_parameters['includeSections'])
 
-    async with httpx.AsyncClient() as client:
+    # handle OpenSSL 3 renegotiation, which SAM.gov does not seem to support
+    context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+    context.options |= 0x4
+
+    async with httpx.AsyncClient(verify=context) as client:
         resp = await client.post(sam_api_endpoint, headers=header, params=search_parameters)
         resp.raise_for_status()
         result = resp.json()
