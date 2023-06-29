@@ -19,7 +19,6 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://federalist-6f53a7f5-d187-47ca-b17f-7ccb6a5e1db0.sites.pages.cloud.gov"  # noqa E501
 ]
 
 
@@ -31,6 +30,7 @@ def create_app(name=__name__):
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
+        allow_origin_regex='https://federalist.*\.sites\.pages\.cloud\.gov',
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
