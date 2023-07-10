@@ -2,4 +2,4 @@ httpx==0.23.1
 gunicorn==20.1.0
 wheel==0.38.1
 fastapi==0.99.1
-uvicorn[standard]==0.20.0
+uvicorn[standard]==0.22.0
