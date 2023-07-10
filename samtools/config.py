@@ -5,10 +5,11 @@ or from instance/samtools.cfg.
 """
 
 from pydantic_settings import BaseSettings
+from typing import Optional
 
 
 class Settings(BaseSettings):
-    SAM_API_KEY: str | None = None
+    SAM_API_KEY: Optional[str]
     EXTERNAL_LINKS: dict = {
         "SAM.GOV": "https://sam.gov",
         "SAM_ENTITIES_API_DOCS": "https://open.gsa.gov/api/entity-api/",
