@@ -4,12 +4,13 @@ The API key and contact email can be imported either from environment variables,
 or from instance/samtools.cfg.
 """
 
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
+from typing import Optional
 
 
 class Settings(BaseSettings):
-    SAM_API_KEY: str
-    EXTERNAL_LINKS = {
+    SAM_API_KEY: Optional[str]
+    EXTERNAL_LINKS: dict = {
         "SAM.GOV": "https://sam.gov",
         "SAM_ENTITIES_API_DOCS": "https://open.gsa.gov/api/entity-api/",
     }
