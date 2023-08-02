@@ -13,7 +13,7 @@
 <template>
     <form role="search" class="usa-search usa-search--big" id="form" @submit.prevent="setSearchParam">
         <label class="usa-sr-only" for="search-field-en-big">
-            Search by business name, website, CAGE code, or SAM Unique Entity ID
+            Search by business name, website, CAGE code, or SAM.gov Unique Entity ID (UEI)
         </label>
         <input 
             v-model="store.search_text"

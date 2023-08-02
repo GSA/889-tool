@@ -34,7 +34,7 @@
 <div class="main_div">
     <h1>Summary of SAM.gov Data</h1>
     <p>
-        Generated on {{ date_generated }} by {{ host_url }} from SAM.gov data using the openGSA SAM Entity Management API.<br />
+        Generated on {{ date_generated }} by {{ host_url }} from SAM.gov data using the openGSA SAM.gov Entity Management API.<br />
     </p>
     <br />
 
