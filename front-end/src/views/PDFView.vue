@@ -32,9 +32,9 @@
 
 
 <div class="main_div">
-    <h1>Summary of SAM Data</h1>
+    <h1>Summary of SAM.gov Data</h1>
     <p>
-        Generated on {{ date_generated }} by {{ host_url }} from sam.gov data using the openGSA SAM Entity Management API.<br />
+        Generated on {{ date_generated }} by {{ host_url }} from SAM.gov data using the openGSA SAM.gov Entity Management API.<br />
     </p>
     <br />
 
@@ -50,7 +50,7 @@
         <span v-if="entityData['coreData']['entityInformation']['entityURL']">
             {{ entityData['coreData']['entityInformation']['entityURL'] }}<br /> 
         </span>
-        SAM: <b>{{ entityData['entityRegistration']['ueiSAM'] }}</b> <br /> 
+        SAM.gov UEI: <b>{{ entityData['entityRegistration']['ueiSAM'] }}</b> <br /> 
         CAGE: <b>{{ entityData['entityRegistration']['cageCode'] }}</b>
     </p>
     
