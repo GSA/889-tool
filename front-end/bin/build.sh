@@ -13,7 +13,7 @@ staging)
     MODE="dev" ;;
 esac
 
-echo "building to:"
-echo $API_ENPOINT
+echo "building for:"
+echo $MODE
 
 vite build --emptyOutDir --mode $MODE
