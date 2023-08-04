@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --emptyOutDir",
+    "build": "./bin/build.sh",
     "federalist": "vite build",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest --environment jsdom",
