@@ -96,7 +96,7 @@
     <p>
         The full entity record can accessed at: 
         <a  href="https://sam.gov/">
-            https://sam.gov/
+            SAM.gov
         </a> 
     </p> 
 </div>
