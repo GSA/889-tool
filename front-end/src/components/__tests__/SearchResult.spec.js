@@ -37,7 +37,7 @@ describe("Search Result", () => {
 
         const el = wrapper.get('[data-test="889-status"]')
         
-        expect(el.text()).toBe("This contractor has indicated in SAM.gov that it provides or uses prohibited equipment. Please follow your agency's procedures.");
+        expect(el.text()).toBe("This contractor has indicated in SAM.gov that it provides or uses prohibited equipment. Please follow your agency’s procedures.");
         expect(el.classes()).toContain('text-secondary')
     });
 
