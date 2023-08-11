@@ -144,8 +144,53 @@ Hopefully that all went smoothly and now you can continue to develop and improve
 
 ## Production deployment
 
-[Note: this section will likely change once we have decided on a cloud provide] The production deployment uses a reverse proxy and web server gateway interface (WSGI). We use nginx as a reverse proxy and gunicorn as a WSGI, but we do not use any specialized features of these programs and it's expected that anything with similar capabilities will suffice.
+### Deploying to cloud.gov & cloud.gov pages
+This repository contains code for a front-end Vue.js application. This can be built and served to any environment that can serve static HTML/CSS/Javascript pages. 
 
+#### Serving the front
+[Cloud.gov pages](https://pages.cloud.gov/sites) expects a repository with a build script. See [their documentation](https://cloud.gov/pages/documentation/) for detailed instruction on setting this up. This project should select the [node.js engine](https://cloud.gov/pages/documentation/node-on-pages/), which will look for a `federalist` script in package.json. The front end needs to know the URI of the backend api. This can be set up on per-environment basis, in the `front-end/.env.xxx` files. The script `front-end/bin/build.sh` determines the mapping between branches and env files.
+
+#### Serving the backend on cloud.gov
+
+##### Create a cloud.gov instance
+Your cloud.gov account must have the `SpaceDeveloper` role in each space in order to run these scripts.
+
+##### Bootstrap the cloud.gov environment
+Before the first deployment, you need to run the bootstrap script, where `SPACE` is one of `dev`, `test`, `staging`, or `prod`. This will create all the necessary services that are required to deploy the app in that space.
+
+```
+bin/cg-bootstrap-space.sh SPACE
+```
+
+You can monitor the services deployment status with `cf services`. It can take quite a while to fully provision everything. Once the services are ready, you can bootstrap the application:
+
+```
+bin/cg-bootstrap-app.sh SPACE
+```
+
+##### Create cloud.gov service accounts
+*Note: Only one service account is needed for a cloud.gov space. We don't need to do this if there is an existing service*
+Create a service account for each space. These accounts will be used by GitHub Actions to deploy the app. Since we are currently manually deploying to the `test` space, we do not need a service account for that space.
+
+```
+bin/cg-service-account-create.sh SPACE
+```
+
+Take note of the username and password it creates for each space.
+
+##### Configure the GitHub environments
+
+1. [Create environments in the GitHub repository](https://github.com/GSA/889-tool/settings/environments) that correspond with each space that GitHub Actions will deploy to (i.e., `dev`, `staging`, and `prod`)
+2. Within each GitHub environment, configure:
+    * The app's secrets
+        * `CG_USERNAME`: The service account username for this space
+        * `CG_PASSWORD`: The service account password for this space
+        * `SAM_API_KEY`: The API Key for making requests to the SAM API
+
+
+### Confirm GitHub Actions are working
+
+At this point, GitHub Actions should be able to deploy to all configured environments.
 ### Deploying for Google Cloud Platform
 Although this application can be hosted in many environments, the configuration is currently designed for hosting on Google App Engine. 
 
