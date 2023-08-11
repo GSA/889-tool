@@ -10,7 +10,7 @@ main)
 staging)
     MODE="staging" ;;
 dev)
-    mode="dev" ;;
+    MODE="dev" ;;
 *)
     MODE="dev" ;;
 esac
