@@ -13,19 +13,6 @@ jobs:
     environment: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: Configure secrets
-        uses: cloud-gov/cg-cli-tools@main
-        with:
-          cf_username: ${{ secrets.CG_USERNAME }}
-          cf_password: ${{ secrets.CG_PASSWORD }}
-          cf_org: gsa-smartpay
-          cf_space: ${{ inputs.environment }}
-          command: >-
-            cf update-user-provided-service smartpay-889-secrets -p '{
-              "SAM_API_KEY": "${{ secrets.SAM_API_KEY }}"
-            }'
-
       - name: Configure environment variables
         uses: cloud-gov/cg-cli-tools@main
         with:
