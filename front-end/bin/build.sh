@@ -9,6 +9,8 @@ main)
     MODE="production" ;;
 staging)
     MODE="staging" ;;
+dev)
+    mode="dev" ;;
 *)
     MODE="dev" ;;
 esac
