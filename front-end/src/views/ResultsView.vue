@@ -31,7 +31,7 @@ watch (
             <div id="main-container" >
                 <div class="grid-container">
                     <div class="padding-top-2">
-                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM Unique Entity ID</p>                  
+                        <p class="margin-top-0">Search by business name, website, CAGE code, or SAM.gov Unique Entity ID (UEI)</p>                  
                         <SearchInput />
                     </div>
                 </div>

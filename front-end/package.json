@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --emptyOutDir",
+    "build": "./bin/build.sh",
     "federalist": "vite build",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest --environment jsdom",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@uswds/uswds": "^3.2.0",
     "jspdf": "^2.5.1",
-    "pinia": "^2.0.21",
+    "pinia": "^2.1.6",
     "vue": "^3.2.38",
     "vue-router": "^4.1.5"
   },
@@ -22,17 +22,17 @@
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/test-utils": "^2.4.0",
-    "cypress": "^12.17.1",
-    "eslint": "^8.22.0",
+    "@vue/test-utils": "^2.4.1",
+    "cypress": "^12.17.3",
+    "eslint": "^8.47.0",
     "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-vue": "^9.3.0",
+    "eslint-plugin-vue": "^9.16.1",
     "jsdom": "^22.1.0",
-    "prettier": "^2.7.1",
-    "sass": "^1.55.0",
+    "prettier": "^3.0.1",
+    "sass": "^1.64.2",
     "start-server-and-test": "^2.0.0",
     "vite": "^3.2.7",
-    "vitest": "^0.33.0"
+    "vitest": "^0.34.1"
   },
   "overrides": {
     "glob-parent@<5.1.2": "^5.1.2"
