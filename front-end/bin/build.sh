@@ -6,9 +6,11 @@ echo $BRANCH
 
 case "$BRANCH" in
 main)
-    MODE="production" ;;
+    MODE="staging" ;;
 staging)
     MODE="staging" ;;
+dev)
+    MODE="dev" ;;
 *)
     MODE="dev" ;;
 esac
