@@ -19,6 +19,7 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://889.smartpay.gsa.gov"
 ]
 
 
@@ -30,7 +31,7 @@ def create_app(name=__name__):
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
-        allow_origin_regex='https://federalist.*\.sites\.pages\.cloud\.gov',
+        allow_origin_regex=r'https://federalist.*\.sites\.pages\.cloud\.gov',
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -56,7 +57,7 @@ def create_app(name=__name__):
             return response
         except Exception as exception:
             logging.exception(exception)
-            raise HTTPException(status_code=400, detail="Problem connecting to SAM.gov")
+            raise HTTPException(status_code=400, detail="Problem connecting to SAM.gov") # noqa E501
 
     return app
 
