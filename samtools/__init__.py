@@ -19,7 +19,8 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://889.smartpay.gsa.gov"
+    "https://889.smartpay.gsa.gov",
+    "https://federalist-adaef58d-ff3c-4a0f-961c-c9916e7bff41.sites.pages.cloud.gov"
 ]
 
 
@@ -31,7 +32,6 @@ def create_app(name=__name__):
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
-        # allow_origin_regex=r'(https://federalist.*\.sites\.pages\.cloud\.gov | https://889.smartpay.gsa.gov)',
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
