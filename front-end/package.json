@@ -10,7 +10,7 @@
     "test:unit": "vitest --environment jsdom",
     "test:e2e": "start-server-and-test preview  http://127.0.0.1:4173/site/gsa/889-vue/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4173/site/gsa/889-vue/ 'cypress run --e2e'",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint 'src' --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@uswds/uswds": "^3.6.0",
@@ -26,9 +26,10 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/test-utils": "^2.4.1",
     "cypress": "^13.3.0",
-    "eslint": "^8.47.0",
+    "eslint": "^8.50.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^9.17.0",
+    "eslint-plugin-vuejs-accessibility": "^2.2.0",
     "jsdom": "^22.1.0",
     "prettier": "^3.0.1",
     "sass": "^1.64.2",
