@@ -82,7 +82,7 @@ Tests can be run using pytest:
 
 ```
 git clone <CODE_REPOSITORY>
-cd samtools
+cd <CLONED_DIRECTORY_NAME>
 ```
 
 ### Install python >= 3.8, pip, and virtualenv using apt-get, brew, etc.
@@ -102,7 +102,6 @@ pip3 install --upgrade pip virtualenv
 The SAM.gov Tool comes with a bash script that automates several of the build steps. Alternatively, you can look at the contenst of the script and run the commands as desired. It is just building a python virtual-env and installing dependencies:
 
 ```
-cd samtools
 bash build_samtools.sh
 source venv/bin/activate
 ```
