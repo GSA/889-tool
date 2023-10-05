@@ -2,17 +2,19 @@
 
 ## Overview
 
-This search uses the openGSA sam.gov Entity Management API. Vendors that have selected "DOES NOT" for both FAR 52.204-26(c)(1) and (2) are marked as compliant. A vendor is not selectable if they do not meet this requirement, do not have an active registration status, or have active exclusions. Selecting a compliant vendor will download PDF record of their compliance.
+The SmartPay 889 Representations SAM.gov Tool is composed of a backend API written in python, and a web-based frontend.
 
-- https://open.gsa.gov/api/entity-api/
+This tool's search capability uses the openGSA SAM.gov Entity Management API. Vendors that have selected "DOES NOT" for both FAR 52.204-26(c)(1) and (2) are marked as compliant. A vendor is not selectable if they do not meet this requirement, do not have an active registration status, or have active exclusions. Selecting a compliant vendor will download PDF record of their compliance.
+
+[You can find more information about the SAM.gov's API here](https://open.gsa.gov/api/entity-api/).
 
 Search results omit entities without representations and certifications, which are those with a "purpose of registration code" of "Federal Assistance Awards" only (Code Z1) and child entities (non-zero/non-null EFT Indicator).
 
-## Objective
+### Objective
 
 The purpose of this tool is to enable the broadest possible user-base, including non-procurement-experts, the ability to determine vendor 889 compliance from their SAM.gov record as quickly as possible and with little or no training.
 
-## Libraries
+### Libraries
 
 The 889 Representations SAM.gov Tool is written with the FastAPI Python framework and uses a Vue.js front-end. PDFs are generated in the browser using jsPDF.
 
@@ -35,14 +37,14 @@ The python FastAPI application can be deployed in a production environment using
 - uvicorn https://www.uvicorn.org (BSD) -- Provides asynchronous workers to allow gunicorn to handle asyncIO 
 Additional libraries used by the tool can be found in requirements.txt.
 
-## Features
+### Features
 
 The tool performs two main tasks.
 
 1. Search term pre-processing. - Improves the quality of search results returned by the SAM.gov Entities API by modifying the search expression provided by the user. Regular expressions are used to identify SAM.gov UEIs, and US and NATO cage codes. See the search_preprocessor.py file and associated tests in tests/test_search_preprocessor.py
 2. Determine entity compliance status. - Call the SAM.gov Entities API and append the response data with a "samToolsData" section for each vendor containing compliance information. See compliance/compliance_rules.py for compliance rules and associated tests in tests/test_compliance_rules.py.
 
-## API Endpoints
+### API Endpoints
 
 The 889 Representations SAM.gov Tool provides a single API endpoint. This endpoint allow for other tools (like the Vue.js front-end) that require 889 compliance data from SAM.gov to obtain this from the tool's. The endpoint is defined in `__init__.py`.
 
@@ -76,16 +78,17 @@ Tests can be run using pytest:
 
 ---
 
-## Local development installation instructions
+## Development and Testing Instructions
+### Backend (Python/FastAPI) Setup
 
-### Clone the repository into a directory
+#### Clone the repository into a directory
 
 ```
 git clone <CODE_REPOSITORY>
 cd <CLONED_DIRECTORY_NAME>
 ```
 
-### Install python >= 3.8, pip, and virtualenv using apt-get, brew, etc.
+#### Install python >= 3.8, pip, and virtualenv using apt-get, brew, etc.
 
 This is an example on systems that use apt-get (such as Debian-based Linux) commands must be run as root or with superuser privileges (sudo). If developing locally on a Mac or Windows machine, take appropriate steps to ensure you have Python version 3.8 installed.
 
@@ -97,7 +100,7 @@ apt-get install -yq git python3 python3-pip
 pip3 install --upgrade pip virtualenv
 ```
 
-### Create a python virtual environment
+#### Create a python virtual environment
 
 The SAM.gov Tool comes with a bash script that automates several of the build steps. Alternatively, you can look at the contenst of the script and run the commands as desired. It is just building a python virtual-env and installing dependencies:
 
@@ -110,21 +113,21 @@ source venv/bin/activate
 pip install -r requirements.dev.txt  # install development-only python requirements
 ```
 
-### Setup instance-specific data (SAM.gov Entity Management API key and contact email)
+#### Setup instance-specific data (SAM.gov Entity Management API key and contact email)
 
-To communicate with the SAM.gov API you need an API Key. You will need to set an environmental variable with this key. On Mac/Linux systems you can eport it:  
+To communicate with the SAM.gov API you need an API Key. You will need to set an environment variable with this key. On Mac/Linux systems you can export it:  
 
 ```
 export SAM_API_KEY=YOUR_API_KEY
 ```
 
-### Run the FastAPI application using uvicorn. The `--reload` will watch for changes and reload the app.
+#### Run the FastAPI application using uvicorn. The `--reload` will watch for changes and reload the app.
 
 ```
 uvicorn samtools.wsgi:app --reload
 ```
 
-### Optional: use gunicorn as a web server gateway interface (WSGI)
+#### Optional: use gunicorn as a web server gateway interface (WSGI)
 
 This is not required to run a development instance of FastAPI application, but is the recommended way to run in production.
 If you would like to run gunicorn with uvicorn workers (for nice async IO):
@@ -135,11 +138,14 @@ gunicorn samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWor
 
 NOTE: gunicorn runs on port 8000 by default.
 
-### That's it!
+#### That's it!
 
 Hopefully that all went smoothly and now you can continue to develop and improve the SAM.gov tool on your local machine!
 
 ---
+
+### Frontend Setup
+[See the frontend instructions here](front-end/README.md).
 
 ## Production deployment
 
