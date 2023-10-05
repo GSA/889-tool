@@ -78,7 +78,7 @@ Tests can be run using pytest:
 
 ---
 
-## Development and Testing Instructions
+## Development and Testing Setup
 ### Backend (Python/FastAPI) Setup
 
 #### Clone the repository into a directory
@@ -115,13 +115,21 @@ pip install -r requirements.dev.txt  # install development-only python requireme
 
 #### Setup instance-specific data (SAM.gov Entity Management API key and contact email)
 
-To communicate with the SAM.gov API you need an API Key. You will need to set an environment variable with this key. On Mac/Linux systems you can export it:  
+To communicate with the SAM.gov API you need an API Key. To learn more about how to register for a key, [see these instructions](https://open.gsa.gov/api/entity-api/#individual-personal-accounts).
+  
+You will need to set an environment variable with this key. On Mac/Linux systems you can export it:  
 
 ```
 export SAM_API_KEY=YOUR_API_KEY
 ```
 
-#### Run the FastAPI application using uvicorn. The `--reload` will watch for changes and reload the app.
+#### Run the FastAPI and the frontend at the same time
+Assuming you've followed the [setup instructions for the frontend](front-end/README.md), you can run the Python backend and the frontend at the same time with the following command (at the root of the repository):
+```shell
+npm run dev
+```
+
+#### Alternative: Run the FastAPI application by itself using uvicorn. The `--reload` will watch for changes and reload the app.
 
 ```
 uvicorn samtools.wsgi:app --reload
@@ -137,10 +145,6 @@ gunicorn samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWor
 ```
 
 NOTE: gunicorn runs on port 8000 by default.
-
-#### That's it!
-
-Hopefully that all went smoothly and now you can continue to develop and improve the SAM.gov tool on your local machine!
 
 ---
 
