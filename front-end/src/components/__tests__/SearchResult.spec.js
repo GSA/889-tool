@@ -52,6 +52,7 @@ describe("Search Result", () => {
 
   it("renders expiring registration when expiration date is within 30 days", () => {
     const date = new Date(2022, 11, 16);
+    date.setUTCHours(0,0,0,0)
     vi.setSystemTime(date);
     const wrapper = mount(SearchResult, {
       props: { entity: non_selectable_entity_prop },

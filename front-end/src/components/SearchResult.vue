@@ -82,7 +82,7 @@ const isExpiring = computed(() => {
   warningDaysFromNow.setDate(
     warningDaysFromNow.getDate() + WARN_IF_FEWER_THAN_DAYS,
   );
-  return validTo < warningDaysFromNow;
+  return validTo <= warningDaysFromNow;
 });
 const expirationDateText = computed(() => {
   const validTo = new Date(
