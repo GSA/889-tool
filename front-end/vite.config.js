@@ -10,6 +10,12 @@ export default defineConfig({
   },
   base: process.env.BASEURL,
   plugins: [vue()],
+  test: {
+    environment: 'jsdom',
+    coverage: {
+      provider: 'v8' // or 'v8'
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
