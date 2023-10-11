@@ -60,7 +60,7 @@ describe("Search Result", () => {
     const el = wrapper.find('[data-test="expiration-date"]');
 
     expect(el.exists()).toBe(true);
-    expect(el.text()).toBe("Expiring registration: January 14, 2023");
+    expect(el.text()).toBe("Expiring registration: January 15, 2023");
   });
 
   it("does not render expiring registration when expiration date is beyond 30 days", () => {

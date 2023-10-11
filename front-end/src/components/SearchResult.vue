@@ -88,13 +88,14 @@ const expirationDateText = computed(() => {
   const validTo = new Date(
     props.entity.entityRegistration.registrationExpirationDate,
   );
-  const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+  validTo.setUTCHours(0,0,0,0)
+  const year = new Intl.DateTimeFormat("en", { year: "numeric", timeZone:"UTC" }).format(
     validTo,
   );
-  const month = new Intl.DateTimeFormat("en", { month: "long" }).format(
+  const month = new Intl.DateTimeFormat("en", { month: "long", timeZone:"UTC" }).format(
     validTo,
   );
-  const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(validTo);
+  const day = new Intl.DateTimeFormat("en", { day: "2-digit", timeZone:"UTC"}).format(validTo);
   return `Expiring registration: ${month} ${day}, ${year}`;
 });
 
