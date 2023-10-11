@@ -6,6 +6,8 @@ import PrototypeAlert from "../PrototypeAlert.vue";
 describe("Prototype Alert", () => {
   it("renders properly", () => {
     const wrapper = mount(PrototypeAlert);
-    expect(wrapper.text()).toContain("This is a prototype. We are continuously updating functionality and collecting feedback");
+    expect(wrapper.text()).toContain(
+      "This is a prototype. We are continuously updating functionality and collecting feedback",
+    );
   });
 });
