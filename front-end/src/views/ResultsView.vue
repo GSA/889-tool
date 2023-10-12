@@ -25,7 +25,10 @@ watch(
 </script>
 
 <template>
-  <main id="main-content" class="wide-layout flex-fill">
+  <main
+    id="main-content"
+    class="wide-layout flex-fill"
+  >
     <div class="background padding-bottom-2">
       <GSAHeader />
       <div id="main-container">
@@ -41,21 +44,37 @@ watch(
       </div>
     </div>
 
-    <div class="grid-container" v-if="store.loading">
+    <div
+      v-if="store.loading"
+      class="grid-container"
+    >
       <LoadingPage />
     </div>
-    <div class="grid-container" v-else>
+    <div
+      v-else
+      class="grid-container"
+    >
       <div class="margin-y-1em grid-row">
         Displaying {{ store.totalRecords }} results
       </div>
       <AccordionKey v-if="!store.APIMessage && !store.error" />
       <SearchResults />
-      <Alert v-if="store.APIMessage" heading="No Results"
-        ><span v-html="store.APIMessage"></span
-      ></Alert>
-      <Alert v-if="store.error" heading="Error" status="error">{{
-        store.error
-      }}</Alert>
+      <Alert
+        v-if="store.APIMessage"
+        heading="No Results"
+      >
+        <!--  eslint-disable-next-line vue/no-v-html -->
+        <span v-html="store.APIMessage" />
+      </Alert>
+      <Alert
+        v-if="store.error"
+        heading="Error"
+        status="error"
+      >
+        {{
+          store.error
+        }}
+      </Alert>
     </div>
   </main>
 </template>

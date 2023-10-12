@@ -1,7 +1,12 @@
 <script setup>
 import { computed } from "vue";
 
-const props = defineProps(["entityData"]);
+const props = defineProps({
+  "entityData": {
+    type: Object,
+    required: true
+  }
+  });
 
 console.log("props:", props.entityData);
 const date_generated = computed(() =>
@@ -39,68 +44,68 @@ const address = computed(() => {
     <h1>Summary of SAM.gov Data</h1>
     <p>
       Generated on {{ date_generated }} by {{ host_url }} from SAM.gov data
-      using the openGSA SAM.gov Entity Management API.<br />
+      using the openGSA SAM.gov Entity Management API.<br>
     </p>
-    <br />
+    <br>
 
-    <hr />
+    <hr>
 
-    <h2 style="text-align: center">Entity Registration Summary</h2>
-    <p style="margin-bottom: 0">Summary for:</p>
+    <h2 style="text-align: center">
+      Entity Registration Summary
+    </h2>
+    <p style="margin-bottom: 0">
+      Summary for:
+    </p>
     <h2 style="margin-top: 0; margin-bottom: 0">
       {{ entityData["entityRegistration"]["legalBusinessName"] }}
     </h2>
     <p style="margin-top: 0">
       <span v-if="entityData['entityRegistration']['dbaName']">
-        ({{ entityData["entityRegistration"]["dbaName"] }})<br />
+        ({{ entityData["entityRegistration"]["dbaName"] }})<br>
       </span>
       <span v-if="entityData['coreData']['entityInformation']['entityURL']">
-        {{ entityData["coreData"]["entityInformation"]["entityURL"] }}<br />
+        {{ entityData["coreData"]["entityInformation"]["entityURL"] }}<br>
       </span>
       SAM.gov UEI: <b>{{ entityData["entityRegistration"]["ueiSAM"] }}</b>
-      <br />
+      <br>
       CAGE: <b>{{ entityData["entityRegistration"]["cageCode"] }}</b>
     </p>
 
-    <p v-html="address"></p>
+    <!--  eslint-disable-next-line vue/no-v-html -->
+    <p v-html="address" />
 
     <p>
       Registration Status:
-      <b>{{ entityData["samToolsData"]["registration"]["statusText"] }}</b
-      ><br />
-      <span id="highlight"
-        >Has Active Exclusion?
+      <b>{{ entityData["samToolsData"]["registration"]["statusText"] }}</b><br>
+      <span id="highlight">Has Active Exclusion?
         <b>{{
           entityData["samToolsData"]["exclusions"]["statusText"]
-        }}</b></span
-      ><br />
+        }}</b></span><br>
       Activation Date:
-      <b>{{ entityData["entityRegistration"]["activationDate"] }}</b
-      ><br />
-      <span id="highlight"
-        >Expiration Date:
+      <b>{{ entityData["entityRegistration"]["activationDate"] }}</b><br>
+      <span id="highlight">Expiration Date:
         <b>{{
           entityData["entityRegistration"]["registrationExpirationDate"]
-        }}</b></span
-      ><br />
+        }}</b></span><br>
     </p>
-    <h3 style="text-align: center">(End of Entity Registration Summary)</h3>
+    <h3 style="text-align: center">
+      (End of Entity Registration Summary)
+    </h3>
 
-    <hr />
+    <hr>
 
-    <h2 style="text-align: center">889 Representations Section</h2>
+    <h2 style="text-align: center">
+      889 Representations Section
+    </h2>
     <p>
-      <span id="highlight"
-        >889 Representations Summary:<b>
-          {{
-            entityData["samToolsData"]["eightEightNine"]["elaboratedStatusText"]
-          }}
-        </b></span
-      >
+      <span id="highlight">889 Representations Summary:<b>
+        {{
+          entityData["samToolsData"]["eightEightNine"]["elaboratedStatusText"]
+        }}
+      </b></span>
     </p>
     <p>
-      <b
-        >The contractor has represented as follows in FAR 52.204-26 (c)
+      <b>The contractor has represented as follows in FAR 52.204-26 (c)
         <span
           v-if="
             entityData['samToolsData']['eightEightNine']['farProvisionDate']
@@ -133,11 +138,13 @@ const address = computed(() => {
       }}
     </p>
 
-    <h3 style="text-align: center">(End of 889 Representations Section)</h3>
+    <h3 style="text-align: center">
+      (End of 889 Representations Section)
+    </h3>
 
-    <hr />
+    <hr>
 
-    <br />
+    <br>
     <p>
       The full entity record can accessed at:
       <a href="https://sam.gov/"> https://SAM.gov/ </a>

@@ -14,8 +14,11 @@ onMounted(() => {
 
 <template>
   <div class="background flex-fill">
-    <GSAHeader :linkHome="false" />
-    <div id="main-container" class="wide-layout">
+    <GSAHeader :link-home="false" />
+    <div
+      id="main-container"
+      class="wide-layout"
+    >
       <main id="main-content">
         <div class="grid-container">
           <div class="padding-top-8">

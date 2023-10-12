@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "parser": "vue-eslint-parser",
+      "extends": [
+        "plugin:vue/vue3-recommended",
+        "plugin:vuejs-accessibility/recommended"
+      ],
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+      },
+      "rules": {
+        "vue/multi-word-component-names":
+            "off", /* allow component names like 'Alert' for now */
+        
+        // default rule requires nested label/inputs
+        // which uswds does not do. id is sufficient
+        "vuejs-accessibility/label-has-for": [
+          "error",
+          {
+            "required": {
+              "some": ["id"]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

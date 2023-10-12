@@ -3,7 +3,10 @@
     <div class="usa-section">
       <div class="grid-container">
         <div class="grid-row grid-gap">
-          <main class="" id="main-content">
+          <main
+            id="main-content"
+            class=""
+          >
             <div class="usa-prose">
               <h1>Page not found</h1>
               <p class="usa-intro">
@@ -23,12 +26,16 @@
               <div class="margin-y-5">
                 <ul class="usa-button-group">
                   <li class="usa-button-group__item">
-                    <router-link to="/">Visit homepage</router-link>
+                    <router-link to="/">
+                      Visit homepage
+                    </router-link>
                   </li>
                 </ul>
               </div>
 
-              <p class="text-base"><strong>Error code:</strong> 404</p>
+              <p class="text-base">
+                <strong>Error code:</strong> 404
+              </p>
             </div>
           </main>
         </div>
