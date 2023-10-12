@@ -21,6 +21,8 @@
         "sourceType": "module"
       },
       "rules": {
+        "vue/multi-word-component-names":
+            "off", /* allow component names like 'Alert' for now */
         // default rule requires nested label/inputs
         // which uswds does not do. id is sufficient
         "vuejs-accessibility/label-has-for": [
