@@ -13,11 +13,17 @@ const props = defineProps({
   /**
    * Total number of pages to show
    */
-  numberOfPages: Number,
+  numberOfPages: {
+    type: Number,
+    required: true
+  },
   /**
    * Index of current page, zero-indexed
    */
-  currentPage: Number,
+  currentPage: {
+    type: Number,
+    required: true
+  }
 });
 
 /**
@@ -54,32 +60,41 @@ const interiorIndexEnd = computed(() => {
 });
 </script>
 <template>
-  <nav v-if="numberOfPages" aria-label="Pagination" class="usa-pagination">
-    <ul class="usa-pagination__list" data-test="page-navigation-list">
+  <nav
+    v-if="numberOfPages"
+    aria-label="Pagination"
+    class="usa-pagination"
+  >
+    <ul
+      class="usa-pagination__list"
+      data-test="page-navigation-list"
+    >
       <li class="usa-pagination__item usa-pagination__arrow">
         <a
           :style="{ visibility: showPrevious ? 'visible' : 'hidden' }"
           data-test="previous-page-link"
           href="javascript:void(0);"
-          @click.prevent="$emit('gotoPage', currentPage - 1)"
           class="usa-pagination__link usa-pagination__previous-page"
           aria-label="Previous page"
-          ><svg class="usa-icon" aria-hidden="true" role="img">
-            <use xlink:href="@/assets/images/sprite.svg#navigate_before"></use>
-          </svg>
-          <span class="usa-pagination__link-text">Previous</span></a
-        >
+          @click.prevent="$emit('gotoPage', currentPage - 1)"
+        ><svg
+           class="usa-icon"
+           aria-hidden="true"
+           role="img"
+         >
+           <use xlink:href="@/assets/images/sprite.svg#navigate_before" />
+         </svg>
+          <span class="usa-pagination__link-text">Previous</span></a>
       </li>
       <li class="usa-pagination__item usa-pagination__page-no">
         <a
           href="javascript:void(0);"
-          @click.prevent="$emit('gotoPage', 0)"
           data-test="page-link"
           :class="{ 'usa-current': currentPage == 0 }"
           class="usa-pagination__button"
           aria-label="Page 1"
-          >1</a
-        >
+          @click.prevent="$emit('gotoPage', 0)"
+        >1</a>
       </li>
       <li
         v-if="interiorIndexStart != 2"
@@ -96,13 +111,12 @@ const interiorIndexEnd = computed(() => {
       >
         <a
           href="javascript:void(0);"
-          @click.prevent="$emit('gotoPage', page - 1)"
           data-test="page-link"
           :class="{ 'usa-current': page == currentPage + 1 }"
           class="usa-pagination__button"
           aria-label="Page {{page}}"
-          >{{ page }}</a
-        >
+          @click.prevent="$emit('gotoPage', page - 1)"
+        >{{ page }}</a>
       </li>
       <li
         v-if="interiorIndexEnd != numberOfPages - 1"
@@ -118,27 +132,29 @@ const interiorIndexEnd = computed(() => {
       >
         <a
           href="javascript:void(0);"
-          @click.prevent="$emit('gotoPage', numberOfPages - 1)"
           data-test="page-link"
           :class="{ 'usa-current': currentPage == numberOfPages - 1 }"
           class="usa-pagination__button"
           aria-label="Last Page, page {{numberOfPages}}"
-          >{{ numberOfPages }}</a
-        >
+          @click.prevent="$emit('gotoPage', numberOfPages - 1)"
+        >{{ numberOfPages }}</a>
       </li>
 
       <li class="usa-pagination__item usa-pagination__arrow">
         <a
           :style="{ visibility: beforeLastPage ? 'visible' : 'hidden' }"
           data-test="next-page-link"
-          @click.prevent="$emit('gotoPage', currentPage + 1)"
           href="javascript:void(0);"
           class="usa-pagination__link usa-pagination__next-page"
           aria-label="Next page"
-          ><span class="usa-pagination__link-text">Next </span
-          ><svg class="usa-icon" aria-hidden="true" role="img">
-            <use xlink:href="@/assets/images/sprite.svg#navigate_next"></use>
-          </svg>
+          @click.prevent="$emit('gotoPage', currentPage + 1)"
+        ><span class="usa-pagination__link-text">Next </span><svg
+          class="usa-icon"
+          aria-hidden="true"
+          role="img"
+        >
+          <use xlink:href="@/assets/images/sprite.svg#navigate_next" />
+        </svg>
         </a>
       </li>
     </ul>

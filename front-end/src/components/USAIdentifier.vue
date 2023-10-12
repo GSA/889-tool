@@ -6,13 +6,14 @@
     >
       <div class="usa-identifier__container">
         <div class="usa-identifier__logos">
-          <a href="" class="usa-identifier__logo"
-            ><img
-              class="usa-identifier__logo-img"
-              src="@/assets/images/gsa-logo.svg"
-              alt="GSA logo"
-              role="img"
-          /></a>
+          <a
+            href=""
+            class="usa-identifier__logo"
+          ><img
+            class="usa-identifier__logo-img"
+            src="@/assets/images/gsa-logo.svg"
+            alt="GSA logo"
+          ></a>
         </div>
         <section
           class="usa-identifier__identity"
@@ -38,50 +39,43 @@
             <a
               href="https://www.gsa.gov/about-us"
               class="usa-identifier__required-link usa-link"
-              >About GSA</a
-            >
+            >About GSA</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
               href="https://www.gsa.gov/website-information/accessibility-aids"
               class="usa-identifier__required-link usa-link"
-              >Accessibility support</a
-            >
+            >Accessibility support</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
               href="https://www.gsa.gov/reference/freedom-of-information-act-foia"
               class="usa-identifier__required-link usa-link"
-              >FOIA requests</a
-            >
+            >FOIA requests</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
               href="https://www.gsa.gov/reference/civil-rights-programs/notification-and-federal-employee-antidiscrimination-and-retaliation-act-of-2002"
               class="usa-identifier__required-link usa-link"
-              >No FEAR Act data</a
-            >
+            >No FEAR Act data</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
               href="https://www.gsaig.gov/"
               class="usa-identifier__required-link usa-link"
-              >Office of the Inspector General</a
-            >
+            >Office of the Inspector General</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
               href="https://www.gsa.gov/reference/reports/budget-performance"
               class="usa-identifier__required-link usa-link"
-              >Performance reports</a
-            >
+            >Performance reports</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
               href="https://www.gsa.gov/website-information/website-policies"
               class="usa-identifier__required-link usa-link"
-              >Privacy policy</a
-            >
+            >Privacy policy</a>
           </li>
         </ul>
       </div>
@@ -95,9 +89,10 @@
           Looking for U.S. government information and services?&nbsp;
         </div>
 
-        <a href="https://www.usa.gov/" class="usa-link--external"
-          >Visit USA.gov</a
-        >
+        <a
+          href="https://www.usa.gov/"
+          class="usa-link--external"
+        >Visit USA.gov</a>
       </div>
     </section>
   </div>

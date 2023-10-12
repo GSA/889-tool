@@ -24,11 +24,23 @@ const alertClass = computed(() => {
 });
 </script>
 <template>
-  <div class="usa-alert margin-y-2" :class="alertClass" data-test="container">
+  <div
+    class="usa-alert margin-y-2"
+    :class="alertClass"
+    data-test="container"
+  >
     <div class="usa-alert__body">
-      <h4 class="usa-alert__heading" data-test="heading">{{ heading }}</h4>
-      <p class="usa-alert__text" data-test="message">
-        <slot></slot>
+      <h4
+        class="usa-alert__heading"
+        data-test="heading"
+      >
+        {{ heading }}
+      </h4>
+      <p
+        class="usa-alert__text"
+        data-test="message"
+      >
+        <slot />
       </p>
     </div>
   </div>

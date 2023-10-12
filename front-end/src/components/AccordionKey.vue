@@ -18,12 +18,19 @@ onMounted(() => accordion.init());
         Definition of symbols
       </button>
     </h4>
-    <div id="a1" class="usa-accordion__content usa-prose">
+    <div
+      id="a1"
+      class="usa-accordion__content usa-prose"
+    >
       <ul class="usa-icon-list">
         <li class="usa-icon-list__item">
           <div class="usa-icon-list__icon text-success">
-            <svg class="usa-icon" aria-hidden="true" role="img">
-              <use xlink:href="@/assets/images/sprite.svg#check_circle"></use>
+            <svg
+              class="usa-icon"
+              aria-hidden="true"
+              role="img"
+            >
+              <use xlink:href="@/assets/images/sprite.svg#check_circle" />
             </svg>
           </div>
           <div class="usa-icon-list__content">
@@ -32,8 +39,12 @@ onMounted(() => accordion.init());
         </li>
         <li class="usa-icon-list__item">
           <div class="usa-icon-list__icon text-secondary">
-            <svg class="usa-icon" aria-hidden="true" role="img">
-              <use xlink:href="@/assets/images/sprite.svg#warning"></use>
+            <svg
+              class="usa-icon"
+              aria-hidden="true"
+              role="img"
+            >
+              <use xlink:href="@/assets/images/sprite.svg#warning" />
             </svg>
           </div>
           <div class="usa-icon-list__content">
