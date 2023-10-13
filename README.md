@@ -54,8 +54,6 @@ export SAM_API_KEY=YOUR_API_KEY
 ```
 
 ### Setting up the backend (Python/FastAPI) environment ###
-
->>>>>>> Stashed changes
 #### Create a python virtual environment
 
 The SAM.gov Tool comes with a bash script that automates several of the build steps. Alternatively, you can look at the contenst of the script and run the commands as desired. It is just building a python virtual-env and installing dependencies:
@@ -75,6 +73,23 @@ Install the required Node.js dependencies:
 npm install
 ```
 
+### Quickstart for dev ###
+To run both the backend and frontend at the same time with a single command:
+```sh
+npm run dev
+```
+  
+To run just the backend:
+```sh
+npm run dev:backend
+```
+  
+And to run just the frontend:
+```sh
+npm run dev:frontend
+```
+
+### Running the backend manually ###
 
 #### Run the FastAPI application using uvicorn. The `--reload` will watch for changes and reload the app.
 
@@ -92,21 +107,78 @@ gunicorn samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWor
 ```
 
 NOTE: gunicorn runs on port 8000 by default.
+  
+### Running Tests ###
+#### Backend Tests ####
+To quickly run the backend tests:
+```sh
+npm run test:backend
+```
+  
+#### Frontend Tests ####
+To quickly run basic frontend tests:
+```sh
+npm run test:frontend
+```
+  
+##### Run Unit Tests with [Vitest](https://vitest.dev/)
 
-## Production deployment
+```sh
+npm run test:unit
+```
 
-### Deploying to cloud.gov & cloud.gov pages
-This repository contains code for a front-end Vue.js application. This can be built and served to any environment that can serve static HTML/CSS/Javascript pages. 
+##### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
 
-#### Serving the front
-[Cloud.gov pages](https://pages.cloud.gov/sites) expects a repository with a build script. See [their documentation](https://cloud.gov/pages/documentation/) for detailed instruction on setting this up. This project should select the [node.js engine](https://cloud.gov/pages/documentation/node-on-pages/), which will look for a `federalist` script in package.json. The front end needs to know the URI of the backend api. This can be set up on per-environment basis, in the `front-end/.env.xxx` files. The script `front-end/bin/build.sh` determines the mapping between branches and env files.
+```sh
+npm run build
+npm run test:e2e # or `npm run test:e2e:ci` for headless testing
+```
 
-#### Serving the backend on cloud.gov
+##### Lint with [ESLint](https://eslint.org/)
 
-##### Create a cloud.gov instance
+```sh
+npm run lint
+```
+ 
+### Additional frontend commands ###
+#### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+#### Compile and Minify for Production
+
+```sh
+npm run build
+```
+  
+#### Build USWDS assets:
+The site uses USWDS for most styling rather than in-component styles. This may not be the right choice; we should iterate and find the technique that balances ease-of-use with maintainability. 
+  
+``` sh
+npx gulp compile
+```
+
+This will build css files from sources in `src/scss` and `node_modules/@uswds` and deposit results in `src/assets`.
+
+See `gulpfile.js` for settings.
+
+## Production Deployment 
+### Frontend (Cloud.gov Pages)
+Because the Vue simply builds a static html/javascript site, it can run from any system that can serve static content. This includes Cloud.gov-Pages (Federalist). The current configuration in `vite.config.js` outputs build artifacts to `_site` where federalist expects to find them. `package.json` includes a `federalist"` script that runs `vite build`. Cloud.gov Pages will watch the github repo for changes on the main branch and re-build files when it changes. 
+
+Currently, using Cloud.gov requires the use of the `createWebHashHistory` style urls. This allows the Vue Router to use URLS that include `#` like `#/search/some_company/2` without trying to load a page at a different path. This allows users to refresh the page or share a link. 
+
+#### Environment variables
+The production build will expect to find an env `VITE_API_DOMAIN` pointing to the 889 tool API. This is currently running on cloud.gov.
+
+### Backend (FastAPI on Cloud.gov)
+
+#### Create a cloud.gov instance
 Your cloud.gov account must have the `SpaceDeveloper` role in each space in order to run these scripts.
 
-##### Bootstrap the cloud.gov environment
+#### Bootstrap the cloud.gov environment
 Before the first deployment, you need to run the bootstrap script, where `SPACE` is one of `dev`, `test`, `staging`, or `prod`. This will create all the necessary services that are required to deploy the app in that space.
 
 ```
@@ -119,7 +191,7 @@ You can monitor the services deployment status with `cf services`. It can take q
 bin/cg-bootstrap-app.sh SPACE
 ```
 
-##### Create cloud.gov service accounts
+#### Create cloud.gov service accounts
 *Note: Only one service account is needed for a cloud.gov space. We don't need to do this if there is an existing service*
 Create a service account for each space. These accounts will be used by GitHub Actions to deploy the app. Since we are currently manually deploying to the `test` space, we do not need a service account for that space.
 
@@ -129,7 +201,7 @@ bin/cg-service-account-create.sh SPACE
 
 Take note of the username and password it creates for each space.
 
-##### Configure the GitHub environments
+#### Configure the GitHub environments
 
 1. [Create environments in the GitHub repository](https://github.com/GSA/889-tool/settings/environments) that correspond with each space that GitHub Actions will deploy to (i.e., `dev`, `staging`, and `prod`)
 2. Within each GitHub environment, configure:
