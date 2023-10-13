@@ -1,8 +1,6 @@
 # GSA SmartPay 889 Representations SAM.gov Tool
 
 ## Overview
-The 889 Representations SAM.gov Tool is written with the [FastAPI Python framework](https://fastapi.tiangolo.com) and uses a [Vue.js](https://vuejs.org) front-end. 
-
 The SmartPay 889 Representations SAM.gov Tool is composed of a backend API written in python, and a web-based frontend.
 
 This tool's search capability uses the openGSA SAM.gov Entity Management API. Vendors that have selected "DOES NOT" for both FAR 52.204-26(c)(1) and (2) are marked as compliant. A vendor is not selectable if they do not meet this requirement, do not have an active registration status, or have active exclusions. Selecting a compliant vendor will download PDF record of their compliance.
