@@ -1,5 +1,10 @@
 # GSA SmartPay 889 Representations SAM.gov Tool
 
+Jump to:
+* [Development setup](#development-and-testing)
+* [Production deployment](#production-deployment)
+* [Features and API description](#features)
+
 ## Overview
 The SmartPay 889 Representations SAM.gov Tool is composed of a backend API written in python, and a web-based frontend.
 
