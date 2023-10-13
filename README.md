@@ -48,7 +48,7 @@ Example:
 ### Prerequisites ###
 Before beginning, ensure that you have Python >= 3.8 and that LTS version of Node.js installed on your sytem.
   
-Additionally, you **will need to register for a SAM.gov API key**. If you have the correct accounts, you can register for this key at sam.gov
+Additionally, you **will need to register for a SAM.gov API key**. [You can find more information here](https://open.gsa.gov/api/entity-api/).
 
 Once you have a key, you will need to set the corresponding environment variable locally, for example:
 
