@@ -1,6 +1,7 @@
 # GSA SmartPay 889 Representations SAM.gov Tool
 
 ## Overview
+The 889 Representations SAM.gov Tool is written with the [FastAPI Python framework](https://fastapi.tiangolo.com) and uses a [Vue.js](https://vuejs.org) front-end. 
 
 The SmartPay 889 Representations SAM.gov Tool is composed of a backend API written in python, and a web-based frontend.
 
@@ -14,30 +15,7 @@ Search results omit entities without representations and certifications, which a
 
 The purpose of this tool is to enable the broadest possible user-base, including non-procurement-experts, the ability to determine vendor 889 compliance from their SAM.gov record as quickly as possible and with little or no training.
 
-### Libraries
-
-The 889 Representations SAM.gov Tool is written with the FastAPI Python framework and uses a Vue.js front-end. PDFs are generated in the browser using jsPDF.
-
-- FastAPI https://fastapi.tiangolo.com (MIT)
-- Vue.js https://vuejs.org (MIT)
-
-Other python libraries include:
-
-- httpx https://www.python-httpx.org/ (BSD) -- An Async HTTP library. -- Used to make calls the SAM.gov Entities API in python without blocking.
-- jsPDF https://parall.ax/products/jspdf (MIT) -- Make PDFs with Javascript. -- Used to generate PDF records of vendor 889 compliance on the fly without additional calls to the backend
-
-The following libraries from requirements.dev.txt are not required for running a production instance, but may be useful in development:
-
-- pytest https://github.com/pytest-dev/pytest/ (MIT) -- Makes it easy to write small, readable tests, and can scale to support complex functional testing for applications and libraries. -- Used to help write and execute tests.
-- pylint https://pylint.pycqa.org/en/latest/ (GPL2) -- Pylint is a static code analyzer -- Used to help in writing clean consistent code
-
-The python FastAPI application can be deployed in a production environment using a variety of tools. While they are not required, these tools may be useful:
-
-- gunicorn https://docs.gunicorn.org/en/stable/ (MIT) -- WSGI HTTP Server for UNIX -- Used to run FastAPI app
-- uvicorn https://www.uvicorn.org (BSD) -- Provides asynchronous workers to allow gunicorn to handle asyncIO 
-Additional libraries used by the tool can be found in requirements.txt.
-
-### Features
+## Features
 
 The tool performs two main tasks.
 
@@ -63,43 +41,21 @@ Example:
 
 `<HOST_URL>/api/entity-information/v3/entities?samToolsSearch=mcmaster&includeSections=[samToolsData,entityRegistration,coreData]&registrationStatus=A`
 
-## Code structure
+## Development and Testing ##
+### Prerequisites ###
+Before beginning, ensure that you have Python >= 3.8 and that LTS version of Node.js installed on your sytem.
+  
+Additionally, you **will need to register for a SAM.gov API key**. If you have the correct accounts, you can register for this key at sam.gov
 
-- `__init__.py` --> Main FastAPI application
-- samtools/compliance --> Objects for determining compliance from SAM.gov data
-- samtools/sam_api --> Run search preprocessor, call SAM.gov Entities Management API, append compliance data to response
-- tests --> Tests
-
-Tests can be run using pytest:
-
-`pytest tests/test_entity_information.py`
-
-`etc...`
-
----
-
-## Development and Testing Setup
-### Backend (Python/FastAPI) Setup
-
-#### Clone the repository into a directory
+Once you have a key, you will need to set the corresponding environment variable locally, for example:
 
 ```
-git clone <CODE_REPOSITORY>
-cd <CLONED_DIRECTORY_NAME>
+export SAM_API_KEY=YOUR_API_KEY
 ```
 
-#### Install python >= 3.8, pip, and virtualenv using apt-get, brew, etc.
+### Setting up the backend (Python/FastAPI) environment ###
 
-This is an example on systems that use apt-get (such as Debian-based Linux) commands must be run as root or with superuser privileges (sudo). If developing locally on a Mac or Windows machine, take appropriate steps to ensure you have Python version 3.8 installed.
-
-Example: `sudo apt-get update`
-
-```
-apt-get update
-apt-get install -yq git python3 python3-pip
-pip3 install --upgrade pip virtualenv
-```
-
+>>>>>>> Stashed changes
 #### Create a python virtual environment
 
 The SAM.gov Tool comes with a bash script that automates several of the build steps. Alternatively, you can look at the contenst of the script and run the commands as desired. It is just building a python virtual-env and installing dependencies:
@@ -108,28 +64,19 @@ The SAM.gov Tool comes with a bash script that automates several of the build st
 bash build_samtools.sh
 source venv/bin/activate
 ```
-
+Then install the development dependencies:
 ```
 pip install -r requirements.dev.txt  # install development-only python requirements
 ```
-
-#### Setup instance-specific data (SAM.gov Entity Management API key and contact email)
-
-To communicate with the SAM.gov API you need an API Key. To learn more about how to register for a key, [see these instructions](https://open.gsa.gov/api/entity-api/#individual-personal-accounts).
   
-You will need to set an environment variable with this key. On Mac/Linux systems you can export it:  
-
-```
-export SAM_API_KEY=YOUR_API_KEY
-```
-
-#### Run the FastAPI and the frontend at the same time
-Assuming you've followed the [setup instructions for the frontend](front-end/README.md), you can run the Python backend and the frontend at the same time with the following command (at the root of the repository):
-```shell
-npm run dev
+### Setting up the frontend (Node.js/Vue.js) environment ###
+Install the required Node.js dependencies:
+```sh
+npm install
 ```
 
-#### Alternative: Run the FastAPI application by itself using uvicorn. The `--reload` will watch for changes and reload the app.
+
+#### Run the FastAPI application using uvicorn. The `--reload` will watch for changes and reload the app.
 
 ```
 uvicorn samtools.wsgi:app --reload
@@ -145,11 +92,6 @@ gunicorn samtools.wsgi:app --workers 2 --worker-class uvicorn.workers.UvicornWor
 ```
 
 NOTE: gunicorn runs on port 8000 by default.
-
----
-
-### Frontend Setup
-[See the frontend instructions here](front-end/README.md).
 
 ## Production deployment
 
