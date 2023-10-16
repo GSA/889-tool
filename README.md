@@ -131,7 +131,7 @@ npm run test:unit
 ```
 
 ##### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
+**NOTE: the framework stubs these e2e tests by default, but we do not have any e2e test cases currently**. We are keeping the capability here for potential future use.
 ```sh
 npm run build
 npm run test:e2e # or `npm run test:e2e:ci` for headless testing
