@@ -16,7 +16,7 @@
           ></a>
         </div>
         <section
-          class="usa-identifier__identity"
+          class="usa-identifier__identity grid-col-auto"
           aria-label="Agency description,"
         >
           <p class="usa-identifier__identity-domain">
@@ -27,6 +27,22 @@
             <a href="https://gsa.gov">General Services Administration</a>
           </p>
         </section>
+        <section class="usa-identifier__identity flex-align-end display-flex flex-column"
+                 aria-label="NASA">
+          <p class="usa-identifier__identity-domain">
+            Created in
+          </p>
+          <p class="usa-identifier__identity-domain">
+            partnership with
+          </p>
+        </section>
+        <div class="margin-left-2">
+          <img
+              class="usa-identifier__logo-img height-7"
+              src="@/assets/images/nasa-logo.svg"
+              alt="NASA logo"
+          >
+        </div>
       </div>
     </section>
     <nav
@@ -97,3 +113,5 @@
     </section>
   </div>
 </template>
+<script setup>
+</script>
