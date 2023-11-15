@@ -6,7 +6,7 @@
     >
       <div class="usa-identifier__container grid-row">
         <div class="grid-col-12 desktop:grid-col-8 display-flex flex-row">
-          <div class="usa-identifier__logos">
+          <div class="usa-identifier__logos margin-top-3 tablet:margin-top-0">
             <a
                 href=""
                 class="usa-identifier__logo"
@@ -29,8 +29,8 @@
             </p>
           </section>
         </div>
-        <div class="grid-col-12 desktop:grid-col-4 display-flex flex-row">
-          <section class="usa-identifier__identity flex-align-end display-flex flex-column"
+        <div class="grid-col-12 desktop:grid-col-4 display-flex flex-row desktop:margin-top-0 margin-top-2">
+          <section class="usa-identifier__identity flex-align-end flex-column desktop:display-flex grid-col-auto desktop:grid-col-5"
                    aria-label="NASA">
             <p class="usa-identifier__identity-domain">
               Created in
@@ -39,7 +39,7 @@
               partnership with
             </p>
           </section>
-          <div class="margin-left-2">
+          <div class="margin-left-2 padding-top-2 tablet:padding-top-0">
             <img
                 class="usa-identifier__logo-img height-7"
                 src="@/assets/images/nasa-logo.svg"
