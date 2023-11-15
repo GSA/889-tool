@@ -4,44 +4,48 @@
       class="usa-identifier__section usa-identifier__section--masthead"
       aria-label="Agency identifier,"
     >
-      <div class="usa-identifier__container">
-        <div class="usa-identifier__logos">
-          <a
-            href=""
-            class="usa-identifier__logo"
-          ><img
-            class="usa-identifier__logo-img"
-            src="@/assets/images/gsa-logo.svg"
-            alt="GSA logo"
-          ></a>
-        </div>
-        <section
-          class="usa-identifier__identity grid-col-auto"
-          aria-label="Agency description,"
-        >
-          <p class="usa-identifier__identity-domain">
-            889 Representations Search
-          </p>
-          <p class="usa-identifier__identity-disclaimer">
-            An official website of the
-            <a href="https://gsa.gov">General Services Administration</a>
-          </p>
-        </section>
-        <section class="usa-identifier__identity flex-align-end display-flex flex-column"
-                 aria-label="NASA">
-          <p class="usa-identifier__identity-domain">
-            Created in
-          </p>
-          <p class="usa-identifier__identity-domain">
-            partnership with
-          </p>
-        </section>
-        <div class="margin-left-2">
-          <img
-              class="usa-identifier__logo-img height-7"
-              src="@/assets/images/nasa-logo.svg"
-              alt="NASA logo"
+      <div class="usa-identifier__container grid-row">
+        <div class="grid-col-12 desktop:grid-col-8 display-flex flex-row">
+          <div class="usa-identifier__logos">
+            <a
+                href=""
+                class="usa-identifier__logo"
+            ><img
+                class="usa-identifier__logo-img"
+                src="@/assets/images/gsa-logo.svg"
+                alt="GSA logo"
+            ></a>
+          </div>
+          <section
+              class="usa-identifier__identity"
+              aria-label="Agency description,"
           >
+            <p class="usa-identifier__identity-domain">
+              889 Representations Search
+            </p>
+            <p class="usa-identifier__identity-disclaimer">
+              An official website of the
+              <a href="https://gsa.gov">General Services Administration</a>
+            </p>
+          </section>
+        </div>
+        <div class="grid-col-12 desktop:grid-col-4 display-flex flex-row">
+          <section class="usa-identifier__identity flex-align-end display-flex flex-column"
+                   aria-label="NASA">
+            <p class="usa-identifier__identity-domain">
+              Created in
+            </p>
+            <p class="usa-identifier__identity-domain">
+              partnership with
+            </p>
+          </section>
+          <div class="margin-left-2">
+            <img
+                class="usa-identifier__logo-img height-7"
+                src="@/assets/images/nasa-logo.svg"
+                alt="NASA logo"
+            >
+          </div>
         </div>
       </div>
     </section>
