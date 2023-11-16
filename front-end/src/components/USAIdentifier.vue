@@ -5,8 +5,8 @@
       aria-label="Agency identifier,"
     >
       <div class="usa-identifier__container grid-row">
-        <div class="grid-col-12 desktop:grid-col-8 display-flex flex-row">
-          <div class="usa-identifier__logos margin-top-3 tablet:margin-top-0">
+        <div class="grid-col-12 desktop:grid-col-8 display-flex flex-column desktop:flex-row">
+          <div class="usa-identifier__logos tablet:margin-top-0 display-flex desktop:display-block ">
             <a
                 href=""
                 class="usa-identifier__logo"
@@ -17,7 +17,7 @@
             ></a>
           </div>
           <section
-              class="usa-identifier__identity"
+              class="usa-identifier__identity margin-top-2 desktop:margin-top-0"
               aria-label="Agency description,"
           >
             <p class="usa-identifier__identity-domain">
@@ -29,17 +29,14 @@
             </p>
           </section>
         </div>
-        <div class="grid-col-12 desktop:grid-col-4 display-flex flex-row desktop:margin-top-0 margin-top-2">
-          <section class="usa-identifier__identity flex-align-end flex-column desktop:display-flex grid-col-auto desktop:grid-col-5"
+        <div class="grid-col-12 desktop:grid-col-4 display-flex flex-row flex-align-center padding-top-4 desktop:padding-top-0 desktop:flex-justify-end">
+          <section class="usa-identifier__identity flex-align-end flex-column desktop:display-flex grid-col-auto desktop:grid-col-5 margin-top-0"
                    aria-label="NASA">
-            <p class="usa-identifier__identity-domain">
-              Created in
-            </p>
-            <p class="usa-identifier__identity-domain">
-              partnership with
+            <p class="usa-identifier__identity-domain text-right">
+              Created in partnership with
             </p>
           </section>
-          <div class="margin-left-2 padding-top-2 tablet:padding-top-0">
+          <div class="margin-left-1">
             <img
                 class="usa-identifier__logo-img height-7"
                 src="@/assets/images/nasa-logo.svg"
