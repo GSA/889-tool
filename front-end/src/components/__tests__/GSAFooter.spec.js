@@ -7,7 +7,7 @@ describe("GSA Footer", () => {
   it("renders properly", () => {
     const wrapper = mount(GSA_Footer);
     expect(wrapper.text()).toContain(
-      "The 889 Representations SAM.gov Tool web application was originally developed by NASA",
+      "This tool was built by NASA using the SAM.gov Entity Management API.",
     );
   });
 });
