@@ -1,4 +1,4 @@
-httpx==0.24.1
+httpx==0.25.2
 gunicorn==21.2.0
 wheel==0.41.2
 fastapi==0.101.0
