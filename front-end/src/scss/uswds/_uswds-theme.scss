@@ -7,8 +7,14 @@ in the form $setting: value,
 ----------------------------------------
 */
 
- @use "uswds-core" with (
+@use "uswds-core" with (
    $theme-image-path: "../images",
-   $theme-header-logo-text-width: 50%
+   $theme-header-logo-text-width: 50%,
+   $flex-settings: (
+     responsive: true
+   ),
+   $flex-direction-settings: (
+     responsive: true
+   )
  );
 
