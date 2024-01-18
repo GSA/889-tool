@@ -4,6 +4,7 @@ import { useSearchStore } from "@/stores/search";
 
 import SearchInput from "../components/SearchInput.vue";
 import GSAHeader from "../components/GSAHeader.vue";
+import Alert from "../components/Alert.vue";
 
 // reset input when coming back to homepage
 const store = useSearchStore();
@@ -22,6 +23,7 @@ onMounted(() => {
       <main id="main-content">
         <div class="grid-container">
           <div class="padding-top-8">
+            <Alert heading="Timeout Issues">SAM.gov is experiencing intermittent timeout issues, which may result in search errors on this 889 tool. GSA technical teams are currently remediating the issue, and your patience is appreciated. Thank You.</Alert>
             <h2 class="font-sans-lg margin-bottom-1">
               Check to see if an entity has a section 889 representation in
               SAM.gov
