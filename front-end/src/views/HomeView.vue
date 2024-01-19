@@ -23,7 +23,7 @@ onMounted(() => {
       <main id="main-content">
         <div class="grid-container">
           <div class="padding-top-8">
-            <Alert heading="Timeout Issues">SAM.gov is experiencing intermittent timeout issues, which may result in search errors on this 889 tool. GSA technical teams are currently remediating the issue, and your patience is appreciated. Thank You.</Alert>
+            <Alert heading="Search Issues">SAM.gov is having technical issues that may cause search errors on the 889 tool. The GSA technical team is working to solve the issue. Thank you for your patience.</Alert>
             <h2 class="font-sans-lg margin-bottom-1">
               Check to see if an entity has a section 889 representation in
               SAM.gov
