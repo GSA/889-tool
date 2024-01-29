@@ -1,6 +1,6 @@
 httpx==0.24.1
 gunicorn==21.2.0
 wheel==0.41.2
-fastapi==0.101.0
+fastapi==0.109.0
 uvicorn[standard]==0.23.2
 pydantic-settings===2.0.2
