@@ -21,7 +21,7 @@
               aria-label="Agency description,"
           >
             <p class="usa-identifier__identity-domain">
-              889 Representations Search
+              889.smartpay.gsa.gov
             </p>
             <p class="usa-identifier__identity-disclaimer">
               An official website of the
@@ -62,7 +62,7 @@
             <a
               href="https://www.gsa.gov/website-information/accessibility-aids"
               class="usa-identifier__required-link usa-link"
-            >Accessibility support</a>
+            >Accessibility statement</a>
           </li>
           <li class="usa-identifier__required-links-item">
             <a
