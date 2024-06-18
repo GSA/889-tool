@@ -105,6 +105,12 @@ const expirationDateText = computed(() => {
 const downloadLabel = computed(
   () => "Download PDF for " + props.entity.entityRegistration.legalBusinessName,
 );
+
+const downloadLabelId = computed(
+  () => downloadLabel.value.replace(" ", "-").toLowerCase(),
+);
+
+
 </script>
 <template>
   <div
@@ -124,9 +130,9 @@ const downloadLabel = computed(
           focusable="false"
           role="img"
           class="usa-icon"
-          :aria-labelledby="downloadLabel"
+          :aria-label="downloadLabel"
         >
-          <title :id="downloadLabel">{{ downloadLabel }}</title>
+          <title :id="downloadLabelId">{{ downloadLabel }}</title>
           <use xlink:href="@/assets/images/sprite.svg#file_download" />
         </svg>
       </button>
