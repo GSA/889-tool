@@ -107,7 +107,7 @@ const downloadLabel = computed(
 );
 
 const downloadLabelId = computed(
-  () => downloadLabel.value.replace(" /g", "-").toLowerCase(),
+  () => downloadLabel.value.toLowerCase().split(" ").join("-"),
 );
 
 
