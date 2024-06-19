@@ -130,7 +130,7 @@ const downloadLabelId = computed(
           focusable="false"
           role="img"
           class="usa-icon"
-          :aria-labelledby="downloadLabelId"
+          :aria-label="downloadLabel"
         >
           <title :id="downloadLabelId">{{ downloadLabel }}</title>
           <use xlink:href="@/assets/images/sprite.svg#file_download" />
@@ -150,7 +150,7 @@ const downloadLabelId = computed(
           focusable="true"
           role="img"
           class="usa-icon"
-          aria-label="no-download"
+          :aria-label="WARN_TEXT"
         >
           <title id="no-download">{{ WARN_TEXT }}</title>
           <use xlink:href="@/assets/images/sprite.svg#remove_circle" />
@@ -176,7 +176,7 @@ const downloadLabelId = computed(
           <svg
             class="usa-icon"
             focusable="true"
-            aria-labelledby="green-check"
+            :aria-label="OK_TEXT"
             role="img"
           >
             <title id="green-check">{{ OK_TEXT }}</title>
@@ -193,7 +193,7 @@ const downloadLabelId = computed(
           <svg
             class="usa-icon"
             aria-hidden="true"
-            aria-labelledby="warning-icon"
+            :aria-label="WARN_TEXT"
             focusable="false"
             role="img"
           >
