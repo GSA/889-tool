@@ -105,6 +105,12 @@ const expirationDateText = computed(() => {
 const downloadLabel = computed(
   () => "Download PDF for " + props.entity.entityRegistration.legalBusinessName,
 );
+
+const downloadLabelId = computed(
+  () => downloadLabel.value.toLowerCase().replace(/\s+/g, '-'),
+);
+
+
 </script>
 <template>
   <div
@@ -124,9 +130,9 @@ const downloadLabel = computed(
           focusable="false"
           role="img"
           class="usa-icon"
-          :aria-labelledby="downloadLabel"
+          :aria-label="downloadLabel"
         >
-          <title :id="downloadLabel">{{ downloadLabel }}</title>
+          <title :id="downloadLabelId">{{ downloadLabel }}</title>
           <use xlink:href="@/assets/images/sprite.svg#file_download" />
         </svg>
       </button>
@@ -144,7 +150,7 @@ const downloadLabel = computed(
           focusable="true"
           role="img"
           class="usa-icon"
-          aria-labelledby="no-download"
+          :aria-label="WARN_TEXT"
         >
           <title id="no-download">{{ WARN_TEXT }}</title>
           <use xlink:href="@/assets/images/sprite.svg#remove_circle" />
@@ -170,7 +176,7 @@ const downloadLabel = computed(
           <svg
             class="usa-icon"
             focusable="true"
-            aria-labelledby="green-check"
+            :aria-label="OK_TEXT"
             role="img"
           >
             <title id="green-check">{{ OK_TEXT }}</title>
@@ -187,7 +193,7 @@ const downloadLabel = computed(
           <svg
             class="usa-icon"
             aria-hidden="true"
-            aria-labelledby="warning-icon"
+            :aria-label="WARN_TEXT"
             focusable="false"
             role="img"
           >
