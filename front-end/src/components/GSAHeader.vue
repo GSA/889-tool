@@ -21,6 +21,8 @@ defineProps({
       >
         <router-link to="/">
           <img
+            width="189.5"
+            height="72"
             class="usa-logo-img"
             src="@/assets/images/gsa-smartpay-logo-reverse.svg"
             alt="GSA SmartPay Logo"
@@ -37,6 +39,8 @@ defineProps({
         class="usa-logo"
       >
         <img
+          width="189.5"
+          height="72"
           class="usa-logo-img"
           src="@/assets/images/gsa-smartpay-logo-reverse.svg"
           alt="GSA SmartPay Logo"
