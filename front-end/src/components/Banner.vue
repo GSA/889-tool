@@ -8,6 +8,8 @@
         <div class="usa-banner__inner">
           <div class="grid-col-auto">
             <img
+              width="16"
+              height="11"
               aria-hidden="true"
               class="usa-banner__header-flag"
               src="@/assets/images/us_flag_small.png"
