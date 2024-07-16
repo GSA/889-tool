@@ -25,5 +25,13 @@ jobs:
       - name: install dependencies
         run: npm ci
 
+      - name: start preview server
+        run: npm run preview &
+        env:
+          CI: true
+
+      - name: wait for server to be ready
+        run: npx wait-on http://localhost:4173
+
       - name: run link checker
-        run: npm run link-checker:ci
+        run: npx linkinator http://localhost:4173 --config linkinator-config.json
