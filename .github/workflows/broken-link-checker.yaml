@@ -32,5 +32,15 @@ jobs:
         env:
           CI: true
 
+      - name: wait for server to be ready
+        run: |
+          echo "Waiting for server to be ready"
+          sleep 15  # Wait for 15 seconds to give the server time to start
+
+      - name: check server status
+        run: |
+          echo "Checking server status"
+          curl -I http://localhost:4173
+
       - name: run link checker
         run: npx linkinator http://localhost:4173 --config linkinator-config.json
