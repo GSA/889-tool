@@ -35,7 +35,7 @@ jobs:
       - name: wait for server to be ready
         run: |
           echo "Waiting for server to be ready"
-          sleep 15  # Wait for 15 seconds to give the server time to start
+          sleep 30  # Wait for 30 seconds to give the server time to start
 
       - name: check server status
         run: |
