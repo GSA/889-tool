@@ -6,7 +6,7 @@ on:
       - .github/**
 
 jobs:
-  unit-tests-and-lint:
+  broken-link-checker:
     runs-on: ubuntu-latest
     defaults:
       run:
