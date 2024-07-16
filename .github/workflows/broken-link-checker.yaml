@@ -26,10 +26,10 @@ jobs:
         run: npm ci
 
       - name: build project
-        run: npm run build
+        run: npm run build:ci
 
       - name: start server and run link checker
         run: |
-          npm run serve-build &
+          npx serve -s dist -l 4173 &
           npx wait-on http://localhost:4173
           npx linkinator http://localhost:4173 --config linkinator-config.json

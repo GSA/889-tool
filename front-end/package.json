@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "./bin/build.sh",
+    "build:ci": "vite build",
     "federalist": "vite build",
     "preview": "vite preview --port 4173",
     "serve-build": "serve -s dist -l 4173",
