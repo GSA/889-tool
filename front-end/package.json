@@ -4,10 +4,10 @@
   "scripts": {
     "dev": "vite",
     "build": "./bin/build.sh",
-    "build:ci": "vite build",
     "federalist": "vite build",
     "preview": "vite preview --port 4173",
     "serve-build": "serve -s dist -l 4173",
+    "serve": "npm run build && npm run preview -- --port 8080",
     "test": "vitest run --environment jsdom",
     "test:unit": "vitest --environment jsdom",
     "test:coverage": "vitest --coverage --environment jsdom",
@@ -15,7 +15,7 @@
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4173/site/gsa/889-vue/ 'cypress run --e2e'",
     "lint": "eslint 'src' --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "link-checker": "npx linkinator http://localhost:5173/ --config linkinator-config.json",
-    "link-checker:ci": "npx wait-on http://localhost:4173 && npx linkinator http://localhost:4173 --config linkinator-config.json"
+    "link-checker:ci": "npx start-server-and-test serve http://localhost:8080 'npx linkinator http://localhost:8080 --config linkinator-config.json'"
   },
   "dependencies": {
     "@uswds/uswds": "^3.8.1",
