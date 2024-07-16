@@ -28,14 +28,21 @@ jobs:
       - name: build project
         run: npm run build
 
-      - name: start server and run link checker
+      - name: start server
         run: |
+          echo "Starting preview server"
           npx serve -s dist -l 4173 &
-          echo "Waiting for server to be ready"
-          npx wait-on http://localhost:4173
+          sleep 5
+          echo "Server started"
+
+      - name: check server status
+        run: |
           echo "Checking server status"
           curl -I http://localhost:4173
-          echo "Running Link Checker"
+
+      - name: run link checker
+        run: |
+          echo "Running link checker"
           npx linkinator http://localhost:4173 --config linkinator-config.json
 
       - name: check server logs
