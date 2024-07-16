@@ -25,22 +25,11 @@ jobs:
       - name: install dependencies
         run: npm ci
 
-      - name: start preview server
-        run: |
-          echo "Starting preview server"
-          npm run preview > server.log 2>&1 &
-        env:
-          CI: true
-          
-      - name: wait for server to be ready
-        run: |
-          echo "Waiting for server to be ready"
-          sleep 30  # Wait for 30 seconds to give the server time to start
+      - name: build project
+        run: npm run build
 
-      - name: check server status
+      - name: start server and run link checker
         run: |
-          echo "Checking server status"
-          curl -I http://localhost:4173
-
-      - name: run link checker
-        run: npx linkinator http://localhost:4173 --config linkinator-config.json
+          npm run serve-build &
+          npx wait-on http://localhost:4173
+          npx linkinator http://localhost:4173 --config linkinator-config.json
