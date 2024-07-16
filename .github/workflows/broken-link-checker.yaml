@@ -26,10 +26,19 @@ jobs:
         run: npm ci
 
       - name: build project
-        run: npm run build:ci
+        run: npm run build
 
       - name: start server and run link checker
         run: |
           npx serve -s dist -l 4173 &
+          echo "Waiting for server to be ready"
           npx wait-on http://localhost:4173
+          echo "Checking server status"
+          curl -I http://localhost:4173
+          echo "Running Link Checker"
           npx linkinator http://localhost:4173 --config linkinator-config.json
+
+      - name: check server logs
+        run: |
+          echo "Server logs"
+          ps aux | grep 'serve'
