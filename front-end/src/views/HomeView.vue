@@ -23,7 +23,9 @@ onMounted(() => {
       <main id="main-content">
         <div class="grid-container">
           <div class="padding-top-8">
-            <Alert heading="Search Issues">We are having technical issues that may cause search errors on the 889 tool. The GSA technical team is working to solve the issue. Thank you for your patience.</Alert>
+            <Alert heading="Search Issues">
+              We are having technical issues that may cause search errors on the 889 tool. The GSA technical team is working to solve the issue. Thank you for your patience.
+            </Alert>
             <h2 class="font-sans-lg margin-bottom-1">
               Check to see if an entity has a section 889 representation in
               SAM.gov
@@ -41,7 +43,7 @@ onMounted(() => {
               This tool only checks for Section 889 representations in an
               entity’s SAM.gov record. Only entities doing business above the
               Micro-Purchase Threshold (MPT) are required to register in
-              SAM.gov. Contracts that are classified/FOUO or contractors that do
+              SAM.gov. Contracts that are classified/For Official Use Only (FOUO) or contractors that do
               not wish for their information to be publicly available will not
               show up in search results.
             </p>
