@@ -4,7 +4,6 @@ import { useSearchStore } from "@/stores/search";
 
 import SearchInput from "../components/SearchInput.vue";
 import GSAHeader from "../components/GSAHeader.vue";
-import Alert from "../components/Alert.vue";
 
 // reset input when coming back to homepage
 const store = useSearchStore();
