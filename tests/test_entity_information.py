@@ -2,9 +2,6 @@ import pytest
 from werkzeug.datastructures import ImmutableMultiDict
 
 from samtools.sam_api.entity_information import DataAdaptors
-from samtools.compliance import compliance_rules
-
-
 
 
 class TestDataAdaptors:
