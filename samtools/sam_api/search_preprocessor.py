@@ -155,6 +155,7 @@ def _get_cleaned_and_prepared_business_name(search_input):
     search_input = _remove_llc(search_input)
     search_input = _remove_trailing_periods(search_input)
     search_input = _add_wildcards(search_input)
+    search_input = _remove_whitespace(search_input)
     return search_input
 
 
@@ -245,9 +246,14 @@ def _remove_trailing_periods(search_input):
 
 
 def _remove_llc(search_input):
-    "User searches like 'Thermo Fisher L.L.C.' perform better without 'L.L.C."
+    "User searches like 'Thermo Fisher L.L.C.' perform better without 'L.L.C.'"
     sentence = []
     for word in _split_and_preserve_quotes(search_input):
         if word.upper() not in ('L.L.C', 'L.L.C.', 'LLC'):
             sentence.append(word)
     return ' '.join(sentence)
+
+
+def _remove_whitespace(search_input):
+    "User searches like ' Test  ' perform better without extra space"
+    return search_input.strip()
