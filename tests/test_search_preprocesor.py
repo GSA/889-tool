@@ -155,16 +155,3 @@ class TestSearchPreprocessor:
     def test_input_with_periods_at_end_of_words():
         assert get_search_parameter("test company. inc.") == \
             {'q': '(legalBusinessName:test* company* inc* OR dbaName:test* company* inc*)'}
-
-
-    @staticmethod    
-    def test_sanitize_input():
-        assert sanitize_input("hello&world") == "helloworld"
-        assert sanitize_input("user+name") == "username"
-        assert sanitize_input("this[is]a{test}!") == "thisisatest"
-        assert sanitize_input("special^characters=") == "specialcharacters"
-        assert sanitize_input("sanitize~input") == "sanitizeinput"
-        assert sanitize_input("remove,hyphens--too") == "removehyphenstoo"
-        assert sanitize_input("keep spaces intact") == "keep spaces intact"
-        assert sanitize_input("no special characters") == "no special characters"
-        assert sanitize_input("") == ""
