@@ -11,6 +11,13 @@ import warnings
 from urllib.parse import urlparse
 
 
+def sanitize_input(input_str):
+    """
+    Sanitize the input string by removing specific special characters.
+    """
+    return re.sub(r'[&\+\[\]\{\}!^\(\)=~,\-]', '', input_str)
+
+
 def get_search_parameter(search_input=""):
     """Generate SAM API query parameters from a user input string.
 
@@ -31,6 +38,9 @@ def get_search_parameter(search_input=""):
     """
     if search_input is None:
         return {}
+
+    # Sanitize the input
+    search_input = sanitize_input(search_input)
 
     search_input = ' '.join(_split_and_preserve_quotes(search_input))
 
