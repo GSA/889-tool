@@ -39,7 +39,7 @@
     "jsdom": "^22.1.0",
     "linkinator": "^6.0.5",
     "prettier": "^3.2.5",
-    "sass": "^1.77.4",
+    "sass": "^1.77.8",
     "serve": "^14.2.3",
     "start-server-and-test": "^2.0.3",
     "vite": "^3.2.10",
