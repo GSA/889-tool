@@ -36,7 +36,7 @@
     "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-vue": "^9.27.0",
     "eslint-plugin-vuejs-accessibility": "^2.2.0",
-    "jsdom": "^22.1.0",
+    "jsdom": "^24.1.1",
     "linkinator": "^6.0.5",
     "prettier": "^3.2.5",
     "sass": "^1.77.4",
