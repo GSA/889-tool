@@ -8,7 +8,6 @@ const props = defineProps({
   }
   });
 
-console.log("props:", props.entityData);
 const date_generated = computed(() =>
   new Date().toLocaleDateString("en-us", {
     year: "numeric",
@@ -37,6 +36,19 @@ const address = computed(() => {
 
   return data.filter(Boolean).join("<br />");
 });
+
+function formatDate(date) {
+  const validTo = new Date(date);
+  validTo.setUTCHours(0, 0, 0, 0)
+  const year = new Intl.DateTimeFormat("en", {year: "numeric", timeZone: "UTC"}).format(
+      validTo,
+  );
+  const month = new Intl.DateTimeFormat("en", {month: "2-digit", timeZone: "UTC"}).format(
+      validTo,
+  );
+  const day = new Intl.DateTimeFormat("en", {day: "2-digit", timeZone: "UTC"}).format(validTo);
+  return `${month}-${day}-${year}`;
+}
 </script>
 
 <template>
@@ -82,11 +94,9 @@ const address = computed(() => {
           entityData["samToolsData"]["exclusions"]["statusText"]
         }}</b></span><br>
       Activation Date:
-      <b>{{ entityData["entityRegistration"]["activationDate"] }}</b><br>
+      <b>{{ formatDate(entityData["entityRegistration"]["activationDate"]) }}</b><br>
       <span id="highlight">Expiration Date:
-        <b>{{
-          entityData["entityRegistration"]["registrationExpirationDate"]
-        }}</b></span><br>
+        <b>{{ formatDate(entityData["entityRegistration"]["registrationExpirationDate"]) }}</b></span><br>
     </p>
     <h3 style="text-align: center">
       (End of Entity Registration Summary)
