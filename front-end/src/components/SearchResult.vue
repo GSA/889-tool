@@ -194,7 +194,7 @@ const downloadLabelId = computed(
           </div>
         </div>
         <div class="grid-col-12 tablet:grid-col-auto">
-          <span>{{ formattedExpirationDateText }}</span>
+          <span data-test="expiration-date">{{ formattedExpirationDateText }}</span>
         </div>
       </div>
       <div class="grid-row">
