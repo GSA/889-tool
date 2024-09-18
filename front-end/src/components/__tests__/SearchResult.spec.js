@@ -49,31 +49,17 @@ describe("Search Result", () => {
     );
     expect(el.classes()).toContain("text-secondary");
   });
+  
+  it("renders expiration registration date at all times", () => {
+       const wrapper = mount(SearchResult, {
+         props: { entity: non_selectable_entity_prop },
+       });
+       const el = wrapper.find('[data-test="expiration-date"]');
 
-  it("renders expiring registration when expiration date is within 30 days", () => {
-    const date = new Date(2022, 11, 16);
-    date.setUTCHours(0,0,0,0)
-    vi.setSystemTime(date);
-    const wrapper = mount(SearchResult, {
-      props: { entity: non_selectable_entity_prop },
-    });
-    const el = wrapper.find('[data-test="expiration-date"]');
-
-    expect(el.exists()).toBe(true);
-    expect(el.text()).toBe("Expiring registration: January 15, 2023");
+       expect(el.exists()).toBe(true);
+       expect(el.text()).toBe("Expiration Date: 01-15-2023");
   });
-
-  it("does not render expiring registration when expiration date is beyond 30 days", () => {
-    const date = new Date(2022, 11, 15);
-    vi.setSystemTime(date);
-
-    const wrapper = mount(SearchResult, {
-      props: { entity: non_selectable_entity_prop },
-    });
-    const el = wrapper.find('[data-test="expiration-date"]');
-
-    expect(el.exists()).toBe(false);
-  });
+  
   it("correctly renders city and country when state is not present", () => {
     const wrapper = mount(SearchResult, {
       props: { entity: non_selectable_entity_prop },
