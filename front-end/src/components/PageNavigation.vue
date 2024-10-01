@@ -99,6 +99,7 @@ const interiorIndexEnd = computed(() => {
       <li
         v-if="interiorIndexStart != 2"
         class="usa-pagination__item usa-pagination__overflow"
+        aria-label="ellipsis indicating non-visible pages"
         data-test="first-ellipsis"
       >
         <span>…</span>
@@ -120,6 +121,7 @@ const interiorIndexEnd = computed(() => {
       <li
         v-if="interiorIndexEnd != numberOfPages - 1"
         class="usa-pagination__item usa-pagination__overflow"
+        aria-label="ellipsis indicating non-visible pages"
         data-test="last-ellipsis"
       >
         <span>…</span>
