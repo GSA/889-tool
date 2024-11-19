@@ -1,0 +1,29 @@
+name: Broken Link Checker
+on:
+  push:
+    paths:
+      - front-end/**
+      - .github/**
+
+jobs:
+  broken-link-checker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'front-end'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: front-end/package-lock.json
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: Run broken link checker 
+        run: npm run link-checker:ci 

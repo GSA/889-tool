@@ -9,6 +9,12 @@ python -m venv venv
 source venv/bin/activate
 venv/bin/pip install -r requirements.txt
 
+#Windows
+#--------#
+# python -m venv venv
+# source venv/Scripts/activate
+# venv/Scripts/pip install -r requirements.txt
+
 # show if there any any updates to the libraires
 pip list --outdated
 

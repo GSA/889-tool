@@ -6,6 +6,8 @@ import Banner from "../Banner.vue";
 describe("Banner", () => {
   it("renders properly", () => {
     const wrapper = mount(Banner);
-    expect(wrapper.text()).toContain("An official website of the United States government");
+    expect(wrapper.text()).toContain(
+      "An official website of the United States government",
+    );
   });
 });

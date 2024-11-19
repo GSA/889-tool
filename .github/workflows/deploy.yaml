@@ -22,7 +22,6 @@ jobs:
           cf_space: ${{ inputs.environment }}
           command: >-
             bin/cg-set-env.sh ${{ inputs.environment }}
-            SAM_API_KEY=${{ secrets.SAM_API_KEY }}
 
       - name: Deploy the application
         uses: cloud-gov/cg-cli-tools@main

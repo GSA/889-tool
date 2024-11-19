@@ -1,3 +1,3 @@
 pytest
 pylint
-Werkzeug==2.3.6
+Werkzeug==3.0.6
