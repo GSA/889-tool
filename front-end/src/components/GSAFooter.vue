@@ -25,7 +25,7 @@
         </div>
         <div class="mobile-lg:grid-col-4">
           <div class="margin-top-2 margin-bottom-2" aria-label="Feedback button" role="complementary">
-            <a id="fba-button" data-id="55c3c7c9" class="fba-button fixed-tab-button usa-button" href="javascript:void(0)" aria-haspopup="dialog"
+            <a id="fba-button" data-id="55c3c7c9" class="fba-button fixed-tab-button usa-button"  aria-haspopup="dialog"
                aria-controls="fba-modal-55c3c7c9" data-open-modal="" role="button">Leave us your feedback</a>
           </div>
         </div>
