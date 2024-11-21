@@ -1,3 +1,16 @@
+<script setup>
+
+import {onMounted} from "vue";
+
+onMounted (() => {
+  let recaptchaScript = document.createElement('script')
+  recaptchaScript.async = true;
+  recaptchaScript.setAttribute('src', 'https://touchpoints.app.cloud.gov/touchpoints/55c3c7c9.js')
+  document.head.appendChild(recaptchaScript)
+})
+
+</script>
+
 <template>
   <div class="usa-footer usa-footer--slim">
     <div class="usa-footer__primary-section">
@@ -24,10 +37,7 @@
           </p>
         </div>
         <div class="mobile-lg:grid-col-4">
-          <div class="margin-top-2 margin-bottom-2" aria-label="Feedback button" role="complementary">
-            <a id="fba-button" data-id="55c3c7c9" class="fba-button fixed-tab-button usa-button"  aria-haspopup="dialog"
-               aria-controls="fba-modal-55c3c7c9" data-open-modal="" role="button">Leave us your feedback</a>
-          </div>
+          <button id="touchpoint-survey-889" class="usa-button margin-top-2 margin-bottom-2" type="button">Leave us your feedback</button>
         </div>
       </div>
     </div>
