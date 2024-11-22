@@ -36,11 +36,11 @@ onMounted(() => {
           </div>
           <div class="padding-bottom-10">
             <p>
-              This tool only checks for Section 889 representations in an
+              This search only checks for Section 889 representations in an
               entity’s SAM.gov record. Only entities doing business above the
               Micro-Purchase Threshold (MPT) are required to register in
               SAM.gov. Contracts classified as For Official Use Only (FOUO) or contractors who do not wish for their information to be publicly available will not appear in search results.
-            </p>
+            </p
 
             <p>
               <b>Please Note:</b> If an entity representation is not available,
