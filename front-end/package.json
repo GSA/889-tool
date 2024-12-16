@@ -17,7 +17,7 @@
     "link-checker:ci": "npx start-server-and-test serve http://localhost:8080 'npx linkinator http://localhost:8080 --config linkinator-config.json'"
   },
   "dependencies": {
-    "@uswds/uswds": "^3.9.0",
+    "@uswds/uswds": "^3.10.0",
     "jspdf": "^2.5.1",
     "pinia": "^2.2.2",
     "vue": "^3.4.38",
