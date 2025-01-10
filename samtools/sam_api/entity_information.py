@@ -194,7 +194,10 @@ class DataAdaptors:
             return None
         if 'certifications' not in entity['repsAndCerts']:
             return None
-        return entity['repsAndCerts']['certifications'].get('fARResponses', None)
+        if entity['repsAndCerts']['certifications'] is not None:
+            return entity['repsAndCerts']['certifications'].get('fARResponses', None)
+        else:
+            return None
 
     @staticmethod
     def _get_far_52_204_26(far_responses):
