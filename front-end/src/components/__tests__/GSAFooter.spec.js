@@ -7,7 +7,7 @@ describe("GSA Footer", () => {
   it("renders properly", () => {
     const wrapper = mount(GSA_Footer);
     expect(wrapper.text()).toContain(
-      "This tool was built by NASA using the SAM.gov Entity Management API.",
+      "This search was built by NASA using the SAM.gov Entity Management API.",
     );
   });
 });
