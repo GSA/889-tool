@@ -41,7 +41,7 @@
     "prettier": "^3.2.5",
     "sass": "^1.79.3",
     "start-server-and-test": "^2.0.11",
-    "vite": "^5.4.14",
+    "vite": "^6.2.3",
     "vitest": "^1.6.1"
   },
   "overrides": {
