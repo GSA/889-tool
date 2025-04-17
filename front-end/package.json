@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@uswds/uswds": "^3.12.0",
-    "jspdf": "^2.5.1",
+    "jspdf": "^3.0.1",
     "pinia": "^2.2.2",
     "vue": "^3.4.38",
     "vue-router": "^4.1.5"
