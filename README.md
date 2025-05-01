@@ -169,7 +169,7 @@ See `gulpfile.js` for settings.
 
 ## Production Deployment 
 ### Frontend (Cloud.gov Pages)
-Because the Vue simply builds a static html/javascript site, it can run from any system that can serve static content. This includes Cloud.gov-Pages (Federalist). The current configuration in `vite.config.js` outputs build artifacts to `_site` where federalist expects to find them. `package.json` includes a `federalist"` script that runs `vite build`. Cloud.gov Pages will watch the github repo for changes on the main branch and re-build files when it changes. 
+Because the Vue simply builds a static html/javascript site, it can run from any system that can serve static content. This includes Cloud.gov-Pages (Federalist). The current configuration in `vite.config.mjs` outputs build artifacts to `_site` where federalist expects to find them. `package.json` includes a `federalist"` script that runs `vite build`. Cloud.gov Pages will watch the github repo for changes on the main branch and re-build files when it changes. 
 
 Currently, using Cloud.gov requires the use of the `createWebHashHistory` style urls. This allows the Vue Router to use URLS that include `#` like `#/search/some_company/2` without trying to load a page at a different path. This allows users to refresh the page or share a link. 
 
@@ -232,7 +232,7 @@ npm run build
 There are a few configuration files that influence how this is built:
 
 - `/front-end/env.procuction` [or `env.devleopment`] - This should have the environmental variable `VITE_API_DOMAIN` pointing to the root url.
-- `/front-end/vite.config.js` - make sure the base url is set correctly. It should just be `'/'` for app engine but might be different on a gloud.gov sandbox that is served from a different url. The output directory should be `../www` which will create the build folder which is sent to Google.
+- `/front-end/vite.config.mjs` - make sure the base url is set correctly. It should just be `'/'` for app engine but might be different on a gloud.gov sandbox that is served from a different url. The output directory should be `../www` which will create the build folder which is sent to Google.
 
 Once the front-end is built, we can upload everything to App Engine. App Engine settings are defined in:
 
