@@ -8,6 +8,9 @@ on:
 jobs:
   broken-link-checker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     defaults:
       run:
         working-directory: 'front-end'
