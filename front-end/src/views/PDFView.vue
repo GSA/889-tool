@@ -156,7 +156,7 @@ function formatDate(date) {
 
     <br>
     <p>
-      The full entity record can accessed at:
+      The full entity record can be accessed at:
       <a href="https://sam.gov/"> https://SAM.gov/ </a>
     </p>
   </div>

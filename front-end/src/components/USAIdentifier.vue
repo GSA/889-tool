@@ -60,7 +60,7 @@
           </li>
           <li class="usa-identifier__required-links-item">
             <a
-              href="https://www.gsa.gov/website-information/accessibility-aids"
+              href="https://www.gsa.gov/website-information/accessibility-statement"
               class="usa-identifier__required-link usa-link"
             >Accessibility statement</a>
           </li>
