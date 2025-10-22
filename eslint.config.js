@@ -1,0 +1,27 @@
+export default [
+  {
+    // ...other config
+    ignores: [
+      ".DS_Store",
+      "node_modules/",
+      "venv/",
+      ".venv/",
+      "__pycache__/",
+      ".idea/",
+      ".vscode/",
+      ".flaskenv",
+      ".pytest_cache/",
+      "semantic/",
+      "package-lock.json",
+      "log/",
+      "instance/",
+      "last_updated.txt",
+      "production/gcp_install*",
+      "production/deploy*",
+      "~*.pptx",
+      "env_variables.yaml",
+      "www/",
+      "_site/"
+    ]
+  }
+];
