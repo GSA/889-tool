@@ -7,18 +7,14 @@ updates:
   - package-ecosystem: "npm"
     # Look for `package.json` and `lock` files in the `fron-end` directory
     directory: "/front-end"
-    # Target only the staging branch
-    target-branch: "hieuso-test"
-    # Check the npm registry for updates daily (more responsive to pushes)
+    # Check the npm registry for updates once a week
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   # Enable version updates for Python dependencies
   - package-ecosystem: "pip"
     # Look for a `requirements.txt` in the `root` directory
     directory: "/"
-    # Target only the staging branch
-    target-branch: "hieuso-test"
-    # Check for updates daily (more responsive to pushes)
+    # Check for updates once a week
     schedule:
-      interval: "daily"
+      interval: "weekly"
