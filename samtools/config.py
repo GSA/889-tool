@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     SAM_API_KEY: Optional[str]
     EXTERNAL_LINKS: dict = {
         "SAM.GOV": "https://sam.gov",
-        "SAM_ENTITIES_API_DOCS": "https://open.gsa.gov/api/entity-api/",
+        "SAM_ENTITIES_API_DOCS": "https://open.gsa.gov/api/entity-api//",
     }
 
 
