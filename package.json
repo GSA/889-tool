@@ -1,14 +1,11 @@
 {
     "scripts": {
-        "build:frontend": "cd front-end && npm install && npm run build && cd ..",
-        "federalist": "npm run build:frontend",
-        "dev": "(trap 'kill 0' SIGINT; npm run dev:backend & npm run dev:frontend)",
-        "dev:backend": "uvicorn samtools.wsgi:app --reload",
-        "dev:frontend": "cd front-end && npm run dev",
-        "test:backend": "pytest",
-        "test:frontend": "cd front-end && npm run test"
-    },
-    "dependencies": {
-        "uswds": "^2.14.0"
+      "build:frontend": "cd front-end && npm install && npm run build && cd ..",
+      "federalist": "npm run build:frontend",
+      "dev": "(trap 'kill 0' SIGINT; npm run dev:backend & npm run dev:frontend)",
+      "dev:backend": "uvicorn samtools.wsgi:app --reload",
+      "dev:frontend": "cd front-end && npm run dev",
+      "test:backend": "pytest",
+      "test:frontend": "cd front-end && npm run test"
     }
 }
