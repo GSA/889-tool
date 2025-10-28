@@ -5,7 +5,6 @@
         "Referer": "http://localhost:5173/"
     },
     "skip": [
-        "https://touchpoints.app.cloud.gov/touchpoints/55c3c7c9.js"
     ],
     "verbosity": "debug"
 }
