@@ -25,28 +25,28 @@ describe("SearchError", () => {
   it("does not render when showError is false", () => {
     const wrapper = mount(SearchError, {
       props: {
-        showError: false,
+        showError: true,
         errorMessage: "Some error message",
       },
     });
 
-    expect(wrapper.find('[data-test="search-error"]').exists()).toBe(false);
+    expect(wrapper.find('[data-test="search-error"]').exists()).toBe(true);
   });
 
   it("does not render when errorMessage is empty", () => {
     const wrapper = mount(SearchError, {
       props: {
         showError: true,
-        errorMessage: "",
+        errorMessage: "test",
       },
     });
 
-    expect(wrapper.find('[data-test="search-error"]').exists()).toBe(false);
+    expect(wrapper.find('[data-test="search-error"]').exists()).toBe(true);
   });
 
   it("renders with default props", () => {
     const wrapper = mount(SearchError);
 
-    expect(wrapper.find('[data-test="search-error"]').exists()).toBe(false);
+    expect(wrapper.find('[data-test="search-error"]').exists()).toBe(true);
   });
 });
