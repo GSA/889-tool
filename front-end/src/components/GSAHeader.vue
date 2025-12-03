@@ -49,5 +49,6 @@ defineProps({
         <em class="usa-logo__text">889 Representations Search</em>
       </div>
     </div>
+    
   </header>
 </template>
