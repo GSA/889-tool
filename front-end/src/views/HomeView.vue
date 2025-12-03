@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { useSearchStore } from "@/stores/search";
 
 import SearchInput from "../components/SearchInput.vue";
+import SearchError from "../components/SearchError.vue";
 import GSAHeader from "../components/GSAHeader.vue";
 
 // reset input when coming back to homepage
@@ -21,6 +22,7 @@ onMounted(() => {
     >
       <main id="main-content">
         <div class="grid-container">
+          <SearchError/>
           <div class="padding-top-8">
             <h2 class="font-sans-lg margin-bottom-1">
               Check to see if an entity has a section 889 representation in
@@ -33,6 +35,8 @@ onMounted(() => {
             </p>
 
             <SearchInput />
+            
+           
           </div>
           <div class="padding-bottom-10">
             <p>
