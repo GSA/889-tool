@@ -19,7 +19,7 @@ describe("SearchError", () => {
     expect(container.exists()).toBe(true);
     expect(heading.text()).toBe("Attention");
     expect(message.text()).toBe("Connection failed. Please try again.");
-    expect(container.classes()).toContain("usa-alert--error");
+    expect(container.classes()).toContain("usa-alert--info");
   });
 
   it("does not render when showError is false", () => {
