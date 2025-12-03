@@ -17,7 +17,7 @@ describe("SearchError", () => {
     const message = wrapper.get('[data-test="error-message"]');
 
     expect(container.exists()).toBe(true);
-    expect(heading.text()).toBe("Search Error");
+    expect(heading.text()).toBe("Attention");
     expect(message.text()).toBe("Connection failed. Please try again.");
     expect(container.classes()).toContain("usa-alert--error");
   });
