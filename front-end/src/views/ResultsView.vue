@@ -9,6 +9,7 @@ import SearchResults from "../components/SearchResults.vue";
 import GSAHeader from "../components/GSAHeader.vue";
 import Alert from "../components/Alert.vue";
 import AccordionKey from "../components/AccordionKey.vue";
+import SearchError from "../components/SearchError.vue";
 
 const route = useRoute();
 const store = useSearchStore();
@@ -33,6 +34,8 @@ watch(
       <GSAHeader />
       <div id="main-container">
         <div class="grid-container">
+           <SearchError
+            />
           <div class="padding-top-2">
             <p class="margin-top-0">
               Search by business name, website, CAGE code, or SAM.gov Unique
