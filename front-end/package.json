@@ -39,7 +39,7 @@
     "eslint-plugin-vue": "^9.27.0",
     "eslint-plugin-vuejs-accessibility": "^2.4.1",
     "jsdom": "^25.0.1",
-    "linkinator": "^6.0.5",
+    "linkinator": "^7.4.1",
     "prettier": "^3.2.5",
     "sass": "^1.79.3",
     "start-server-and-test": "^2.1.2",
