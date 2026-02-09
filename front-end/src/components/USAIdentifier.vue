@@ -94,6 +94,18 @@
               class="usa-identifier__required-link usa-link"
             >Privacy policy</a>
           </li>
+          <li class="usa-identifier__required-links-item">
+            <a
+              href="https://www.whitehouse.gov/america250/"
+              class="usa-identifier__required-link usa-link"
+            >Countdown to America’s 250th Anniversary</a>
+          </li>
+          <li class="usa-identifier__required-links-item">
+            <a
+              href="https://america250.org/"
+              class="usa-identifier__required-link usa-link"
+            >America250</a>
+          </li>
         </ul>
       </div>
     </nav>
