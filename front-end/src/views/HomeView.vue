@@ -20,6 +20,15 @@ onMounted(() => {
       class="wide-layout"
     >
       <main id="main-content">
+        <section class="usa-site-alert usa-site-alert--info" aria-label="Site alert">
+          <div class="usa-alert">
+            <div class="usa-alert__body">
+              <p class="usa-alert__text">
+                <strong>Scheduled Maintenance:</strong> This site will be unavailable on Saturday, March 29, 2026, from 12:00 PM to 3:00 PM ET for scheduled maintenance. We apologize for any inconvenience.
+              </p>
+            </div>
+          </div>
+        </section>
         <div class="grid-container">
           <div class="padding-top-8">
             <h2 class="font-sans-lg margin-bottom-1">
