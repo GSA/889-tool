@@ -24,8 +24,7 @@ onMounted(() => {
           <div class="usa-alert">
             <div class="usa-alert__body">
               <p class="usa-alert__text">
-                <strong>Scheduled Maintenance:</strong> This site will be unavailable on Saturday, March 29, 2026, from 12:00 PM to 3:00 PM ET for scheduled maintenance. We apologize for any inconvenience.
-              </p>
+                <strong>Scheduled Maintenance:</strong>Please be advised that the GSA 889 Representations Search website will undergo scheduled maintenance on Thursday, April 2, 2026 after 4:00 PM ET. The site may be unavailable during this time. We apologize for any inconvenience.</p>
             </div>
           </div>
         </section>
