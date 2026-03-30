@@ -20,6 +20,14 @@ onMounted(() => {
       class="wide-layout"
     >
       <main id="main-content">
+        <section class="usa-site-alert usa-site-alert--info" aria-label="Site alert">
+          <div class="usa-alert">
+            <div class="usa-alert__body">
+              <p class="usa-alert__text">
+                <strong>Scheduled Maintenance:</strong>Please be advised that the GSA 889 Representations Search website will undergo scheduled maintenance on Thursday, April 2, 2026 after 4:00 PM ET. The site may be unavailable during this time. We apologize for any inconvenience.</p>
+            </div>
+          </div>
+        </section>
         <div class="grid-container">
           <div class="padding-top-8">
             <h2 class="font-sans-lg margin-bottom-1">
