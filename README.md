@@ -1,5 +1,7 @@
 # GSA SmartPay 889 Representations SAM.gov Tool
 
+[![DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/GSA/889-tool)
+
 Jump to:
 * [Development setup](#development-and-testing)
 * [Production deployment](#production-deployment)
